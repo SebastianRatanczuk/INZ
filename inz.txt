@@ -1,0 +1,19 @@
+pierwszy rozdział
+Analiza konkurencji chees.com liczhes
+
+drugi rozdział 
+uml jaki
+ide dlaczego i jakie
+python dlaczego
+pygame dlaczego
+ptinker dlaczego nie
+webscraping do sciagania meczów
+biblioteki gotowce do szachów 
+przykłądowe encje i atrybuty 
+
+trzeci
+ułozenie intefejsów
+biblioteki i interfejsy
+i włąsny progeam na podstawie dobrych zeczy z innych bibliotek 
+mdoel wymagan i dokumentacja 
+
