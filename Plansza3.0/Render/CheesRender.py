@@ -16,11 +16,13 @@ class Render:
         self.light_color = (250, 230, 200)
         self.dark_color = (180, 140, 120)
         self.selected_color = (255, 123, 123)
+        self.possibleMovesColor = (123, 255, 123)
         self.engine = ChessEngine.GameEngine()
+        self.possibleMoves = []
         self.tile_selected = ()
         self.tile_history = []
 
-        self._whitePlayer = False
+        self._whitePlayer = True
 
         self.piece_sprite = {
 
@@ -58,6 +60,7 @@ class Render:
 
             self.screen.fill((0, 0, 0))
             self._render_chess_board()
+            self._render_possibleMoves()
             self._render_pieces()
             self._render_buttons()
 
@@ -109,6 +112,9 @@ class Render:
 
     def menu_interface_logic(self, mouse_pos):
         if self.undoButton.getActon(mouse_pos):
+            self.tile_selected = ()
+            self.tile_history = []
+            self.possibleMoves = []
             self.engine.undo_move()
 
     def game_interface_logic(self, mouse_pos):
@@ -116,24 +122,48 @@ class Render:
             new_tile_selection = (mouse_pos[0] // self.tile_size, 7 - (mouse_pos[1] // self.tile_size))
         else:
             new_tile_selection = (7 - (mouse_pos[0] // self.tile_size), mouse_pos[1] // self.tile_size)
+
         if self.tile_selected == () and self.engine.getBoard()[new_tile_selection[0]][new_tile_selection[1]] == 0:
             return
 
         if self.tile_selected == new_tile_selection:
             self.tile_selected = ()
             self.tile_history = []
+            self.possibleMoves = []
         else:
             self.tile_selected = new_tile_selection
             self.tile_history.append(self.tile_selected)
 
+        if len(self.tile_history) == 1:
+            self.showMoves()
+
         if len(self.tile_history) == 2:
             self.make_move()
+
+    def showMoves(self):
+        self.possibleMoves = self.engine.getPossibleMoves(self.tile_history[0])
 
     def make_move(self):
         move = ChessEngine.Move(self.engine.getBoard(), self.tile_history[0], self.tile_history[1])
         self.engine.move(move)
+        self.possibleMoves = []
         self.tile_history = []
         self.tile_selected = ()
+
+    def _render_possibleMoves(self):
+        if len(self.possibleMoves) == 0:
+            return
+
+        if self._whitePlayer:
+            for move in self.possibleMoves:
+                _tile_color = self.possibleMovesColor
+                _tile_render_position = pygame.math.Vector2(( move[0]) * self.tile_size, (7-move[1]) * self.tile_size)
+                pygame.draw.rect(self.screen, _tile_color, (_tile_render_position, self.tile_size_vector))
+        else:
+            for move in self.possibleMoves:
+                _tile_color = self.possibleMovesColor
+                _tile_render_position = pygame.math.Vector2((7-move[0]) * self.tile_size, (  move[1]) * self.tile_size)
+                pygame.draw.rect(self.screen, _tile_color, (_tile_render_position, self.tile_size_vector))
 
 
 class Button:
