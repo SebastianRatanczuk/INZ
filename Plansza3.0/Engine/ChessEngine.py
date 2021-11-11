@@ -321,18 +321,18 @@ class GameEngine:
             if move[1] - 1 >= 0 and self._mainBoard[move[0]][move[1] - 1] == 0:
                 possibleMoves.append([move[0], move[1] - 1])
 
-            if move[0] + 1 < 8 and move[1] - 1 >= 0 and isBlack(self._mainBoard[move[0] + 1][move[1] - 1]):
-                possibleMoves.append([move[0] + 1, move[1] + 1])
+            if move[0] + 1 < 8 and move[1] - 1 >= 0 and isWhite(self._mainBoard[move[0] + 1][move[1] - 1]):
+                possibleMoves.append([move[0] + 1, move[1] - 1])
 
-            if move[0] - 1 > 0 and move[1] - 0 >= 0 and isBlack(self._mainBoard[move[0] - 1][move[1] - 1]):
-                possibleMoves.append([move[0] - 1, move[1] + 1])
+            if move[0] - 1 > 0 and move[1] - 0 >= 0 and isWhite(self._mainBoard[move[0] - 1][move[1] - 1]):
+                possibleMoves.append([move[0] - 1, move[1] - 1])
 
-            if move[1] == 4:
-                if move[0] + 1 < 8 and isBlack(self._mainBoard[move[0] + 1][move[1]]):
-                    possibleMoves.append([move[0] + 1, move[1] + 1])
+            if move[1] == 3:
+                if move[0] + 1 < 8 and isWhite(self._mainBoard[move[0] + 1][move[1]]):
+                    possibleMoves.append([move[0] + 1, move[1] - 1])
 
-                if move[0] - 1 > 0 and isBlack(self._mainBoard[move[0] - 1][move[1]]):
-                    possibleMoves.append([move[0] - 1, move[1] + 1])
+                if move[0] - 1 > 0 and isWhite(self._mainBoard[move[0] - 1][move[1]]):
+                    possibleMoves.append([move[0] - 1, move[1] - 1])
         return possibleMoves
 
 
