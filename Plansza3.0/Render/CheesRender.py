@@ -19,13 +19,12 @@ class Render:
         self.possibleMovesColor = (123, 255, 123)
         self.engine = ChessEngine.GameEngine()
         self.possibleMoves = []
+        self.validMoves = self.engine.getValidMoves()
+        self.moveMade = False
         self.tile_selected = ()
         self.tile_history = []
 
-        self._whitePlayer = True
-
         self.piece_sprite = {
-
             1: pygame.image.load('Render/resources/pieces/white/pawn.png'),
             2: pygame.image.load('Render/resources/pieces/white/rook.png'),
             3: pygame.image.load('Render/resources/pieces/white/knight.png'),
@@ -57,6 +56,9 @@ class Render:
                     self.running = False
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     self.mouse_logic()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_u:
+                        self.undoMove()
 
             self.screen.fill((0, 0, 0))
             self._render_chess_board()
@@ -85,7 +87,7 @@ class Render:
                 pygame.draw.rect(self.screen, _tile_color, (_tile_render_position, self.tile_size_vector))
 
         if self.tile_selected:
-            if self._whitePlayer:
+            if self.engine.whiteTurn:
                 _tile_render_position = pygame.math.Vector2(self.tile_selected[0] * self.tile_size,
                                                             (7 - self.tile_selected[1]) * self.tile_size)
             else:
@@ -94,7 +96,7 @@ class Render:
             pygame.draw.rect(self.screen, self.selected_color, (_tile_render_position, self.tile_size_vector))
 
     def _render_pieces(self):
-        if self._whitePlayer:
+        if self.engine.whiteTurn:
             for file in range(8):
                 for rank in range(8):
                     if self.engine.getBoard()[file][rank] != 0:
@@ -112,13 +114,17 @@ class Render:
 
     def menu_interface_logic(self, mouse_pos):
         if self.undoButton.getActon(mouse_pos):
-            self.tile_selected = ()
-            self.tile_history = []
-            self.possibleMoves = []
-            self.engine.undo_move()
+            self.undoMove()
+
+    def undoMove(self):
+        self.tile_selected = ()
+        self.tile_history = []
+        self.possibleMoves = []
+        self.engine.undo_move()
+        self.validMoves = self.engine.getValidMoves()
 
     def game_interface_logic(self, mouse_pos):
-        if self._whitePlayer:
+        if self.engine.whiteTurn:
             new_tile_selection = (mouse_pos[0] // self.tile_size, 7 - (mouse_pos[1] // self.tile_size))
         else:
             new_tile_selection = (7 - (mouse_pos[0] // self.tile_size), mouse_pos[1] // self.tile_size)
@@ -138,31 +144,37 @@ class Render:
             self.showMoves()
 
         if len(self.tile_history) == 2:
+            self.possibleMoves = []
             self.make_move()
 
+        if self.moveMade:
+            self.validMoves = self.engine.getValidMoves()
+            self.moveMade = False
+
     def showMoves(self):
-        self.possibleMoves = self.engine.getPossibleMoves(self.tile_history[0])
+        self.possibleMoves = self.engine.getPossiblePieceMoves(self.tile_history[0])
 
     def make_move(self):
         move = ChessEngine.Move(self.engine.getBoard(), self.tile_history[0], self.tile_history[1])
-        self.engine.move(move)
-        self.possibleMoves = []
-        self.tile_history = []
-        self.tile_selected = ()
+        if move in self.validMoves:
+            self.engine.move(move)
+            self.tile_history = []
+            self.tile_selected = ()
+            self.moveMade = True
 
     def _render_possibleMoves(self):
         if len(self.possibleMoves) == 0:
             return
 
-        if self._whitePlayer:
+        if self.engine.whiteTurn:
             for move in self.possibleMoves:
                 _tile_color = self.possibleMovesColor
-                _tile_render_position = pygame.math.Vector2(( move[0]) * self.tile_size, (7-move[1]) * self.tile_size)
+                _tile_render_position = pygame.math.Vector2((move[0]) * self.tile_size, (7 - move[1]) * self.tile_size)
                 pygame.draw.rect(self.screen, _tile_color, (_tile_render_position, self.tile_size_vector))
         else:
             for move in self.possibleMoves:
                 _tile_color = self.possibleMovesColor
-                _tile_render_position = pygame.math.Vector2((7-move[0]) * self.tile_size, (  move[1]) * self.tile_size)
+                _tile_render_position = pygame.math.Vector2((7 - move[0]) * self.tile_size, (move[1]) * self.tile_size)
                 pygame.draw.rect(self.screen, _tile_color, (_tile_render_position, self.tile_size_vector))
 
 
