@@ -9,6 +9,18 @@ def isBlack(pawn):
     return pawn > 10
 
 
+def isTheSameColor(pawn, pawn1):
+    if pawn == 0 or pawn1 == 0:
+        return False
+
+    if pawn > 10 and pawn1 > 10:
+        return True
+
+    if pawn < 10 and pawn1 < 10:
+        return True
+    return False
+
+
 class GameEngine:
     def __init__(self):
         self._mainBoard = [

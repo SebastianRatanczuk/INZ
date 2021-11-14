@@ -1,6 +1,7 @@
 import pygame
 
 from Engine import ChessEngine
+from Engine.ChessEngine import isWhite, isBlack, isTheSameColor
 
 
 class Render:
@@ -132,10 +133,24 @@ class Render:
         if self.tile_selected == () and self.engine.getBoard()[new_tile_selection[0]][new_tile_selection[1]] == 0:
             return
 
+        if self.tile_selected == () and self.engine.whiteTurn and not isWhite(
+                self.engine.getBoard()[new_tile_selection[0]][new_tile_selection[1]]):
+            return
+
+        if self.tile_selected == () and not self.engine.whiteTurn and not isBlack(
+                self.engine.getBoard()[new_tile_selection[0]][new_tile_selection[1]]):
+            return
+
         if self.tile_selected == new_tile_selection:
             self.tile_selected = ()
             self.tile_history = []
             self.possibleMoves = []
+        elif len(self.tile_history) == 1 and (
+                isTheSameColor(self.engine.getBoard()[self.tile_selected[0]][self.tile_selected[1]],
+                               self.engine.getBoard()[new_tile_selection[0]][new_tile_selection[1]])):
+            self.tile_selected = new_tile_selection
+            self.tile_history = []
+            self.tile_history.append(self.tile_selected)
         else:
             self.tile_selected = new_tile_selection
             self.tile_history.append(self.tile_selected)
@@ -144,7 +159,6 @@ class Render:
             self.showMoves()
 
         if len(self.tile_history) == 2:
-            self.possibleMoves = []
             self.make_move()
 
         if self.moveMade:
@@ -158,9 +172,10 @@ class Render:
         move = ChessEngine.Move(self.engine.getBoard(), self.tile_history[0], self.tile_history[1])
         if move in self.validMoves:
             self.engine.move(move)
-            self.tile_history = []
-            self.tile_selected = ()
             self.moveMade = True
+        self.possibleMoves = []
+        self.tile_history = []
+        self.tile_selected = ()
 
     def _render_possibleMoves(self):
         if len(self.possibleMoves) == 0:
