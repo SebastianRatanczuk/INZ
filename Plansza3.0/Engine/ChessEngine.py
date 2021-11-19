@@ -1,15 +1,15 @@
 import copy
 
 
-def isWhite(pawn):
+def is_white(pawn):
     return pawn < 10 and pawn != 0
 
 
-def isBlack(pawn):
+def is_black(pawn):
     return pawn > 10
 
 
-def isTheSameColor(pawn, pawn1):
+def is_the_same_color(pawn, pawn1):
     if pawn == 0 or pawn1 == 0:
         return False
 
@@ -23,7 +23,7 @@ def isTheSameColor(pawn, pawn1):
 
 class GameEngine:
     def __init__(self):
-        self._mainBoard = [
+        self._main_board = [
             #    1  2  3  4  5  6  7   8
             [2, 1, 0, 0, 0, 0, 11, 12],  # A   # x1 = pionek
             [3, 1, 0, 0, 0, 0, 11, 13],  # B   # x2 = wieża
@@ -34,602 +34,602 @@ class GameEngine:
             [3, 1, 0, 0, 0, 0, 11, 13],  # G
             [2, 1, 0, 0, 0, 0, 11, 12],  # H
         ]
-        self.whiteTurn = True
+        self.white_turn = True
         self._log = []
 
     def move(self, move):
-        self.whiteTurn = not self.whiteTurn
-        self._mainBoard[move.startMove[0]][move.startMove[1]] = 0
-        self._mainBoard[move.endMove[0]][move.endMove[1]] = move.movingPawn
+        self.white_turn = not self.white_turn
+        self._main_board[move.start_move[0]][move.start_move[1]] = 0
+        self._main_board[move.end_move[0]][move.end_move[1]] = move.moving_pawn
         self._log.append(move)
 
     def undo_move(self):
         if len(self._log) == 0:
             return
-        self.whiteTurn = not self.whiteTurn
-        oldMove = self._log.pop()
-        self._mainBoard = oldMove.mainBoard
+        self.white_turn = not self.white_turn
+        old_move = self._log.pop()
+        self._main_board = old_move.main_board
 
-    def getBoard(self):
-        return self._mainBoard
+    def get_board(self):
+        return self._main_board
 
-    def getValidMoves(self):
-        return self.getPossibleMoves()
+    def get_valid_moves(self):
+        return self.get_possible_moves()
 
-    def getPossibleMoves(self):
-        possibleMoves = []
+    def get_possible_moves(self):
+        possible_moves = []
         for file in range(8):
             for rank in range(8):
-                if (self.whiteTurn and isWhite(self._mainBoard[file][rank])) or (
-                        not self.whiteTurn and isBlack(self._mainBoard[file][rank])):
-                    allMoves = self.getPossiblePieceMoves([file, rank])
+                if (self.white_turn and is_white(self._main_board[file][rank])) or (
+                        not self.white_turn and is_black(self._main_board[file][rank])):
+                    allMoves = self.get_possible_piece_moves([file, rank])
                     for move in allMoves:
-                        possibleMoves.append(Move(self._mainBoard, [file, rank], move))
+                        possible_moves.append(Move(self._main_board, [file, rank], move))
 
-        return possibleMoves
+        return possible_moves
 
-    def getPossiblePieceMoves(self, move):
-        possibleMoves = []
-        currentPawn = self._mainBoard[move[0]][move[1]]
+    def get_possible_piece_moves(self, move):
+        possible_moves = []
+        current_pawn = self._main_board[move[0]][move[1]]
 
-        if currentPawn == 1:
+        if current_pawn == 1:
             if move[1] == 1:
-                if move[1] + 1 < 8 and self._mainBoard[move[0]][move[1] + 1] == 0:
-                    possibleMoves.append([move[0], move[1] + 1])
-                    if move[1] + 2 < 8 and self._mainBoard[move[0]][move[1] + 2] == 0:
-                        possibleMoves.append([move[0], move[1] + 2])
+                if move[1] + 1 < 8 and self._main_board[move[0]][move[1] + 1] == 0:
+                    possible_moves.append([move[0], move[1] + 1])
+                    if move[1] + 2 < 8 and self._main_board[move[0]][move[1] + 2] == 0:
+                        possible_moves.append([move[0], move[1] + 2])
 
-            if move[0] + 1 < 8 and move[1] + 1 < 8 and isBlack(self._mainBoard[move[0] + 1][move[1] + 1]):
-                possibleMoves.append([move[0] + 1, move[1] + 1])
+            if move[0] + 1 < 8 and move[1] + 1 < 8 and is_black(self._main_board[move[0] + 1][move[1] + 1]):
+                possible_moves.append([move[0] + 1, move[1] + 1])
 
-            if move[0] - 1 > 0 and move[1] + 1 < 8 and isBlack(self._mainBoard[move[0] - 1][move[1] + 1]):
-                possibleMoves.append([move[0] - 1, move[1] + 1])
+            if move[0] - 1 > 0 and move[1] + 1 < 8 and is_black(self._main_board[move[0] - 1][move[1] + 1]):
+                possible_moves.append([move[0] - 1, move[1] + 1])
 
             if move[1] == 4:
-                if move[0] + 1 < 8 and isBlack(self._mainBoard[move[0] + 1][move[1]]):
-                    possibleMoves.append([move[0] + 1, move[1] + 1])
+                if move[0] + 1 < 8 and is_black(self._main_board[move[0] + 1][move[1]]):
+                    possible_moves.append([move[0] + 1, move[1] + 1])
 
-                if move[0] - 1 > 0 and isBlack(self._mainBoard[move[0] - 1][move[1]]):
-                    possibleMoves.append([move[0] - 1, move[1] + 1])
+                if move[0] - 1 > 0 and is_black(self._main_board[move[0] - 1][move[1]]):
+                    possible_moves.append([move[0] - 1, move[1] + 1])
 
-        if currentPawn == 2:
+        if current_pawn == 2:
             for i in range(1, 8):
-                if (move[0] + i) > 7 or isWhite(self._mainBoard[move[0] + i][move[1]]):
+                if (move[0] + i) > 7 or is_white(self._main_board[move[0] + i][move[1]]):
                     break
 
-                if (move[0] + i) > 7 or isBlack(self._mainBoard[move[0] + i][move[1]]):
-                    possibleMoves.append([move[0] + i, move[1]])
+                if (move[0] + i) > 7 or is_black(self._main_board[move[0] + i][move[1]]):
+                    possible_moves.append([move[0] + i, move[1]])
                     break
-                possibleMoves.append([move[0] + i, move[1]])
-
-            for i in range(1, 8):
-                if (move[0] - i) < 0 or isWhite(self._mainBoard[move[0] - i][move[1]]):
-                    break
-
-                if (move[0] - i) < 0 or isBlack(self._mainBoard[move[0] - i][move[1]]):
-                    possibleMoves.append([move[0] - i, move[1]])
-                    break
-                possibleMoves.append([move[0] - i, move[1]])
+                possible_moves.append([move[0] + i, move[1]])
 
             for i in range(1, 8):
-                if (move[1] + i) > 7 or isWhite(self._mainBoard[move[0]][move[1] + i]):
+                if (move[0] - i) < 0 or is_white(self._main_board[move[0] - i][move[1]]):
                     break
 
-                if (move[1] + i) > 7 or isBlack(self._mainBoard[move[0]][move[1] + i]):
-                    possibleMoves.append([move[0], move[1] + i])
+                if (move[0] - i) < 0 or is_black(self._main_board[move[0] - i][move[1]]):
+                    possible_moves.append([move[0] - i, move[1]])
                     break
-                possibleMoves.append([move[0], move[1] + i])
+                possible_moves.append([move[0] - i, move[1]])
 
             for i in range(1, 8):
-                if (move[1] - i) < 0 or isWhite(self._mainBoard[move[0]][move[1] - i]):
+                if (move[1] + i) > 7 or is_white(self._main_board[move[0]][move[1] + i]):
                     break
 
-                if (move[1] - i) < 0 or isBlack(self._mainBoard[move[0]][move[1] - i]):
-                    possibleMoves.append([move[0], move[1] - i])
+                if (move[1] + i) > 7 or is_black(self._main_board[move[0]][move[1] + i]):
+                    possible_moves.append([move[0], move[1] + i])
                     break
-                possibleMoves.append([move[0], move[1] - i])
+                possible_moves.append([move[0], move[1] + i])
 
-        if currentPawn == 3:
+            for i in range(1, 8):
+                if (move[1] - i) < 0 or is_white(self._main_board[move[0]][move[1] - i]):
+                    break
+
+                if (move[1] - i) < 0 or is_black(self._main_board[move[0]][move[1] - i]):
+                    possible_moves.append([move[0], move[1] - i])
+                    break
+                possible_moves.append([move[0], move[1] - i])
+
+        if current_pawn == 3:
             if move[0] + 2 < 8 and move[1] + 1 < 8:
-                if not isWhite(self._mainBoard[move[0] + 2][move[1] + 1]):
-                    possibleMoves.append([move[0] + 2, move[1] + 1])
+                if not is_white(self._main_board[move[0] + 2][move[1] + 1]):
+                    possible_moves.append([move[0] + 2, move[1] + 1])
 
             if move[0] + 1 < 8 and move[1] + 2 < 8:
-                if not isWhite(self._mainBoard[move[0] + 1][move[1] + 2]):
-                    possibleMoves.append([move[0] + 1, move[1] + 2])
+                if not is_white(self._main_board[move[0] + 1][move[1] + 2]):
+                    possible_moves.append([move[0] + 1, move[1] + 2])
 
             if move[0] - 2 >= 0 and move[1] - 1 >= 0:
-                if not isWhite(self._mainBoard[move[0] - 2][move[1] - 1]):
-                    possibleMoves.append([move[0] - 2, move[1] - 1])
+                if not is_white(self._main_board[move[0] - 2][move[1] - 1]):
+                    possible_moves.append([move[0] - 2, move[1] - 1])
 
             if move[0] - 1 >= 0 and move[1] - 2 >= 0:
-                if not isWhite(self._mainBoard[move[0] - 1][move[1] - 2]):
-                    possibleMoves.append([move[0] - 1, move[1] - 2])
+                if not is_white(self._main_board[move[0] - 1][move[1] - 2]):
+                    possible_moves.append([move[0] - 1, move[1] - 2])
 
             if move[0] - 2 >= 0 and move[1] + 1 < 8:
-                if not isWhite(self._mainBoard[move[0] - 2][move[1] + 1]):
-                    possibleMoves.append([move[0] - 2, move[1] + 1])
+                if not is_white(self._main_board[move[0] - 2][move[1] + 1]):
+                    possible_moves.append([move[0] - 2, move[1] + 1])
 
             if move[0] - 1 >= 0 and move[1] + 2 < 8:
-                if not isWhite(self._mainBoard[move[0] - 1][move[1] + 2]):
-                    possibleMoves.append([move[0] - 1, move[1] + 2])
+                if not is_white(self._main_board[move[0] - 1][move[1] + 2]):
+                    possible_moves.append([move[0] - 1, move[1] + 2])
 
             if move[0] + 2 < 8 and move[1] - 1 >= 0:
-                if not isWhite(self._mainBoard[move[0] + 2][move[1] - 1]):
-                    possibleMoves.append([move[0] + 2, move[1] - 1])
+                if not is_white(self._main_board[move[0] + 2][move[1] - 1]):
+                    possible_moves.append([move[0] + 2, move[1] - 1])
 
             if move[0] + 1 < 8 and move[1] - 2 >= 0:
-                if not isWhite(self._mainBoard[move[0] + 1][move[1] - 2]):
-                    possibleMoves.append([move[0] + 1, move[1] - 2])
+                if not is_white(self._main_board[move[0] + 1][move[1] - 2]):
+                    possible_moves.append([move[0] + 1, move[1] - 2])
 
-        if currentPawn == 4:
+        if current_pawn == 4:
             for i in range(1, 8):
-                if (move[0] + i) > 7 or (move[1] + i) > 7 or isWhite(self._mainBoard[move[0] + i][move[1] + i]):
+                if (move[0] + i) > 7 or (move[1] + i) > 7 or is_white(self._main_board[move[0] + i][move[1] + i]):
                     break
 
-                if (move[0] + i) > 7 or (move[1] + i) > 7 or isBlack(self._mainBoard[move[0] + i][move[1] + i]):
-                    possibleMoves.append([move[0] + i, move[1] + i])
+                if (move[0] + i) > 7 or (move[1] + i) > 7 or is_black(self._main_board[move[0] + i][move[1] + i]):
+                    possible_moves.append([move[0] + i, move[1] + i])
                     break
-                possibleMoves.append([move[0] + i, move[1] + i])
-
-            for i in range(1, 8):
-                if (move[0] - i) < 0 or (move[1] - i) < 0 or isWhite(self._mainBoard[move[0] - i][move[1] - i]):
-                    break
-
-                if (move[0] - i) < 0 or (move[1] - i) < 0 or isBlack(self._mainBoard[move[0] - i][move[1] - i]):
-                    possibleMoves.append([move[0] - i, move[1] - i])
-                    break
-                possibleMoves.append([move[0] - i, move[1] - i])
+                possible_moves.append([move[0] + i, move[1] + i])
 
             for i in range(1, 8):
-                if (move[0] + i) > 7 or (move[1] - i) < 0 or isWhite(self._mainBoard[move[0] + i][move[1] - i]):
+                if (move[0] - i) < 0 or (move[1] - i) < 0 or is_white(self._main_board[move[0] - i][move[1] - i]):
                     break
 
-                if (move[0] + i) > 7 or (move[1] - i) < 0 or isBlack(self._mainBoard[move[0] + i][move[1] - i]):
-                    possibleMoves.append([move[0] + i, move[1] - i])
+                if (move[0] - i) < 0 or (move[1] - i) < 0 or is_black(self._main_board[move[0] - i][move[1] - i]):
+                    possible_moves.append([move[0] - i, move[1] - i])
                     break
-                possibleMoves.append([move[0] + i, move[1] - i])
-
-            for i in range(1, 8):
-                if (move[0] - i) < 0 or (move[1] + i) > 7 or isWhite(self._mainBoard[move[0] - i][move[1] + i]):
-                    break
-
-                if (move[0] - i) < 0 or (move[1] + i) > 7 or isBlack(self._mainBoard[move[0] - i][move[1] + i]):
-                    possibleMoves.append([move[0] - i, move[1] + i])
-                    break
-                possibleMoves.append([move[0] - i, move[1] + i])
-
-        if currentPawn == 5:
-            for i in range(1, 8):
-                if (move[0] + i) > 7 or (move[1] + i) > 7 or isWhite(self._mainBoard[move[0] + i][move[1] + i]):
-                    break
-
-                if (move[0] + i) > 7 or (move[1] + i) > 7 or isBlack(self._mainBoard[move[0] + i][move[1] + i]):
-                    possibleMoves.append([move[0] + i, move[1] + i])
-                    break
-                possibleMoves.append([move[0] + i, move[1] + i])
+                possible_moves.append([move[0] - i, move[1] - i])
 
             for i in range(1, 8):
-                if (move[0] - i) < 0 or (move[1] - i) < 0 or isWhite(self._mainBoard[move[0] - i][move[1] - i]):
+                if (move[0] + i) > 7 or (move[1] - i) < 0 or is_white(self._main_board[move[0] + i][move[1] - i]):
                     break
 
-                if (move[0] - i) < 0 or (move[1] - i) < 0 or isBlack(self._mainBoard[move[0] - i][move[1] - i]):
-                    possibleMoves.append([move[0] - i, move[1] - i])
+                if (move[0] + i) > 7 or (move[1] - i) < 0 or is_black(self._main_board[move[0] + i][move[1] - i]):
+                    possible_moves.append([move[0] + i, move[1] - i])
                     break
-                possibleMoves.append([move[0] - i, move[1] - i])
-
-            for i in range(1, 8):
-                if (move[0] + i) > 7 or (move[1] - i) < 0 or isWhite(self._mainBoard[move[0] + i][move[1] - i]):
-                    break
-
-                if (move[0] + i) > 7 or (move[1] - i) < 0 or isBlack(self._mainBoard[move[0] + i][move[1] - i]):
-                    possibleMoves.append([move[0] + i, move[1] - i])
-                    break
-                possibleMoves.append([move[0] + i, move[1] - i])
+                possible_moves.append([move[0] + i, move[1] - i])
 
             for i in range(1, 8):
-                if (move[0] - i) < 0 or (move[1] + i) > 7 or isWhite(self._mainBoard[move[0] - i][move[1] + i]):
+                if (move[0] - i) < 0 or (move[1] + i) > 7 or is_white(self._main_board[move[0] - i][move[1] + i]):
                     break
 
-                if (move[0] - i) < 0 or (move[1] + i) > 7 or isBlack(self._mainBoard[move[0] - i][move[1] + i]):
-                    possibleMoves.append([move[0] - i, move[1] + i])
+                if (move[0] - i) < 0 or (move[1] + i) > 7 or is_black(self._main_board[move[0] - i][move[1] + i]):
+                    possible_moves.append([move[0] - i, move[1] + i])
                     break
-                possibleMoves.append([move[0] - i, move[1] + i])
+                possible_moves.append([move[0] - i, move[1] + i])
+
+        if current_pawn == 5:
+            for i in range(1, 8):
+                if (move[0] + i) > 7 or (move[1] + i) > 7 or is_white(self._main_board[move[0] + i][move[1] + i]):
+                    break
+
+                if (move[0] + i) > 7 or (move[1] + i) > 7 or is_black(self._main_board[move[0] + i][move[1] + i]):
+                    possible_moves.append([move[0] + i, move[1] + i])
+                    break
+                possible_moves.append([move[0] + i, move[1] + i])
 
             for i in range(1, 8):
-                if (move[0] + i) > 7 or isWhite(self._mainBoard[move[0] + i][move[1]]):
+                if (move[0] - i) < 0 or (move[1] - i) < 0 or is_white(self._main_board[move[0] - i][move[1] - i]):
                     break
 
-                if (move[0] + i) > 7 or isBlack(self._mainBoard[move[0] + i][move[1]]):
-                    possibleMoves.append([move[0] + i, move[1]])
+                if (move[0] - i) < 0 or (move[1] - i) < 0 or is_black(self._main_board[move[0] - i][move[1] - i]):
+                    possible_moves.append([move[0] - i, move[1] - i])
                     break
-                possibleMoves.append([move[0] + i, move[1]])
-
-            for i in range(1, 8):
-                if (move[0] - i) < 0 or isWhite(self._mainBoard[move[0] - i][move[1]]):
-                    break
-
-                if (move[0] - i) < 0 or isBlack(self._mainBoard[move[0] - i][move[1]]):
-                    possibleMoves.append([move[0] - i, move[1]])
-                    break
-                possibleMoves.append([move[0] - i, move[1]])
+                possible_moves.append([move[0] - i, move[1] - i])
 
             for i in range(1, 8):
-                if (move[1] + i) > 7 or isWhite(self._mainBoard[move[0]][move[1] + i]):
+                if (move[0] + i) > 7 or (move[1] - i) < 0 or is_white(self._main_board[move[0] + i][move[1] - i]):
                     break
 
-                if (move[1] + i) > 7 or isBlack(self._mainBoard[move[0]][move[1] + i]):
-                    possibleMoves.append([move[0], move[1] + i])
+                if (move[0] + i) > 7 or (move[1] - i) < 0 or is_black(self._main_board[move[0] + i][move[1] - i]):
+                    possible_moves.append([move[0] + i, move[1] - i])
                     break
-                possibleMoves.append([move[0], move[1] + i])
+                possible_moves.append([move[0] + i, move[1] - i])
 
             for i in range(1, 8):
-                if (move[1] - i) < 0 or isWhite(self._mainBoard[move[0]][move[1] - i]):
+                if (move[0] - i) < 0 or (move[1] + i) > 7 or is_white(self._main_board[move[0] - i][move[1] + i]):
                     break
 
-                if (move[1] - i) < 0 or isBlack(self._mainBoard[move[0]][move[1] - i]):
-                    possibleMoves.append([move[0], move[1] - i])
+                if (move[0] - i) < 0 or (move[1] + i) > 7 or is_black(self._main_board[move[0] - i][move[1] + i]):
+                    possible_moves.append([move[0] - i, move[1] + i])
                     break
-                possibleMoves.append([move[0], move[1] - i])
+                possible_moves.append([move[0] - i, move[1] + i])
 
-        if currentPawn == 6:
+            for i in range(1, 8):
+                if (move[0] + i) > 7 or is_white(self._main_board[move[0] + i][move[1]]):
+                    break
+
+                if (move[0] + i) > 7 or is_black(self._main_board[move[0] + i][move[1]]):
+                    possible_moves.append([move[0] + i, move[1]])
+                    break
+                possible_moves.append([move[0] + i, move[1]])
+
+            for i in range(1, 8):
+                if (move[0] - i) < 0 or is_white(self._main_board[move[0] - i][move[1]]):
+                    break
+
+                if (move[0] - i) < 0 or is_black(self._main_board[move[0] - i][move[1]]):
+                    possible_moves.append([move[0] - i, move[1]])
+                    break
+                possible_moves.append([move[0] - i, move[1]])
+
+            for i in range(1, 8):
+                if (move[1] + i) > 7 or is_white(self._main_board[move[0]][move[1] + i]):
+                    break
+
+                if (move[1] + i) > 7 or is_black(self._main_board[move[0]][move[1] + i]):
+                    possible_moves.append([move[0], move[1] + i])
+                    break
+                possible_moves.append([move[0], move[1] + i])
+
+            for i in range(1, 8):
+                if (move[1] - i) < 0 or is_white(self._main_board[move[0]][move[1] - i]):
+                    break
+
+                if (move[1] - i) < 0 or is_black(self._main_board[move[0]][move[1] - i]):
+                    possible_moves.append([move[0], move[1] - i])
+                    break
+                possible_moves.append([move[0], move[1] - i])
+
+        if current_pawn == 6:
             for i in range(1, 2):
-                if (move[0] + i) > 7 or (move[1] + i) > 7 or isWhite(self._mainBoard[move[0] + i][move[1] + i]):
+                if (move[0] + i) > 7 or (move[1] + i) > 7 or is_white(self._main_board[move[0] + i][move[1] + i]):
                     break
 
-                if (move[0] + i) > 7 or (move[1] + i) > 7 or isBlack(self._mainBoard[move[0] + i][move[1] + i]):
-                    possibleMoves.append([move[0] + i, move[1] + i])
+                if (move[0] + i) > 7 or (move[1] + i) > 7 or is_black(self._main_board[move[0] + i][move[1] + i]):
+                    possible_moves.append([move[0] + i, move[1] + i])
                     break
-                possibleMoves.append([move[0] + i, move[1] + i])
-
-            for i in range(1, 2):
-                if (move[0] - i) < 0 or (move[1] - i) < 0 or isWhite(self._mainBoard[move[0] - i][move[1] - i]):
-                    break
-
-                if (move[0] - i) < 0 or (move[1] - i) < 0 or isBlack(self._mainBoard[move[0] - i][move[1] - i]):
-                    possibleMoves.append([move[0] - i, move[1] - i])
-                    break
-                possibleMoves.append([move[0] - i, move[1] - i])
+                possible_moves.append([move[0] + i, move[1] + i])
 
             for i in range(1, 2):
-                if (move[0] + i) > 7 or (move[1] - i) < 0 or isWhite(self._mainBoard[move[0] + i][move[1] - i]):
+                if (move[0] - i) < 0 or (move[1] - i) < 0 or is_white(self._main_board[move[0] - i][move[1] - i]):
                     break
 
-                if (move[0] + i) > 7 or (move[1] - i) < 0 or isBlack(self._mainBoard[move[0] + i][move[1] - i]):
-                    possibleMoves.append([move[0] + i, move[1] - i])
+                if (move[0] - i) < 0 or (move[1] - i) < 0 or is_black(self._main_board[move[0] - i][move[1] - i]):
+                    possible_moves.append([move[0] - i, move[1] - i])
                     break
-                possibleMoves.append([move[0] + i, move[1] - i])
-
-            for i in range(1, 2):
-                if (move[0] - i) < 0 or (move[1] + i) > 7 or isWhite(self._mainBoard[move[0] - i][move[1] + i]):
-                    break
-
-                if (move[0] - i) < 0 or (move[1] + i) > 7 or isBlack(self._mainBoard[move[0] - i][move[1] + i]):
-                    possibleMoves.append([move[0] - i, move[1] + i])
-                    break
-                possibleMoves.append([move[0] - i, move[1] + i])
+                possible_moves.append([move[0] - i, move[1] - i])
 
             for i in range(1, 2):
-                if (move[0] + i) > 7 or isWhite(self._mainBoard[move[0] + i][move[1]]):
+                if (move[0] + i) > 7 or (move[1] - i) < 0 or is_white(self._main_board[move[0] + i][move[1] - i]):
                     break
 
-                if (move[0] + i) > 7 or isBlack(self._mainBoard[move[0] + i][move[1]]):
-                    possibleMoves.append([move[0] + i, move[1]])
+                if (move[0] + i) > 7 or (move[1] - i) < 0 or is_black(self._main_board[move[0] + i][move[1] - i]):
+                    possible_moves.append([move[0] + i, move[1] - i])
                     break
-                possibleMoves.append([move[0] + i, move[1]])
-
-            for i in range(1, 2):
-                if (move[0] - i) < 0 or isWhite(self._mainBoard[move[0] - i][move[1]]):
-                    break
-
-                if (move[0] - i) < 0 or isBlack(self._mainBoard[move[0] - i][move[1]]):
-                    possibleMoves.append([move[0] - i, move[1]])
-                    break
-                possibleMoves.append([move[0] - i, move[1]])
+                possible_moves.append([move[0] + i, move[1] - i])
 
             for i in range(1, 2):
-                if (move[1] + i) > 7 or isWhite(self._mainBoard[move[0]][move[1] + i]):
+                if (move[0] - i) < 0 or (move[1] + i) > 7 or is_white(self._main_board[move[0] - i][move[1] + i]):
                     break
 
-                if (move[1] + i) > 7 or isBlack(self._mainBoard[move[0]][move[1] + i]):
-                    possibleMoves.append([move[0], move[1] + i])
+                if (move[0] - i) < 0 or (move[1] + i) > 7 or is_black(self._main_board[move[0] - i][move[1] + i]):
+                    possible_moves.append([move[0] - i, move[1] + i])
                     break
-                possibleMoves.append([move[0], move[1] + i])
+                possible_moves.append([move[0] - i, move[1] + i])
 
             for i in range(1, 2):
-                if (move[1] - i) < 0 or isWhite(self._mainBoard[move[0]][move[1] - i]):
+                if (move[0] + i) > 7 or is_white(self._main_board[move[0] + i][move[1]]):
                     break
 
-                if (move[1] - i) < 0 or isBlack(self._mainBoard[move[0]][move[1] - i]):
-                    possibleMoves.append([move[0], move[1] - i])
+                if (move[0] + i) > 7 or is_black(self._main_board[move[0] + i][move[1]]):
+                    possible_moves.append([move[0] + i, move[1]])
                     break
-                possibleMoves.append([move[0], move[1] - i])
+                possible_moves.append([move[0] + i, move[1]])
 
-        if currentPawn == 11:
-            if move[1] - 1 >= 0 and self._mainBoard[move[0]][move[1] - 1] == 0:
-                possibleMoves.append([move[0], move[1] - 1])
+            for i in range(1, 2):
+                if (move[0] - i) < 0 or is_white(self._main_board[move[0] - i][move[1]]):
+                    break
+
+                if (move[0] - i) < 0 or is_black(self._main_board[move[0] - i][move[1]]):
+                    possible_moves.append([move[0] - i, move[1]])
+                    break
+                possible_moves.append([move[0] - i, move[1]])
+
+            for i in range(1, 2):
+                if (move[1] + i) > 7 or is_white(self._main_board[move[0]][move[1] + i]):
+                    break
+
+                if (move[1] + i) > 7 or is_black(self._main_board[move[0]][move[1] + i]):
+                    possible_moves.append([move[0], move[1] + i])
+                    break
+                possible_moves.append([move[0], move[1] + i])
+
+            for i in range(1, 2):
+                if (move[1] - i) < 0 or is_white(self._main_board[move[0]][move[1] - i]):
+                    break
+
+                if (move[1] - i) < 0 or is_black(self._main_board[move[0]][move[1] - i]):
+                    possible_moves.append([move[0], move[1] - i])
+                    break
+                possible_moves.append([move[0], move[1] - i])
+
+        if current_pawn == 11:
+            if move[1] - 1 >= 0 and self._main_board[move[0]][move[1] - 1] == 0:
+                possible_moves.append([move[0], move[1] - 1])
                 if move[1] == 6:
-                    if move[1] - 2 >= 0 and self._mainBoard[move[0]][move[1] - 2] == 0:
-                        possibleMoves.append([move[0], move[1] - 2])
+                    if move[1] - 2 >= 0 and self._main_board[move[0]][move[1] - 2] == 0:
+                        possible_moves.append([move[0], move[1] - 2])
 
-            if move[0] + 1 < 8 and move[1] - 1 >= 0 and isWhite(self._mainBoard[move[0] + 1][move[1] - 1]):
-                possibleMoves.append([move[0] + 1, move[1] - 1])
+            if move[0] + 1 < 8 and move[1] - 1 >= 0 and is_white(self._main_board[move[0] + 1][move[1] - 1]):
+                possible_moves.append([move[0] + 1, move[1] - 1])
 
-            if move[0] - 1 > 0 and move[1] - 0 >= 0 and isWhite(self._mainBoard[move[0] - 1][move[1] - 1]):
-                possibleMoves.append([move[0] - 1, move[1] - 1])
+            if move[0] - 1 > 0 and move[1] - 0 >= 0 and is_white(self._main_board[move[0] - 1][move[1] - 1]):
+                possible_moves.append([move[0] - 1, move[1] - 1])
 
             if move[1] == 3:
-                if move[0] + 1 < 8 and isWhite(self._mainBoard[move[0] + 1][move[1]]):
-                    possibleMoves.append([move[0] + 1, move[1] - 1])
+                if move[0] + 1 < 8 and is_white(self._main_board[move[0] + 1][move[1]]):
+                    possible_moves.append([move[0] + 1, move[1] - 1])
 
-                if move[0] - 1 > 0 and isWhite(self._mainBoard[move[0] - 1][move[1]]):
-                    possibleMoves.append([move[0] - 1, move[1] - 1])
+                if move[0] - 1 > 0 and is_white(self._main_board[move[0] - 1][move[1]]):
+                    possible_moves.append([move[0] - 1, move[1] - 1])
 
-        if currentPawn == 12:
+        if current_pawn == 12:
             for i in range(1, 8):
-                if (move[0] + i) > 7 or isBlack(self._mainBoard[move[0] + i][move[1]]):
+                if (move[0] + i) > 7 or is_black(self._main_board[move[0] + i][move[1]]):
                     break
 
-                if (move[0] + i) > 7 or isWhite(self._mainBoard[move[0] + i][move[1]]):
-                    possibleMoves.append([move[0] + i, move[1]])
+                if (move[0] + i) > 7 or is_white(self._main_board[move[0] + i][move[1]]):
+                    possible_moves.append([move[0] + i, move[1]])
                     break
-                possibleMoves.append([move[0] + i, move[1]])
-
-            for i in range(1, 8):
-                if (move[0] - i) < 0 or isBlack(self._mainBoard[move[0] - i][move[1]]):
-                    break
-
-                if (move[0] - i) < 0 or isWhite(self._mainBoard[move[0] - i][move[1]]):
-                    possibleMoves.append([move[0] - i, move[1]])
-                    break
-                possibleMoves.append([move[0] - i, move[1]])
+                possible_moves.append([move[0] + i, move[1]])
 
             for i in range(1, 8):
-                if (move[1] + i) > 7 or isBlack(self._mainBoard[move[0]][move[1] + i]):
+                if (move[0] - i) < 0 or is_black(self._main_board[move[0] - i][move[1]]):
                     break
 
-                if (move[1] + i) > 7 or isWhite(self._mainBoard[move[0]][move[1] + i]):
-                    possibleMoves.append([move[0], move[1] + i])
+                if (move[0] - i) < 0 or is_white(self._main_board[move[0] - i][move[1]]):
+                    possible_moves.append([move[0] - i, move[1]])
                     break
-                possibleMoves.append([move[0], move[1] + i])
+                possible_moves.append([move[0] - i, move[1]])
 
             for i in range(1, 8):
-                if (move[1] - i) < 0 or isBlack(self._mainBoard[move[0]][move[1] - i]):
+                if (move[1] + i) > 7 or is_black(self._main_board[move[0]][move[1] + i]):
                     break
 
-                if (move[1] - i) < 0 or isWhite(self._mainBoard[move[0]][move[1] - i]):
-                    possibleMoves.append([move[0], move[1] - i])
+                if (move[1] + i) > 7 or is_white(self._main_board[move[0]][move[1] + i]):
+                    possible_moves.append([move[0], move[1] + i])
                     break
-                possibleMoves.append([move[0], move[1] - i])
+                possible_moves.append([move[0], move[1] + i])
 
-        if currentPawn == 13:
+            for i in range(1, 8):
+                if (move[1] - i) < 0 or is_black(self._main_board[move[0]][move[1] - i]):
+                    break
+
+                if (move[1] - i) < 0 or is_white(self._main_board[move[0]][move[1] - i]):
+                    possible_moves.append([move[0], move[1] - i])
+                    break
+                possible_moves.append([move[0], move[1] - i])
+
+        if current_pawn == 13:
             if move[0] + 2 < 8 and move[1] + 1 < 8:
-                if not isBlack(self._mainBoard[move[0] + 2][move[1] + 1]):
-                    possibleMoves.append([move[0] + 2, move[1] + 1])
+                if not is_black(self._main_board[move[0] + 2][move[1] + 1]):
+                    possible_moves.append([move[0] + 2, move[1] + 1])
 
             if move[0] + 1 < 8 and move[1] + 2 < 8:
-                if not isBlack(self._mainBoard[move[0] + 1][move[1] + 2]):
-                    possibleMoves.append([move[0] + 1, move[1] + 2])
+                if not is_black(self._main_board[move[0] + 1][move[1] + 2]):
+                    possible_moves.append([move[0] + 1, move[1] + 2])
 
             if move[0] - 2 >= 0 and move[1] - 1 >= 0:
-                if not isBlack(self._mainBoard[move[0] - 2][move[1] - 1]):
-                    possibleMoves.append([move[0] - 2, move[1] - 1])
+                if not is_black(self._main_board[move[0] - 2][move[1] - 1]):
+                    possible_moves.append([move[0] - 2, move[1] - 1])
 
             if move[0] - 1 >= 0 and move[1] - 2 >= 0:
-                if not isBlack(self._mainBoard[move[0] - 1][move[1] - 2]):
-                    possibleMoves.append([move[0] - 1, move[1] - 2])
+                if not is_black(self._main_board[move[0] - 1][move[1] - 2]):
+                    possible_moves.append([move[0] - 1, move[1] - 2])
 
             if move[0] - 2 >= 0 and move[1] + 1 < 8:
-                if not isBlack(self._mainBoard[move[0] - 2][move[1] + 1]):
-                    possibleMoves.append([move[0] - 2, move[1] + 1])
+                if not is_black(self._main_board[move[0] - 2][move[1] + 1]):
+                    possible_moves.append([move[0] - 2, move[1] + 1])
 
             if move[0] - 1 >= 0 and move[1] + 2 < 8:
-                if not isBlack(self._mainBoard[move[0] - 1][move[1] + 2]):
-                    possibleMoves.append([move[0] - 1, move[1] + 2])
+                if not is_black(self._main_board[move[0] - 1][move[1] + 2]):
+                    possible_moves.append([move[0] - 1, move[1] + 2])
 
             if move[0] + 2 < 8 and move[1] - 1 >= 0:
-                if not isBlack(self._mainBoard[move[0] + 2][move[1] - 1]):
-                    possibleMoves.append([move[0] + 2, move[1] - 1])
+                if not is_black(self._main_board[move[0] + 2][move[1] - 1]):
+                    possible_moves.append([move[0] + 2, move[1] - 1])
 
             if move[0] + 1 < 8 and move[1] - 2 >= 0:
-                if not isBlack(self._mainBoard[move[0] + 1][move[1] - 2]):
-                    possibleMoves.append([move[0] + 1, move[1] - 2])
+                if not is_black(self._main_board[move[0] + 1][move[1] - 2]):
+                    possible_moves.append([move[0] + 1, move[1] - 2])
 
-        if currentPawn == 14:
+        if current_pawn == 14:
             for i in range(1, 8):
-                if (move[0] + i) > 7 or (move[1] + i) > 7 or isBlack(self._mainBoard[move[0] + i][move[1] + i]):
+                if (move[0] + i) > 7 or (move[1] + i) > 7 or is_black(self._main_board[move[0] + i][move[1] + i]):
                     break
 
-                if (move[0] + i) > 7 or (move[1] + i) > 7 or isWhite(self._mainBoard[move[0] + i][move[1] + i]):
-                    possibleMoves.append([move[0] + i, move[1] + i])
+                if (move[0] + i) > 7 or (move[1] + i) > 7 or is_white(self._main_board[move[0] + i][move[1] + i]):
+                    possible_moves.append([move[0] + i, move[1] + i])
                     break
-                possibleMoves.append([move[0] + i, move[1] + i])
-
-            for i in range(1, 8):
-                if (move[0] - i) < 0 or (move[1] - i) < 0 or isBlack(self._mainBoard[move[0] - i][move[1] - i]):
-                    break
-
-                if (move[0] - i) < 0 or (move[1] - i) < 0 or isWhite(self._mainBoard[move[0] - i][move[1] - i]):
-                    possibleMoves.append([move[0] - i, move[1] - i])
-                    break
-                possibleMoves.append([move[0] - i, move[1] - i])
+                possible_moves.append([move[0] + i, move[1] + i])
 
             for i in range(1, 8):
-                if (move[0] + i) > 7 or (move[1] - i) < 0 or isBlack(self._mainBoard[move[0] + i][move[1] - i]):
+                if (move[0] - i) < 0 or (move[1] - i) < 0 or is_black(self._main_board[move[0] - i][move[1] - i]):
                     break
 
-                if (move[0] + i) > 7 or (move[1] - i) < 0 or isWhite(self._mainBoard[move[0] + i][move[1] - i]):
-                    possibleMoves.append([move[0] + i, move[1] - i])
+                if (move[0] - i) < 0 or (move[1] - i) < 0 or is_white(self._main_board[move[0] - i][move[1] - i]):
+                    possible_moves.append([move[0] - i, move[1] - i])
                     break
-                possibleMoves.append([move[0] + i, move[1] - i])
-
-            for i in range(1, 8):
-                if (move[0] - i) < 0 or (move[1] + i) > 7 or isBlack(self._mainBoard[move[0] - i][move[1] + i]):
-                    break
-
-                if (move[0] - i) < 0 or (move[1] + i) > 7 or isWhite(self._mainBoard[move[0] - i][move[1] + i]):
-                    possibleMoves.append([move[0] - i, move[1] + i])
-                    break
-                possibleMoves.append([move[0] - i, move[1] + i])
-
-        if currentPawn == 15:
-            for i in range(1, 8):
-                if (move[0] + i) > 7 or (move[1] + i) > 7 or isBlack(self._mainBoard[move[0] + i][move[1] + i]):
-                    break
-
-                if (move[0] + i) > 7 or (move[1] + i) > 7 or isWhite(self._mainBoard[move[0] + i][move[1] + i]):
-                    possibleMoves.append([move[0] + i, move[1] + i])
-                    break
-                possibleMoves.append([move[0] + i, move[1] + i])
+                possible_moves.append([move[0] - i, move[1] - i])
 
             for i in range(1, 8):
-                if (move[0] - i) < 0 or (move[1] - i) < 0 or isBlack(self._mainBoard[move[0] - i][move[1] - i]):
+                if (move[0] + i) > 7 or (move[1] - i) < 0 or is_black(self._main_board[move[0] + i][move[1] - i]):
                     break
 
-                if (move[0] - i) < 0 or (move[1] - i) < 0 or isWhite(self._mainBoard[move[0] - i][move[1] - i]):
-                    possibleMoves.append([move[0] - i, move[1] - i])
+                if (move[0] + i) > 7 or (move[1] - i) < 0 or is_white(self._main_board[move[0] + i][move[1] - i]):
+                    possible_moves.append([move[0] + i, move[1] - i])
                     break
-                possibleMoves.append([move[0] - i, move[1] - i])
-
-            for i in range(1, 8):
-                if (move[0] + i) > 7 or (move[1] - i) < 0 or isBlack(self._mainBoard[move[0] + i][move[1] - i]):
-                    break
-
-                if (move[0] + i) > 7 or (move[1] - i) < 0 or isWhite(self._mainBoard[move[0] + i][move[1] - i]):
-                    possibleMoves.append([move[0] + i, move[1] - i])
-                    break
-                possibleMoves.append([move[0] + i, move[1] - i])
+                possible_moves.append([move[0] + i, move[1] - i])
 
             for i in range(1, 8):
-                if (move[0] - i) < 0 or (move[1] + i) > 7 or isBlack(self._mainBoard[move[0] - i][move[1] + i]):
+                if (move[0] - i) < 0 or (move[1] + i) > 7 or is_black(self._main_board[move[0] - i][move[1] + i]):
                     break
 
-                if (move[0] - i) < 0 or (move[1] + i) > 7 or isWhite(self._mainBoard[move[0] - i][move[1] + i]):
-                    possibleMoves.append([move[0] - i, move[1] + i])
+                if (move[0] - i) < 0 or (move[1] + i) > 7 or is_white(self._main_board[move[0] - i][move[1] + i]):
+                    possible_moves.append([move[0] - i, move[1] + i])
                     break
-                possibleMoves.append([move[0] - i, move[1] + i])
+                possible_moves.append([move[0] - i, move[1] + i])
+
+        if current_pawn == 15:
+            for i in range(1, 8):
+                if (move[0] + i) > 7 or (move[1] + i) > 7 or is_black(self._main_board[move[0] + i][move[1] + i]):
+                    break
+
+                if (move[0] + i) > 7 or (move[1] + i) > 7 or is_white(self._main_board[move[0] + i][move[1] + i]):
+                    possible_moves.append([move[0] + i, move[1] + i])
+                    break
+                possible_moves.append([move[0] + i, move[1] + i])
 
             for i in range(1, 8):
-                if (move[0] + i) > 7 or isBlack(self._mainBoard[move[0] + i][move[1]]):
+                if (move[0] - i) < 0 or (move[1] - i) < 0 or is_black(self._main_board[move[0] - i][move[1] - i]):
                     break
 
-                if (move[0] + i) > 7 or isWhite(self._mainBoard[move[0] + i][move[1]]):
-                    possibleMoves.append([move[0] + i, move[1]])
+                if (move[0] - i) < 0 or (move[1] - i) < 0 or is_white(self._main_board[move[0] - i][move[1] - i]):
+                    possible_moves.append([move[0] - i, move[1] - i])
                     break
-                possibleMoves.append([move[0] + i, move[1]])
-
-            for i in range(1, 8):
-                if (move[0] - i) < 0 or isBlack(self._mainBoard[move[0] - i][move[1]]):
-                    break
-
-                if (move[0] - i) < 0 or isWhite(self._mainBoard[move[0] - i][move[1]]):
-                    possibleMoves.append([move[0] - i, move[1]])
-                    break
-                possibleMoves.append([move[0] - i, move[1]])
+                possible_moves.append([move[0] - i, move[1] - i])
 
             for i in range(1, 8):
-                if (move[1] + i) > 7 or isBlack(self._mainBoard[move[0]][move[1] + i]):
+                if (move[0] + i) > 7 or (move[1] - i) < 0 or is_black(self._main_board[move[0] + i][move[1] - i]):
                     break
 
-                if (move[1] + i) > 7 or isWhite(self._mainBoard[move[0]][move[1] + i]):
-                    possibleMoves.append([move[0], move[1] + i])
+                if (move[0] + i) > 7 or (move[1] - i) < 0 or is_white(self._main_board[move[0] + i][move[1] - i]):
+                    possible_moves.append([move[0] + i, move[1] - i])
                     break
-                possibleMoves.append([move[0], move[1] + i])
+                possible_moves.append([move[0] + i, move[1] - i])
 
             for i in range(1, 8):
-                if (move[1] - i) < 0 or isBlack(self._mainBoard[move[0]][move[1] - i]):
+                if (move[0] - i) < 0 or (move[1] + i) > 7 or is_black(self._main_board[move[0] - i][move[1] + i]):
                     break
 
-                if (move[1] - i) < 0 or isWhite(self._mainBoard[move[0]][move[1] - i]):
-                    possibleMoves.append([move[0], move[1] - i])
+                if (move[0] - i) < 0 or (move[1] + i) > 7 or is_white(self._main_board[move[0] - i][move[1] + i]):
+                    possible_moves.append([move[0] - i, move[1] + i])
                     break
-                possibleMoves.append([move[0], move[1] - i])
+                possible_moves.append([move[0] - i, move[1] + i])
 
-        if currentPawn == 16:
+            for i in range(1, 8):
+                if (move[0] + i) > 7 or is_black(self._main_board[move[0] + i][move[1]]):
+                    break
+
+                if (move[0] + i) > 7 or is_white(self._main_board[move[0] + i][move[1]]):
+                    possible_moves.append([move[0] + i, move[1]])
+                    break
+                possible_moves.append([move[0] + i, move[1]])
+
+            for i in range(1, 8):
+                if (move[0] - i) < 0 or is_black(self._main_board[move[0] - i][move[1]]):
+                    break
+
+                if (move[0] - i) < 0 or is_white(self._main_board[move[0] - i][move[1]]):
+                    possible_moves.append([move[0] - i, move[1]])
+                    break
+                possible_moves.append([move[0] - i, move[1]])
+
+            for i in range(1, 8):
+                if (move[1] + i) > 7 or is_black(self._main_board[move[0]][move[1] + i]):
+                    break
+
+                if (move[1] + i) > 7 or is_white(self._main_board[move[0]][move[1] + i]):
+                    possible_moves.append([move[0], move[1] + i])
+                    break
+                possible_moves.append([move[0], move[1] + i])
+
+            for i in range(1, 8):
+                if (move[1] - i) < 0 or is_black(self._main_board[move[0]][move[1] - i]):
+                    break
+
+                if (move[1] - i) < 0 or is_white(self._main_board[move[0]][move[1] - i]):
+                    possible_moves.append([move[0], move[1] - i])
+                    break
+                possible_moves.append([move[0], move[1] - i])
+
+        if current_pawn == 16:
             for i in range(1, 2):
-                if (move[0] + i) > 7 or (move[1] + i) > 7 or isBlack(self._mainBoard[move[0] + i][move[1] + i]):
+                if (move[0] + i) > 7 or (move[1] + i) > 7 or is_black(self._main_board[move[0] + i][move[1] + i]):
                     break
 
-                if (move[0] + i) > 7 or (move[1] + i) > 7 or isWhite(self._mainBoard[move[0] + i][move[1] + i]):
-                    possibleMoves.append([move[0] + i, move[1] + i])
+                if (move[0] + i) > 7 or (move[1] + i) > 7 or is_white(self._main_board[move[0] + i][move[1] + i]):
+                    possible_moves.append([move[0] + i, move[1] + i])
                     break
-                possibleMoves.append([move[0] + i, move[1] + i])
-
-            for i in range(1, 2):
-                if (move[0] - i) < 0 or (move[1] - i) < 0 or isBlack(self._mainBoard[move[0] - i][move[1] - i]):
-                    break
-
-                if (move[0] - i) < 0 or (move[1] - i) < 0 or isWhite(self._mainBoard[move[0] - i][move[1] - i]):
-                    possibleMoves.append([move[0] - i, move[1] - i])
-                    break
-                possibleMoves.append([move[0] - i, move[1] - i])
+                possible_moves.append([move[0] + i, move[1] + i])
 
             for i in range(1, 2):
-                if (move[0] + i) > 7 or (move[1] - i) < 0 or isBlack(self._mainBoard[move[0] + i][move[1] - i]):
+                if (move[0] - i) < 0 or (move[1] - i) < 0 or is_black(self._main_board[move[0] - i][move[1] - i]):
                     break
 
-                if (move[0] + i) > 7 or (move[1] - i) < 0 or isWhite(self._mainBoard[move[0] + i][move[1] - i]):
-                    possibleMoves.append([move[0] + i, move[1] - i])
+                if (move[0] - i) < 0 or (move[1] - i) < 0 or is_white(self._main_board[move[0] - i][move[1] - i]):
+                    possible_moves.append([move[0] - i, move[1] - i])
                     break
-                possibleMoves.append([move[0] + i, move[1] - i])
-
-            for i in range(1, 2):
-                if (move[0] - i) < 0 or (move[1] + i) > 7 or isBlack(self._mainBoard[move[0] - i][move[1] + i]):
-                    break
-
-                if (move[0] - i) < 0 or (move[1] + i) > 7 or isWhite(self._mainBoard[move[0] - i][move[1] + i]):
-                    possibleMoves.append([move[0] - i, move[1] + i])
-                    break
-                possibleMoves.append([move[0] - i, move[1] + i])
+                possible_moves.append([move[0] - i, move[1] - i])
 
             for i in range(1, 2):
-                if (move[0] + i) > 7 or isBlack(self._mainBoard[move[0] + i][move[1]]):
+                if (move[0] + i) > 7 or (move[1] - i) < 0 or is_black(self._main_board[move[0] + i][move[1] - i]):
                     break
 
-                if (move[0] + i) > 7 or isWhite(self._mainBoard[move[0] + i][move[1]]):
-                    possibleMoves.append([move[0] + i, move[1]])
+                if (move[0] + i) > 7 or (move[1] - i) < 0 or is_white(self._main_board[move[0] + i][move[1] - i]):
+                    possible_moves.append([move[0] + i, move[1] - i])
                     break
-                possibleMoves.append([move[0] + i, move[1]])
-
-            for i in range(1, 2):
-                if (move[0] - i) < 0 or isBlack(self._mainBoard[move[0] - i][move[1]]):
-                    break
-
-                if (move[0] - i) < 0 or isWhite(self._mainBoard[move[0] - i][move[1]]):
-                    possibleMoves.append([move[0] - i, move[1]])
-                    break
-                possibleMoves.append([move[0] - i, move[1]])
+                possible_moves.append([move[0] + i, move[1] - i])
 
             for i in range(1, 2):
-                if (move[1] + i) > 7 or isBlack(self._mainBoard[move[0]][move[1] + i]):
+                if (move[0] - i) < 0 or (move[1] + i) > 7 or is_black(self._main_board[move[0] - i][move[1] + i]):
                     break
 
-                if (move[1] + i) > 7 or isWhite(self._mainBoard[move[0]][move[1] + i]):
-                    possibleMoves.append([move[0], move[1] + i])
+                if (move[0] - i) < 0 or (move[1] + i) > 7 or is_white(self._main_board[move[0] - i][move[1] + i]):
+                    possible_moves.append([move[0] - i, move[1] + i])
                     break
-                possibleMoves.append([move[0], move[1] + i])
+                possible_moves.append([move[0] - i, move[1] + i])
 
             for i in range(1, 2):
-                if (move[1] - i) < 0 or isBlack(self._mainBoard[move[0]][move[1] - i]):
+                if (move[0] + i) > 7 or is_black(self._main_board[move[0] + i][move[1]]):
                     break
 
-                if (move[1] - i) < 0 or isWhite(self._mainBoard[move[0]][move[1] - i]):
-                    possibleMoves.append([move[0], move[1] - i])
+                if (move[0] + i) > 7 or is_white(self._main_board[move[0] + i][move[1]]):
+                    possible_moves.append([move[0] + i, move[1]])
                     break
-                possibleMoves.append([move[0], move[1] - i])
+                possible_moves.append([move[0] + i, move[1]])
 
-        return possibleMoves
+            for i in range(1, 2):
+                if (move[0] - i) < 0 or is_black(self._main_board[move[0] - i][move[1]]):
+                    break
+
+                if (move[0] - i) < 0 or is_white(self._main_board[move[0] - i][move[1]]):
+                    possible_moves.append([move[0] - i, move[1]])
+                    break
+                possible_moves.append([move[0] - i, move[1]])
+
+            for i in range(1, 2):
+                if (move[1] + i) > 7 or is_black(self._main_board[move[0]][move[1] + i]):
+                    break
+
+                if (move[1] + i) > 7 or is_white(self._main_board[move[0]][move[1] + i]):
+                    possible_moves.append([move[0], move[1] + i])
+                    break
+                possible_moves.append([move[0], move[1] + i])
+
+            for i in range(1, 2):
+                if (move[1] - i) < 0 or is_black(self._main_board[move[0]][move[1] - i]):
+                    break
+
+                if (move[1] - i) < 0 or is_white(self._main_board[move[0]][move[1] - i]):
+                    possible_moves.append([move[0], move[1] - i])
+                    break
+                possible_moves.append([move[0], move[1] - i])
+
+        return possible_moves
 
 
 class Move:
-    def __init__(self, board, startMove, endMove):
-        self.mainBoard = copy.deepcopy(board)
-        self.startMove = startMove
-        self.endMove = endMove
-        self.movingPawn = board[startMove[0]][startMove[1]]
-        self.targetPawn = board[endMove[0]][endMove[1]]
-        self.movePos = 1000 * startMove[0] + 100 * startMove[1] + 10 * endMove[0] + endMove[1]
+    def __init__(self, board, start_move, end_move):
+        self.main_board = copy.deepcopy(board)
+        self.start_move = start_move
+        self.end_move = end_move
+        self.moving_pawn = board[start_move[0]][start_move[1]]
+        self.target_pawn = board[end_move[0]][end_move[1]]
+        self.move_pos = 1000 * start_move[0] + 100 * start_move[1] + 10 * end_move[0] + end_move[1]
 
     def __eq__(self, other):
         if isinstance(other, Move):
-            return self.movePos == other.movePos
+            return self.move_pos == other.move_pos
