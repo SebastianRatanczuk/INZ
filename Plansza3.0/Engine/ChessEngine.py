@@ -11,13 +11,12 @@ from Engine.pieces.Rook import Rook
 class GameEngine:
     def __init__(self):
         self.main_board = [
-            #    1  2  3  4  5  6  7   8
-            [Rook(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Rook(False)],  # A   # x1 = pionek
-            [Knight(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Knight(False)],  # B   # x2 = wieża
-            [Bishop(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Bishop(False)],  # C   # x3 = skoczek
-            [Queen(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Queen(False)],  # D   # x4 = goniec
-            [King(True), Pawn(True), 0, 0, 0, 0, Pawn(False), King(False)],  # E   # x5 = dama
-            [Bishop(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Bishop(False)],  # F   # x6 = krol
+            [Rook(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Rook(False)],  # A
+            [Knight(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Knight(False)],  # B
+            [Bishop(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Bishop(False)],  # C
+            [Queen(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Queen(False)],  # D
+            [King(True), Pawn(True), 0, 0, 0, 0, Pawn(False), King(False)],  # E
+            [Bishop(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Bishop(False)],  # F
             [Knight(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Knight(False)],  # G
             [Rook(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Rook(False)],  # H
         ]
