@@ -1,12 +1,11 @@
 import pygame
 
 from Engine import ChessEngine
-from Engine.ChessEngine import is_white, is_black, is_the_same_color
 
 
 class Render:
     def __init__(self):
-        self.tile_size = 100
+        self.tile_size = 110
         self.window_width = self.tile_size * 8 + 300
         self.window_height = self.tile_size * 8
         self.window_title = "Szaszki"
@@ -99,13 +98,13 @@ class Render:
             for file in range(8):
                 for rank in range(8):
                     if self.engine.get_board()[file][rank] != 0:
-                        self.screen.blit(self.piece_sprite[self.engine.get_board()[file][rank]],
+                        self.screen.blit(self.piece_sprite[self.engine.main_board[file][rank].pawn_number],
                                          (5 + file * self.tile_size, 5 + (7 - rank) * self.tile_size))
         else:
             for file in range(8):
                 for rank in range(8):
                     if self.engine.get_board()[file][rank] != 0:
-                        self.screen.blit(self.piece_sprite[self.engine.get_board()[file][rank]],
+                        self.screen.blit(self.piece_sprite[self.engine.main_board[file][rank].pawn_number],
                                          (5 + (7 - file) * self.tile_size, 5 + rank * self.tile_size))
 
     def _render_buttons(self):
@@ -131,12 +130,12 @@ class Render:
         if self.tile_selected == () and self.engine.get_board()[new_tile_selection[0]][new_tile_selection[1]] == 0:
             return
 
-        if self.tile_selected == () and self.engine.white_turn and not is_white(
-                self.engine.get_board()[new_tile_selection[0]][new_tile_selection[1]]):
+        if self.tile_selected == () and self.engine.white_turn and not self.engine.main_board[new_tile_selection[0]][
+            new_tile_selection[1]].isWhite:
             return
 
-        if self.tile_selected == () and not self.engine.white_turn and not is_black(
-                self.engine.get_board()[new_tile_selection[0]][new_tile_selection[1]]):
+        if self.tile_selected == () and not self.engine.white_turn and self.engine.main_board[new_tile_selection[0]][
+            new_tile_selection[1]].isWhite:
             return
 
         if self.tile_selected == new_tile_selection:
@@ -144,8 +143,8 @@ class Render:
             self.tile_history = []
             self.possible_moves = []
         elif len(self.tile_history) == 1 and (
-                is_the_same_color(self.engine.get_board()[self.tile_selected[0]][self.tile_selected[1]],
-                                  self.engine.get_board()[new_tile_selection[0]][new_tile_selection[1]])):
+                self.engine.main_board[self.tile_selected[0]][self.tile_selected[1]].isWhite ==
+                self.engine.main_board[new_tile_selection[0]][new_tile_selection[1]].isWhite):
             self.tile_selected = new_tile_selection
             self.tile_history = []
             self.tile_history.append(self.tile_selected)
