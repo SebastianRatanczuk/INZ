@@ -10,5 +10,5 @@ class Piece:
         self.hasMoved = False
 
     @abstractmethod
-    def getAllPossibleMoves(self, board):
+    def getAllPossibleMoves(self, main_board, move):
         pass

@@ -28,6 +28,7 @@ class GameEngine:
         self.white_turn = not self.white_turn
         self.main_board[move.start_move[0]][move.start_move[1]] = 0
         self.main_board[move.end_move[0]][move.end_move[1]] = move.moving_pawn
+        move.moving_pawn.hasMoved = True
         self._log.append(move)
 
     def undo_move(self):
@@ -48,7 +49,8 @@ class GameEngine:
         for file in range(8):
             for rank in range(8):
                 if (self.white_turn and self.main_board[file][rank] != 0 and self.main_board[file][rank].isWhite) or (
-                        not self.white_turn and self.main_board[file][rank] != 0 and not self.main_board[file][rank].isWhite):
+                        not self.white_turn and self.main_board[file][rank] != 0
+                        and not self.main_board[file][rank].isWhite):
                     allMoves = self.get_possible_piece_moves([file, rank])
                     for move in allMoves:
                         possible_moves.append(Move(self.main_board, [file, rank], move))
@@ -56,8 +58,8 @@ class GameEngine:
         return possible_moves
 
     def get_possible_piece_moves(self, move):
-        possible_moves = []
-        return possible_moves
+        current_pawn = self.main_board[move[0]][move[1]]
+        return current_pawn.getAllPossibleMoves(self.main_board, move)
 
 
 class Move:
