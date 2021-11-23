@@ -142,7 +142,8 @@ class Render:
             self.tile_selected = ()
             self.tile_history = []
             self.possible_moves = []
-        elif len(self.tile_history) == 1 and (
+        elif len(self.tile_history) == 1 and self.engine.main_board[new_tile_selection[0]][
+            new_tile_selection[1]] != 0 and (
                 self.engine.main_board[self.tile_selected[0]][self.tile_selected[1]].isWhite ==
                 self.engine.main_board[new_tile_selection[0]][new_tile_selection[1]].isWhite):
             self.tile_selected = new_tile_selection

@@ -45,13 +45,13 @@ class GameEngine:
 
     def get_possible_moves(self):
         possible_moves = []
-        # for file in range(8):
-        #     for rank in range(8):
-        #         if (self.white_turn and is_white(self._main_board[file][rank])) or (
-        #                 not self.white_turn and is_black(self._main_board[file][rank])):
-        #             allMoves = self.get_possible_piece_moves([file, rank])
-        #             for move in allMoves:
-        #                 possible_moves.append(Move(self._main_board, [file, rank], move))
+        for file in range(8):
+            for rank in range(8):
+                if (self.white_turn and self.main_board[file][rank] != 0 and self.main_board[file][rank].isWhite) or (
+                        not self.white_turn and self.main_board[file][rank] != 0 and not self.main_board[file][rank].isWhite):
+                    allMoves = self.get_possible_piece_moves([file, rank])
+                    for move in allMoves:
+                        possible_moves.append(Move(self.main_board, [file, rank], move))
 
         return possible_moves
 
