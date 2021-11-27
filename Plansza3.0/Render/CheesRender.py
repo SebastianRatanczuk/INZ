@@ -118,16 +118,30 @@ class Render:
     def _render_buttons(self):
         self.undo_button.render_button()
 
+    def _render_possible_moves(self):
+        if len(self.possible_moves) == 0:
+            return
+
+        for move in self.possible_moves:
+            _tile_color = self.possible_moves_color
+            _tile_render_position = pygame.math.Vector2((move.end_move[0]) * self.tile_size,
+                                                        (7 - move.end_move[1]) * self.tile_size)
+            pygame.draw.rect(self.screen, _tile_color, (_tile_render_position, self.tile_size_vector))
+
+        # if self.engine.white_turn:
+        #     for move in self.possible_moves:
+        #         _tile_color = self.possible_moves_color
+        #         _tile_render_position = pygame.math.Vector2((move.end_move[0]) * self.tile_size, (7 - move.end_move[1]) * self.tile_size)
+        #         pygame.draw.rect(self.screen, _tile_color, (_tile_render_position, self.tile_size_vector))
+        # else:
+        #     for move in self.possible_moves:
+        #         _tile_color = self.possible_moves_color
+        #         _tile_render_position = pygame.math.Vector2((7 - move.end_move[0]) * self.tile_size, (move.end_move[1]) * self.tile_size)
+        #         pygame.draw.rect(self.screen, _tile_color, (_tile_render_position, self.tile_size_vector))
+
     def menu_interface_logic(self, mouse_pos):
         if self.undo_button.get_acton(mouse_pos):
             self.undo_move()
-
-    def undo_move(self):
-        self.tile_selected = []
-        self.tile_history = []
-        self.possible_moves = []
-        self.engine.undo_move()
-        self.valid_moves = self.engine.get_valid_moves()
 
     def game_interface_logic(self, mouse_pos):
 
@@ -188,26 +202,12 @@ class Render:
         self.tile_history = []
         self.tile_selected = []
 
-    def _render_possible_moves(self):
-        if len(self.possible_moves) == 0:
-            return
-
-        for move in self.possible_moves:
-            _tile_color = self.possible_moves_color
-            _tile_render_position = pygame.math.Vector2((move.end_move[0]) * self.tile_size,
-                                                        (7 - move.end_move[1]) * self.tile_size)
-            pygame.draw.rect(self.screen, _tile_color, (_tile_render_position, self.tile_size_vector))
-
-        # if self.engine.white_turn:
-        #     for move in self.possible_moves:
-        #         _tile_color = self.possible_moves_color
-        #         _tile_render_position = pygame.math.Vector2((move.end_move[0]) * self.tile_size, (7 - move.end_move[1]) * self.tile_size)
-        #         pygame.draw.rect(self.screen, _tile_color, (_tile_render_position, self.tile_size_vector))
-        # else:
-        #     for move in self.possible_moves:
-        #         _tile_color = self.possible_moves_color
-        #         _tile_render_position = pygame.math.Vector2((7 - move.end_move[0]) * self.tile_size, (move.end_move[1]) * self.tile_size)
-        #         pygame.draw.rect(self.screen, _tile_color, (_tile_render_position, self.tile_size_vector))
+    def undo_move(self):
+        self.tile_selected = []
+        self.tile_history = []
+        self.possible_moves = []
+        self.engine.undo_move()
+        self.valid_moves = self.engine.get_valid_moves()
 
 
 class Button:
