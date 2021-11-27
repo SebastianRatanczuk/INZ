@@ -5,4 +5,12 @@
     <orderEntry type="jdk" jdkName="Python 3.8 (Plansza2.0)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="PyNamespacePackagesService">
+    <option name="namespacePackageFolders">
+      <list>
+        <option value="$MODULE_DIR$/Render" />
+        <option value="$MODULE_DIR$/Engine" />
+      </list>
+    </option>
+  </component>
 </module>

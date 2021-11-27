@@ -22,13 +22,22 @@ class GameEngine:
         ]
         self.white_turn = True
         self._log = []
+        self.white_king_pos = [4, 0]
+        self.black_king_pos = [4, 7]
+        self.check_mate = False
+        self.stale_mate = False
 
     def move(self, move):
         self.white_turn = not self.white_turn
         self.main_board[move.start_move[0]][move.start_move[1]] = 0
         self.main_board[move.end_move[0]][move.end_move[1]] = move.moving_pawn
-        move.moving_pawn.hasMoved = True
+        move.moving_pawn.has_moved = True
         self._log.append(move)
+        if isinstance(move.moving_pawn, King):
+            if move.moving_pawn.is_white:
+                self.white_king_pos = move.end_move
+            else:
+                self.black_king_pos = move.end_move
 
     def undo_move(self):
         if len(self._log) == 0:
@@ -36,20 +45,42 @@ class GameEngine:
         self.white_turn = not self.white_turn
         old_move = self._log.pop()
         self.main_board = old_move.main_board
+        if isinstance(old_move.moving_pawn, King):
+            if old_move.moving_pawn.is_white:
+                self.white_king_pos = old_move.start_move
+            else:
+                self.black_king_pos = old_move.start_move
 
     def get_board(self):
         return self.main_board
 
     def get_valid_moves(self):
-        return self.get_possible_moves()
+        moves = self.get_possible_moves()
+        for i in range(len(moves) - 1, -1, -1):
+            self.move(moves[i])
+            self.white_turn = not self.white_turn
+            if self.check_for_check():
+                moves.remove(moves[i])
+            self.white_turn = not self.white_turn
+            self.undo_move()
+
+        if len(moves) == 0:
+            if self.check_for_check():
+                self.check_mate = True
+            else:
+                self.stale_mate = True
+        else:
+            self.check_mate = False
+            self.stale_mate = False
+        return moves
 
     def get_possible_moves(self):
         possible_moves = []
         for file in range(8):
             for rank in range(8):
-                if (self.white_turn and self.main_board[file][rank] != 0 and self.main_board[file][rank].isWhite) or (
+                if (self.white_turn and self.main_board[file][rank] != 0 and self.main_board[file][rank].is_white) or (
                         not self.white_turn and self.main_board[file][rank] != 0
-                        and not self.main_board[file][rank].isWhite):
+                        and not self.main_board[file][rank].is_white):
                     allMoves = self.get_possible_piece_moves([file, rank])
                     for move in allMoves:
                         possible_moves.append(Move(self.main_board, [file, rank], move))
@@ -58,7 +89,23 @@ class GameEngine:
 
     def get_possible_piece_moves(self, move):
         current_pawn = self.main_board[move[0]][move[1]]
-        return current_pawn.getAllPossibleMoves(self.main_board, move)
+        return current_pawn.get_all_possible_moves(self.main_board, move)
+
+    def check_for_check(self):
+        if self.white_turn:
+            return self.check_for_attack(self.white_king_pos)
+        else:
+            return self.check_for_attack(self.black_king_pos)
+
+    def check_for_attack(self, position):
+        self.white_turn = not self.white_turn
+        enemyMoves = self.get_possible_moves()
+        self.white_turn = not self.white_turn
+
+        for move in enemyMoves:
+            if move.end_move == position:
+                return True
+        return False
 
 
 class Move:
