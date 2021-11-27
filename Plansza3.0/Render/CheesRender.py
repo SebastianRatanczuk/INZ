@@ -195,12 +195,15 @@ class Render:
 
     def make_move(self):
         move = ChessEngine.Move(self.engine.get_board(), self.tile_history[0], self.tile_history[1])
-        if move in self.valid_moves:
-            self.engine.move(move)
-            self.move_made = True
-        self.possible_moves = []
-        self.tile_history = []
-        self.tile_selected = []
+        for valid_move in self.valid_moves:
+            if move == valid_move:
+                self.engine.move(valid_move)
+                self.move_made = True
+
+        if self.move_made:
+            self.possible_moves = []
+            self.tile_history = []
+            self.tile_selected = []
 
     def undo_move(self):
         self.tile_selected = []

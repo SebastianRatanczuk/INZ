@@ -33,6 +33,7 @@ class GameEngine:
         self.main_board[move.end_move[0]][move.end_move[1]] = move.moving_pawn
         move.moving_pawn.has_moved = True
         self._log.append(move)
+
         if isinstance(move.moving_pawn, King):
             if move.moving_pawn.is_white:
                 self.white_king_pos = move.end_move
@@ -45,6 +46,7 @@ class GameEngine:
         self.white_turn = not self.white_turn
         old_move = self._log.pop()
         self.main_board = old_move.main_board
+
         if isinstance(old_move.moving_pawn, King):
             if old_move.moving_pawn.is_white:
                 self.white_king_pos = old_move.start_move
@@ -83,13 +85,13 @@ class GameEngine:
                         and not self.main_board[file][rank].is_white):
                     allMoves = self.get_possible_piece_moves([file, rank])
                     for move in allMoves:
-                        possible_moves.append(Move(self.main_board, [file, rank], move))
+                        possible_moves.append(Move(copy.deepcopy(self.main_board), [file, rank], move))
 
         return possible_moves
 
     def get_possible_piece_moves(self, move):
         current_pawn = self.main_board[move[0]][move[1]]
-        return current_pawn.get_all_possible_moves(self.main_board, move)
+        return current_pawn.get_all_possible_moves(copy.deepcopy(self.main_board), move)
 
     def check_for_check(self):
         if self.white_turn:
