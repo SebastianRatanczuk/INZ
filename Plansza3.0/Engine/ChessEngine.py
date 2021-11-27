@@ -45,7 +45,7 @@ class GameEngine:
             return
         self.white_turn = not self.white_turn
         old_move = self._log.pop()
-        self.main_board = old_move.main_board
+        self.main_board = copy.deepcopy(old_move.main_board)
 
         if isinstance(old_move.moving_pawn, King):
             if old_move.moving_pawn.is_white:

@@ -199,6 +199,7 @@ class Render:
             if move == valid_move:
                 self.engine.move(valid_move)
                 self.move_made = True
+                break
 
         if self.move_made:
             self.possible_moves = []
