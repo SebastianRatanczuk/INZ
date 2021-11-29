@@ -40,6 +40,7 @@ class GameEngine:
                 self.black_king_pos = move.end_move
 
         if move.is_pawn_promotion:
+            print("PROMOTION 123")
             self.main_board[move.end_move[0]][move.end_move[1]] = Queen(move.moving_pawn.is_white)
 
         self._log.append(move)
@@ -49,7 +50,7 @@ class GameEngine:
             return
         self.white_turn = not self.white_turn
         old_move = self._log.pop()
-        self.main_board = copy.copy(old_move.main_board)
+        self.main_board = copy.deepcopy(old_move.main_board)
 
         if isinstance(old_move.moving_pawn, King):
             if old_move.moving_pawn.is_white:
