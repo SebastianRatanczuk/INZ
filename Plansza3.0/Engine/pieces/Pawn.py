@@ -21,7 +21,7 @@ class Pawn(Piece):
                     main_board[move[0] + 1][move[1] + 1].is_white:
                 possible_moves.append([move[0] + 1, move[1] + 1])
 
-            if move[0] - 1 > 0 and move[1] + 1 < 8 and main_board[move[0] - 1][move[1] + 1] != 0 and not \
+            if move[0] - 1 >= 0 and move[1] + 1 < 8 and main_board[move[0] - 1][move[1] + 1] != 0 and not \
                     main_board[move[0] - 1][move[1] + 1].is_white:
                 possible_moves.append([move[0] - 1, move[1] + 1])
 
@@ -36,7 +36,7 @@ class Pawn(Piece):
                     main_board[move[0] + 1][move[1] - 1].is_white:
                 possible_moves.append([move[0] + 1, move[1] - 1])
 
-            if move[0] - 1 > 0 and move[1] - 0 >= 0 and main_board[move[0] - 1][move[1] - 1] != 0 and \
+            if move[0] - 1 >= 0 and move[1] - 0 >= 0 and main_board[move[0] - 1][move[1] - 1] != 0 and \
                     main_board[move[0] - 1][move[1] - 1].is_white:
                 possible_moves.append([move[0] - 1, move[1] - 1])
 

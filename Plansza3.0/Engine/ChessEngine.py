@@ -32,13 +32,17 @@ class GameEngine:
         self.main_board[move.start_move[0]][move.start_move[1]] = 0
         self.main_board[move.end_move[0]][move.end_move[1]] = move.moving_pawn
         move.moving_pawn.has_moved = True
-        self._log.append(move)
 
         if isinstance(move.moving_pawn, King):
             if move.moving_pawn.is_white:
                 self.white_king_pos = move.end_move
             else:
                 self.black_king_pos = move.end_move
+
+        if move.is_pawn_promotion:
+            self.main_board[move.end_move[0]][move.end_move[1]] = Queen(move.moving_pawn.is_white)
+
+        self._log.append(move)
 
     def undo_move(self):
         if len(self._log) == 0:
@@ -118,6 +122,13 @@ class Move:
         self.moving_pawn = board[start_move[0]][start_move[1]]
         self.target_pawn = board[end_move[0]][end_move[1]]
         self.move_pos = 1000 * start_move[0] + 100 * start_move[1] + 10 * end_move[0] + end_move[1]
+        self.is_pawn_promotion = False
+
+        if isinstance(self.moving_pawn, Pawn):
+            if self.moving_pawn.is_white and self.end_move[1] == 7:
+                self.is_pawn_promotion = True
+            if not self.moving_pawn.is_white and self.end_move[1] == 0:
+                self.is_pawn_promotion = True
 
     def __eq__(self, other):
         if isinstance(other, Move):
