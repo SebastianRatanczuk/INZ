@@ -1,4 +1,4 @@
-import NumPy as np
+import copy
 
 from Engine.pieces.Bishop import Bishop
 from Engine.pieces.King import King
@@ -49,7 +49,7 @@ class GameEngine:
             return
         self.white_turn = not self.white_turn
         old_move = self._log.pop()
-        self.main_board = np.copy(old_move.main_board)
+        self.main_board = copy.copy(old_move.main_board)
 
         if isinstance(old_move.moving_pawn, King):
             if old_move.moving_pawn.is_white:
@@ -89,13 +89,13 @@ class GameEngine:
                         and not self.main_board[file][rank].is_white):
                     allMoves = self.get_possible_piece_moves([file, rank])
                     for move in allMoves:
-                        possible_moves.append(Move(np.copy(self.main_board), [file, rank], move))
+                        possible_moves.append(Move(copy.deepcopy(self.main_board), [file, rank], move))
 
         return possible_moves
 
     def get_possible_piece_moves(self, move):
         current_pawn = self.main_board[move[0]][move[1]]
-        return current_pawn.get_all_possible_moves(np.copy(self.main_board), move)
+        return current_pawn.get_all_possible_moves(copy.deepcopy(self.main_board), move)
 
     def check_for_check(self):
         if self.white_turn:
@@ -116,7 +116,7 @@ class GameEngine:
 
 class Move:
     def __init__(self, board, start_move, end_move):
-        self.main_board = np.copy(board)
+        self.main_board = copy.deepcopy(board)
         self.start_move = start_move
         self.end_move = end_move
         self.moving_pawn = board[start_move[0]][start_move[1]]
