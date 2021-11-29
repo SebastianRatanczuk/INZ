@@ -26,6 +26,7 @@ class GameEngine:
         self.black_king_pos = [4, 7]
         self.check_mate = False
         self.stale_mate = False
+        self.possible_enpassant = []
 
     def move(self, move):
         self.white_turn = not self.white_turn
@@ -90,7 +91,7 @@ class GameEngine:
                         and not self.main_board[file][rank].is_white):
                     allMoves = self.get_possible_piece_moves([file, rank])
                     for move in allMoves:
-                        possible_moves.append(Move(self.main_board, [file, rank], move))
+                        possible_moves.append(move)
 
         return possible_moves
 
@@ -113,23 +114,3 @@ class GameEngine:
             if move.end_move == position:
                 return True
         return False
-
-
-class Move:
-    def __init__(self, board, start_move, end_move):
-        self.start_move = start_move
-        self.end_move = end_move
-        self.moving_pawn = board[start_move[0]][start_move[1]]
-        self.target_pawn = board[end_move[0]][end_move[1]]
-        self.move_pos = 1000 * start_move[0] + 100 * start_move[1] + 10 * end_move[0] + end_move[1]
-        self.is_pawn_promotion = False
-
-        if isinstance(self.moving_pawn, Pawn):
-            if self.moving_pawn.is_white and self.end_move[1] == 7:
-                self.is_pawn_promotion = True
-            if not self.moving_pawn.is_white and self.end_move[1] == 0:
-                self.is_pawn_promotion = True
-
-    def __eq__(self, other):
-        if isinstance(other, Move):
-            return self.move_pos == other.move_pos
