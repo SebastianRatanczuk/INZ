@@ -42,9 +42,12 @@ class Pawn(Piece):
             if move[0] + 1 < 8 and move[1] - 1 >= 0 and main_board[move[0] + 1][move[1] - 1] != 0 and \
                     main_board[move[0] + 1][move[1] - 1].is_white:
                 possible_moves.append(Move(main_board, move, [move[0] + 1, move[1] - 1]))
+            elif [move[0] + 1, move[1] - 1] == GameEngine().possible_enpassant:
+                possible_moves.append(Move(main_board, move, [move[0] + 1, move[1] - 1], True))
 
             if move[0] - 1 >= 0 and move[1] - 0 >= 0 and main_board[move[0] - 1][move[1] - 1] != 0 and \
                     main_board[move[0] - 1][move[1] - 1].is_white:
                 possible_moves.append(Move(main_board, move, [move[0] - 1, move[1] - 1]))
-
+            elif [move[0] - 1, move[1] - 1] == GameEngine().possible_enpassant:
+                possible_moves.append(Move(main_board, move, [move[0] - 1, move[1] - 1], True))
         return possible_moves
