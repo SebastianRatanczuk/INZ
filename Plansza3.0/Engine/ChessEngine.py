@@ -9,6 +9,7 @@ from Engine.pieces.Rook import Rook
 
 
 class GameEngine:
+
     def __init__(self):
         self.main_board = [
             [Rook(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Rook(False)],  # A

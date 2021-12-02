@@ -10,6 +10,7 @@ class Pawn(Piece):
 
     def get_all_possible_moves(self, main_board, move):
         from Engine.Move import Move
+        from Engine.ChessEngine import GameEngine
         possible_moves = []
         if self.is_white:
             if move[1] + 1 < 8 and main_board[move[0]][move[1] + 1] == 0:
@@ -22,10 +23,14 @@ class Pawn(Piece):
             if move[0] + 1 < 8 and move[1] + 1 < 8 and main_board[move[0] + 1][move[1] + 1] != 0 and not \
                     main_board[move[0] + 1][move[1] + 1].is_white:
                 possible_moves.append(Move(main_board, move, [move[0] + 1, move[1] + 1]))
+            elif [move[0] + 1, move[1] + 1] == GameEngine().possible_enpassant:
+                possible_moves.append(Move(main_board, move, [move[0] + 1, move[1] + 1], True))
 
             if move[0] - 1 >= 0 and move[1] + 1 < 8 and main_board[move[0] - 1][move[1] + 1] != 0 and not \
                     main_board[move[0] - 1][move[1] + 1].is_white:
                 possible_moves.append(Move(main_board, move, [move[0] - 1, move[1] + 1]))
+            elif [move[0] - 1, move[1] + 1] == GameEngine().possible_enpassant:
+                possible_moves.append(Move(main_board, move, [move[0] - 1, move[1] + 1], True))
 
         else:
             if move[1] - 1 >= 0 and main_board[move[0]][move[1] - 1] == 0:
