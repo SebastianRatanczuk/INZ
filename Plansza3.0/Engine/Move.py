@@ -9,6 +9,7 @@ class Move:
         self.target_pawn = board[end_move[0]][end_move[1]]
         self.move_pos = 1000 * start_move[0] + 100 * start_move[1] + 10 * end_move[0] + end_move[1]
         self.is_pawn_promotion = False
+        self.enpassant = ()
 
         if isinstance(self.moving_pawn, Pawn.Pawn):
             if self.moving_pawn.is_white and self.end_move[1] == 7:

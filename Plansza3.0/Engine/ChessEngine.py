@@ -36,6 +36,7 @@ class GameEngine:
         moving_pawn = copy.deepcopy(move.moving_pawn)
         moving_pawn.has_moved = True
         self.main_board[move.end_move[0]][move.end_move[1]] = moving_pawn
+        move.enpassant = copy.deepcopy(self.possible_enpassant)
         self._log.append(move)
 
         if isinstance(move.moving_pawn, King):
@@ -72,7 +73,8 @@ class GameEngine:
         if old_move.is_enpassant_move:
             self.main_board[old_move.end_move[0]][old_move.end_move[1]] = 0
             self.main_board[old_move.end_move[0]][old_move.start_move[1]] = old_move.target_pawn
-            self.possible_enpassant = (old_move.end_move[0], old_move.end_move[1])
+
+        self.possible_enpassant = old_move.enpassant
 
     def get_board(self):
         return self.main_board
