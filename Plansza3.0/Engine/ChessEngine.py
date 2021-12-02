@@ -11,26 +11,17 @@ from Engine.pieces.Rook import Rook
 class GameEngine:
 
     def __init__(self):
-        # self.main_board = [
-        #     [Rook(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Rook(False)],  # A
-        #     [Knight(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Knight(False)],  # B
-        #     [Bishop(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Bishop(False)],  # C
-        #     [Queen(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Queen(False)],  # D
-        #     [King(True), Pawn(True), 0, 0, 0, 0, Pawn(False), King(False)],  # E
-        #     [Bishop(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Bishop(False)],  # F
-        #     [Knight(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Knight(False)],  # G
-        #     [Rook(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Rook(False)],  # H
-        # ]
         self.main_board = [
-            [0, Pawn(True), 0, 0, 0, 0, Pawn(False), 0],  # A
-            [0, Pawn(True), 0, 0, 0, 0, Pawn(False), 0],  # B
-            [0,  0, 0, 0, 0, 0, 0,  0],  # C
-            [0, 0, 0, 0, 0, 0, 0, 0],  # D
-            [0, 0, 0, 0, 0, 0, 0, 0],  # E
-            [0, 0, 0, 0, 0, 0, 0, 0],  # F
-            [0, 0, 0, 0, 0, 0, 0, 0],  # G
-            [0, 0, 0, 0, 0, 0, 0, 0],  # H
+            [Rook(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Rook(False)],  # A
+            [Knight(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Knight(False)],  # B
+            [Bishop(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Bishop(False)],  # C
+            [Queen(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Queen(False)],  # D
+            [King(True), Pawn(True), 0, 0, 0, 0, Pawn(False), King(False)],  # E
+            [Bishop(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Bishop(False)],  # F
+            [Knight(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Knight(False)],  # G
+            [Rook(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Rook(False)],  # H
         ]
+
         self.white_turn = True
         self._log = []
         self.white_king_pos = [4, 0]
@@ -57,7 +48,7 @@ class GameEngine:
             self.main_board[move.end_move[0]][move.end_move[1]] = Queen(move.moving_pawn.is_white)
 
         if move.is_enpassant_move:
-            self.main_board[move.start_move[0]][move.end_move[1]] = 0
+            self.main_board[move.end_move[0]][move.start_move[1]] = 0
 
         if isinstance(move.moving_pawn, Pawn) and abs(move.start_move[1] - move.end_move[1]) == 2:
             self.possible_enpassant = (move.end_move[0], (move.start_move[1] + move.end_move[1]) // 2)
@@ -80,7 +71,7 @@ class GameEngine:
 
         if old_move.is_enpassant_move:
             self.main_board[old_move.end_move[0]][old_move.end_move[1]] = 0
-            self.main_board[old_move.start_move[0]][old_move.end_move[1]] = old_move.target_pawn
+            self.main_board[old_move.end_move[0]][old_move.start_move[1]] = old_move.target_pawn
             self.possible_enpassant = (old_move.end_move[0], old_move.end_move[1])
 
     def get_board(self):
@@ -123,7 +114,7 @@ class GameEngine:
 
     def get_possible_piece_moves(self, move):
         current_pawn = self.main_board[move[0]][move[1]]
-        return current_pawn.get_all_possible_moves(self.main_board, move)
+        return current_pawn.get_all_possible_moves(self, move)
 
     def check_for_check(self):
         if self.white_turn:

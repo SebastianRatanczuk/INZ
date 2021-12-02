@@ -17,6 +17,8 @@ class Move:
                 self.is_pawn_promotion = True
 
         self.is_enpassant_move = enpassant
+        if enpassant:
+            self.target_pawn = board[end_move[0]][start_move[1]]
 
     def __eq__(self, other):
         if isinstance(other, Move):
