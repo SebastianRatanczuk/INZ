@@ -11,15 +11,25 @@ from Engine.pieces.Rook import Rook
 class GameEngine:
 
     def __init__(self):
+        # self.main_board = [
+        #     [Rook(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Rook(False)],  # A
+        #     [Knight(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Knight(False)],  # B
+        #     [Bishop(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Bishop(False)],  # C
+        #     [Queen(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Queen(False)],  # D
+        #     [King(True), Pawn(True), 0, 0, 0, 0, Pawn(False), King(False)],  # E
+        #     [Bishop(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Bishop(False)],  # F
+        #     [Knight(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Knight(False)],  # G
+        #     [Rook(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Rook(False)],  # H
+        # ]
         self.main_board = [
-            [Rook(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Rook(False)],  # A
-            [Knight(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Knight(False)],  # B
-            [Bishop(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Bishop(False)],  # C
-            [Queen(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Queen(False)],  # D
-            [King(True), Pawn(True), 0, 0, 0, 0, Pawn(False), King(False)],  # E
-            [Bishop(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Bishop(False)],  # F
-            [Knight(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Knight(False)],  # G
-            [Rook(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Rook(False)],  # H
+            [0, Pawn(True), 0, 0, 0, 0, Pawn(False), 0],  # A
+            [0, Pawn(True), 0, 0, 0, 0, Pawn(False), 0],  # B
+            [0,  0, 0, 0, 0, 0, 0,  0],  # C
+            [0, 0, 0, 0, 0, 0, 0, 0],  # D
+            [0, 0, 0, 0, 0, 0, 0, 0],  # E
+            [0, 0, 0, 0, 0, 0, 0, 0],  # F
+            [0, 0, 0, 0, 0, 0, 0, 0],  # G
+            [0, 0, 0, 0, 0, 0, 0, 0],  # H
         ]
         self.white_turn = True
         self._log = []
@@ -27,7 +37,7 @@ class GameEngine:
         self.black_king_pos = [4, 7]
         self.check_mate = False
         self.stale_mate = False
-        self.possible_enpassant = []
+        self.possible_enpassant = ()
 
     def move(self, move):
         self.white_turn = not self.white_turn
@@ -46,6 +56,14 @@ class GameEngine:
         if move.is_pawn_promotion:
             self.main_board[move.end_move[0]][move.end_move[1]] = Queen(move.moving_pawn.is_white)
 
+        if move.is_enpassant_move:
+            self.main_board[move.start_move[0]][move.end_move[1]] = 0
+
+        if isinstance(move.moving_pawn, Pawn) and abs(move.start_move[1] - move.end_move[1]) == 2:
+            self.possible_enpassant = (move.end_move[0], (move.start_move[1] + move.end_move[1]) // 2)
+        else:
+            self.possible_enpassant = ()
+
     def undo_move(self):
         if len(self._log) == 0:
             return
@@ -60,10 +78,16 @@ class GameEngine:
             else:
                 self.black_king_pos = old_move.start_move
 
+        if old_move.is_enpassant_move:
+            self.main_board[old_move.end_move[0]][old_move.end_move[1]] = 0
+            self.main_board[old_move.start_move[0]][old_move.end_move[1]] = old_move.target_pawn
+            self.possible_enpassant = (old_move.end_move[0], old_move.end_move[1])
+
     def get_board(self):
         return self.main_board
 
     def get_valid_moves(self):
+        tempEnp = self.possible_enpassant
         moves = self.get_possible_moves()
         for i in range(len(moves) - 1, -1, -1):
             self.move(moves[i])
@@ -81,6 +105,7 @@ class GameEngine:
         else:
             self.check_mate = False
             self.stale_mate = False
+        self.possible_enpassant = tempEnp
         return moves
 
     def get_possible_moves(self):
