@@ -1,7 +1,7 @@
 import pygame
 
-import Engine.Move
 from Engine import ChessEngine
+from Engine.ChessEngine import Move
 
 
 class Render:
@@ -195,7 +195,7 @@ class Render:
                 self.possible_moves.append(move)
 
     def make_move(self):
-        move = Engine.Move.Move(self.engine.get_board(), self.tile_history[0], self.tile_history[1])
+        move = Move(self.engine.get_board(), self.tile_history[0], self.tile_history[1])
         for valid_move in self.valid_moves:
             if move == valid_move:
                 self.engine.move(valid_move)
