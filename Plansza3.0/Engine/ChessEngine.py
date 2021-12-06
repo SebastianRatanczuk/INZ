@@ -51,6 +51,16 @@ class GameEngine:
         else:
             self.possible_enpassant = ()
 
+        if move.is_castle_move:
+            if move.end_move[0] - move.start_move[0] == 2:
+                self.main_board[move.end_move[0] - 1][move.end_move[1]] = self.main_board[move.end_move[0] + 1][
+                    move.end_move[1]]
+                self.main_board[move.end_move[0] + 1][move.end_move[1]] = 0
+            else:
+                self.main_board[move.end_move[0] + 1][move.end_move[1]] = self.main_board[move.end_move[0] - 2][
+                    move.end_move[1]]
+                self.main_board[move.end_move[0] - 2][move.end_move[1]] = 0
+
     def undo_move(self):
         if len(self._log) == 0:
             return
@@ -71,12 +81,32 @@ class GameEngine:
 
         self.possible_enpassant = old_move.enpassant
 
+        if old_move.is_castle_move:
+            if old_move.end_move[0] - old_move.start_move[0] == 2:
+                self.main_board[old_move.end_move[0] + 1][old_move.end_move[1]] = \
+                    self.main_board[old_move.end_move[0] - 1][old_move.end_move[1]]
+                self.main_board[old_move.end_move[0] - 1][old_move.end_move[1]] = 0
+            else:
+                self.main_board[old_move.end_move[0] - 2][old_move.end_move[1]] = \
+                    self.main_board[old_move.end_move[0] + 1][old_move.end_move[1]]
+                self.main_board[old_move.end_move[0] + 1][old_move.end_move[1]] = 0
+
     def get_board(self):
         return self.main_board
 
     def get_valid_moves(self):
         tempEnp = self.possible_enpassant
         moves = self.get_possible_moves()
+
+        if self.white_turn:
+            castleMoves = self.getCastileMoves(self.white_king_pos)
+            for m in castleMoves:
+                moves.append(m)
+        else:
+            castleMoves = self.getCastileMoves(self.black_king_pos)
+            for m in castleMoves:
+                moves.append(m)
+
         for i in range(len(moves) - 1, -1, -1):
             self.move(moves[i])
             self.white_turn = not self.white_turn
@@ -129,9 +159,62 @@ class GameEngine:
                 return True
         return False
 
+    def getCastileMoves(self, move):
+        casstleMoves = []
+        if self.check_for_check():
+            return casstleMoves
+
+        if self.main_board[move[0]][move[1]].has_moved:
+            return casstleMoves
+
+        if self.main_board[move[0]][move[1]].is_white:
+            if isinstance(self.main_board[0][0], Rook) and self.main_board[0][0].has_moved:
+                return casstleMoves
+            else:
+                m = self.getQueensideCastle(move)
+                if m is not None:
+                    casstleMoves.append(m)
+
+            if isinstance(self.main_board[7][0], Rook) and self.main_board[7][0].has_moved:
+                return casstleMoves
+            else:
+                m = self.getKingsideCastle(move)
+                if m is not None:
+                    casstleMoves.append(m)
+        else:
+            if isinstance(self.main_board[0][7], Rook) and self.main_board[0][7].has_moved:
+                return casstleMoves
+            else:
+                m = self.getQueensideCastle(move)
+                if m is not None:
+                    casstleMoves.append(m)
+
+            if isinstance(self.main_board[7][7], Rook) and self.main_board[7][7].has_moved:
+                return casstleMoves
+            else:
+                m = self.getKingsideCastle(move)
+                if m is not None:
+                    casstleMoves.append(m)
+
+        return casstleMoves
+
+    def getKingsideCastle(self, move):
+        if self.main_board[move[0] + 1][move[1]] == 0 and self.main_board[move[0] + 2][move[1]] == 0:
+            if not self.check_for_attack([move[0] + 1, move[1]]) \
+                    and not self.check_for_attack([move[0] + 2, move[1]]):
+                return Move(self.main_board, move, [move[0] + 2, move[1]], isCastle=True)
+
+    def getQueensideCastle(self, move):
+        if self.main_board[move[0] - 1][move[1]] == 0 \
+                and self.main_board[move[0] - 2][move[1]] == 0 \
+                and self.main_board[move[0] - 3][move[1]] == 0:
+            if not self.check_for_attack([move[0] - 1, move[1]]) \
+                    and not self.check_for_attack([move[0] - 2, move[1]]):
+                return Move(self.main_board, move, [move[0] - 2, move[1]], isCastle=True)
+
 
 class Move:
-    def __init__(self, board, start_move, end_move, enpassant=False):
+    def __init__(self, board, start_move, end_move, isEnpassant=False, isCastle=False):
         self.start_move = start_move
         self.end_move = end_move
         self.moving_pawn = board[start_move[0]][start_move[1]]
@@ -146,9 +229,11 @@ class Move:
             if not self.moving_pawn.is_white and self.end_move[1] == 0:
                 self.is_pawn_promotion = True
 
-        self.is_enpassant_move = enpassant
-        if enpassant:
+        self.is_enpassant_move = isEnpassant
+        if isEnpassant:
             self.target_pawn = board[end_move[0]][start_move[1]]
+
+        self.is_castle_move = isCastle
 
     def __eq__(self, other):
         if isinstance(other, Move):
