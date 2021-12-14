@@ -4,7 +4,8 @@ import pygame
 
 
 class Render:
-    def __init__(self):
+    def __init__(self, gametype):
+        self.vs_AI = gametype
         self.tile_size = 110
         self.tile_size_vector = pygame.math.Vector2(self.tile_size, self.tile_size)
         self.window_width = self.tile_size * 10 + 50
@@ -196,15 +197,19 @@ class Render:
 
         if move in self.board.legal_moves:
             self.board.push(move)
-
-        if not self.board.is_game_over():
-            result = self.engine.play(self.board, chess.engine.Limit(time=0.1))
-            self.board.push(result.move)
+        if self.vs_AI:
+            if not self.board.is_game_over():
+                result = self.engine.play(self.board, chess.engine.Limit(time=0.1))
+                self.board.push(result.move)
 
     def undo_move(self):
         if len(self.board.move_stack) == 0:
             return
         self.board.pop()
+        if self.vs_AI:
+            if len(self.board.move_stack) == 0:
+                return
+            self.board.pop()
         self.promotion_request = False
         self.legal_moves = []
 
