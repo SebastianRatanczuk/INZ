@@ -1,4 +1,5 @@
 import chess
+import chess.engine
 import pygame
 
 
@@ -19,6 +20,7 @@ class Render:
         self.pawn_promotion = ""
         self.promotion_request = False
         self.legal_moves = []
+        self.engine = chess.engine.SimpleEngine.popen_uci("resources/troutFish/troutFish.exe")
 
         self.piece_sprite = {
             'P': pygame.image.load('resources/pieces/white/pawn.png'),
@@ -194,6 +196,10 @@ class Render:
 
         if move in self.board.legal_moves:
             self.board.push(move)
+
+        if not self.board.is_game_over():
+            result = self.engine.play(self.board, chess.engine.Limit(time=0.1))
+            self.board.push(result.move)
 
     def undo_move(self):
         if len(self.board.move_stack) == 0:
