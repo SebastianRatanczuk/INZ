@@ -3,11 +3,9 @@ import chess.engine
 import pygame
 from PIL import Image, ImageFilter
 
-game_states = [MENU, IN_GAME, POST_GAME] = range(1, 4)
-
 
 class Render:
-    def __init__(self, ):
+    def __init__(self):
         self.vs_AI = False
         self.tile_size = 110
         self.tile_size_vector = pygame.math.Vector2(self.tile_size, self.tile_size)
@@ -42,7 +40,12 @@ class Render:
             'k': pygame.image.load('resources/pieces/black/king.png'),
         }
 
-        self.game_state = MENU
+        self.game_state = 1
+        self.game_mode_background = None
+        self.game_end_background = None
+
+    def __del__(self):
+        self.engine.close()
 
     def run(self):
         pygame.init()
@@ -51,71 +54,75 @@ class Render:
         self.screen = pygame.display.set_mode((self.window_width, self.window_height))
         pygame.display.set_caption(self.window_title)
         self._main_game_loop()
-        pygame.quit()
-
-    def _game_mode_selection(self):
-        self.running = True
-        image = Image.open('resources/background.png')
-        mode = image.mode
-        size = image.size
-        data = image.tobytes()
-
-        py_image = pygame.image.fromstring(data, size, mode)
-        while self.running:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.running = False
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    self.mouse_menu_logic()
-                    self.running = False
-
-            self.screen.blit(py_image, (0, 0))
-            pygame.display.update()
 
     def _main_game_loop(self):
         self.running = True
-
         while self.running:
-            for event in pygame.event.get():
+            self.events = pygame.event.get()
+            for event in self.events:
                 if event.type == pygame.QUIT:
                     self.running = False
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    self.mouse_logic()
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_u:
-                        self.undo_move()
 
-            self.screen.fill((0, 0, 0))
-            self._render_chess_board()
-            self._render_possible_moves()
-            self._render_pieces()
-            self._render_other()
+            match self.game_state:
+                case 1:
+                    self._game_mode_selection()
+                case 2:
+                    self._game_window()
+                case 3:
+                    self._end_game_screen()
 
-            if self.board.is_game_over():
-                self.running = False
             pygame.display.update()
+        pygame.quit()
 
-    def _end_game_loop(self):
-        pygame.image.save(self.screen, 'resources/ScreenShot.png')
-        image = Image.open('resources/ScreenShot.png').filter(ImageFilter.GaussianBlur(radius=6))
+    def _game_mode_selection(self):
+        for event in self.events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                self.game_state += 1
 
-        mode = image.mode
-        size = image.size
-        data = image.tobytes()
+        if self.game_mode_background is None:
+            image = Image.open('resources/background.png')
+            mode = image.mode
+            size = image.size
+            data = image.tobytes()
+            self.game_mode_background = pygame.image.fromstring(data, size, mode)
 
-        py_image = pygame.image.fromstring(data, size, mode)
+        self.screen.blit(self.game_mode_background, (0, 0))
 
-        self.running = True
-        while self.running:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.running = False
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_q:
-                        self.running = False
-            self.screen.blit(py_image, (0, 0))
-            self._render_game_over()
-            pygame.display.update()
+
+    def _game_window(self):
+        for event in self.events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                self.mouse_logic()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_u:
+                    self.undo_move()
+
+        self.screen.fill((0, 0, 0))
+        self._render_chess_board()
+        self._render_possible_moves()
+        self._render_pieces()
+        self._render_other()
+
+        if self.board.is_game_over():
+            self.game_state += 1
+
+    def _end_game_screen(self):
+        for event in self.events:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_u:
+                    self.undo_move()
+                    self.game_state -= 1
+
+        if self.game_end_background is None:
+            pygame.image.save(self.screen, 'resources/ScreenShot.png')
+            image = Image.open('resources/ScreenShot.png').filter(ImageFilter.GaussianBlur(radius=6))
+            mode = image.mode
+            size = image.size
+            data = image.tobytes()
+            self.game_end_background = pygame.image.fromstring(data, size, mode)
+
+        self.screen.blit(self.game_end_background, (0, 0))
+        self._render_game_over()
 
     def _render_chess_board(self):
         for file in range(8):
@@ -262,7 +269,6 @@ class Render:
         self.legal_moves = []
 
     def _render_game_over(self):
-
         if self.board.outcome() is None or self.board.outcome().termination.value != 1:
             text = "Pat"
         else:
