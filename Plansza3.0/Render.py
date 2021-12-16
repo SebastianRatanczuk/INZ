@@ -1,11 +1,14 @@
 import chess
 import chess.engine
 import pygame
+from PIL import Image, ImageFilter
+
+game_states = [MENU, IN_GAME, POST_GAME] = range(1, 4)
 
 
 class Render:
-    def __init__(self, gametype):
-        self.vs_AI = gametype
+    def __init__(self, ):
+        self.vs_AI = False
         self.tile_size = 110
         self.tile_size_vector = pygame.math.Vector2(self.tile_size, self.tile_size)
         self.window_width = self.tile_size * 10 + 50
@@ -39,6 +42,8 @@ class Render:
             'k': pygame.image.load('resources/pieces/black/king.png'),
         }
 
+        self.game_state = MENU
+
     def run(self):
         pygame.init()
         pygame.font.init()
@@ -46,6 +51,26 @@ class Render:
         self.screen = pygame.display.set_mode((self.window_width, self.window_height))
         pygame.display.set_caption(self.window_title)
         self._main_game_loop()
+        pygame.quit()
+
+    def _game_mode_selection(self):
+        self.running = True
+        image = Image.open('resources/background.png')
+        mode = image.mode
+        size = image.size
+        data = image.tobytes()
+
+        py_image = pygame.image.fromstring(data, size, mode)
+        while self.running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.running = False
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    self.mouse_menu_logic()
+                    self.running = False
+
+            self.screen.blit(py_image, (0, 0))
+            pygame.display.update()
 
     def _main_game_loop(self):
         self.running = True
@@ -67,10 +92,30 @@ class Render:
             self._render_other()
 
             if self.board.is_game_over():
-                self._render_game_over()
-
+                self.running = False
             pygame.display.update()
-        pygame.quit()
+
+    def _end_game_loop(self):
+        pygame.image.save(self.screen, 'resources/ScreenShot.png')
+        image = Image.open('resources/ScreenShot.png').filter(ImageFilter.GaussianBlur(radius=6))
+
+        mode = image.mode
+        size = image.size
+        data = image.tobytes()
+
+        py_image = pygame.image.fromstring(data, size, mode)
+
+        self.running = True
+        while self.running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.running = False
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_q:
+                        self.running = False
+            self.screen.blit(py_image, (0, 0))
+            self._render_game_over()
+            pygame.display.update()
 
     def _render_chess_board(self):
         for file in range(8):
@@ -113,6 +158,9 @@ class Render:
     def _render_other(self):
         _tile_render_position = pygame.math.Vector2(930, 0)
         pygame.draw.rect(self.screen, (122, 122, 122), (_tile_render_position, (250, self.window_height)))
+
+    def mouse_menu_logic(self):
+        pass
 
     def mouse_logic(self):
         mouse_pos = pygame.mouse.get_pos()
@@ -214,10 +262,12 @@ class Render:
         self.legal_moves = []
 
     def _render_game_over(self):
-        if self.board.outcome().termination.value == 1:
-            text = "Wygrał " + str('Biały' if self.board.outcome().winner else "Czarny")
-        else:
+
+        if self.board.outcome() is None or self.board.outcome().termination.value != 1:
             text = "Pat"
+        else:
+            text = "Wygrał " + str('Biały' if self.board.outcome().winner else "Czarny")
+
         textsurface = self.font.render(text, True, (255, 0, 122))
         self.screen.blit(textsurface, (255, 255))
 
