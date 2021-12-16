@@ -153,7 +153,6 @@ class Render:
         self.screen.blit(self.menu_sprite['ai'], (self.window_width * 2 / 3, self.window_height / 2 - 128))
 
     def _game_window(self):
-        pass
         for event in self.events:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 self.mouse_logic()

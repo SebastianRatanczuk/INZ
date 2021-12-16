@@ -1,5 +1,13 @@
 import copy
+import dataclasses
 from typing import Optional, List
+
+@dataclasses.dataclass
+class Status:
+    winner: Optional[bool]
+
+    def result(self) -> str:
+        return "1/2-1/2" if self.winner is None else ("1-0" if self.winner else "0-1")
 
 
 class Move:
@@ -416,3 +424,11 @@ class GameEngine:
             if not self.check_for_attack([move[0] - 1, move[1]]) \
                     and not self.check_for_attack([move[0] - 2, move[1]]):
                 return Move(self.main_board, move, [move[0] - 2, move[1]], isCastle=True)
+
+    def is_game_over(self) -> bool:
+        return self.check_mate and self.stale_mate
+
+    def game_status(self) -> Optional[Status]:
+        if not self.is_game_over():
+            return None
+        return Status(self.white_turn)

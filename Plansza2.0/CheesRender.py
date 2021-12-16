@@ -1,4 +1,7 @@
+from abc import ABC, abstractmethod
+
 import pygame
+from PIL import Image, ImageFilter
 
 import ChessEngine
 from ChessEngine import Move
@@ -6,6 +9,7 @@ from ChessEngine import Move
 
 class Render:
     def __init__(self) -> None:
+
         self.vs_AI = False
         self.tile_size = 110
         self.tile_size_vector = pygame.math.Vector2(self.tile_size, self.tile_size)
@@ -23,6 +27,8 @@ class Render:
         self.tile_selected = []
         self.tile_history = []
 
+        self.move_interface = PvpMove
+
         self.piece_sprite = {
             1: pygame.image.load('resources/pieces/white/pawn.png'),
             2: pygame.image.load('resources/pieces/white/rook.png'),
@@ -39,6 +45,14 @@ class Render:
             16: pygame.image.load('resources/pieces/black/king.png'),
         }
 
+        self.game_state = 1
+        self.game_mode_background = None
+        self.game_end_background = None
+        self.menu_sprite = {
+            "pvp": pygame.image.load('resources/pvp.png'),
+            "ai": pygame.image.load('resources/ai.png'),
+        }
+
     def run(self) -> None:
         pygame.init()
         pygame.font.init()
@@ -49,28 +63,110 @@ class Render:
 
     def _main_game_loop(self) -> None:
         self.running = True
-
         while self.running:
-            for event in pygame.event.get():
+            self.events = pygame.event.get()
+            for event in self.events:
                 if event.type == pygame.QUIT:
                     self.running = False
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    self.mouse_logic()
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_u:
-                        self.undo_move()
 
-            self.screen.fill((0, 0, 0))
-            self._render_chess_board()
-            self._render_possible_moves()
-            self._render_pieces()
+            match self.game_state:
+                case 1:
+                    self._game_mode_selection()
+                case 2:
+                    self._game_window()
+                case 3:
+                    self._end_game_screen()
 
             pygame.display.update()
         pygame.quit()
 
+    def _game_mode_selection(self):
+
+        for event in self.events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                self.mouse_menu_logic()
+
+        if self.game_mode_background is None:
+            image = Image.open('resources/background.png')
+            mode = image.mode
+            size = image.size
+            data = image.tobytes()
+            self.game_mode_background = pygame.image.fromstring(data, size, mode)
+            image.close()
+
+        self.screen.blit(self.game_mode_background, (0, 0))
+        self.screen.blit(self.menu_sprite['pvp'], (self.window_width * 1 / 3 - 256, self.window_height / 2 - 128))
+        self.screen.blit(self.menu_sprite['ai'], (self.window_width * 2 / 3, self.window_height / 2 - 128))
+
+    def _game_window(self):
+        for event in self.events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                self.mouse_logic()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_u:
+                    self.move_interface.undo(self)
+        self.screen.fill((0, 0, 0))
+        self._render_chess_board()
+        self._render_possible_moves()
+        self._render_pieces()
+
+    def _end_game_screen(self):
+        for event in self.events:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_u:
+                    self.move_interface.undo(self)
+                    self.game_state -= 1
+
+        if self.game_end_background is None:
+            pygame.image.save(self.screen, 'resources/ScreenShot.png')
+            image = Image.open('resources/ScreenShot.png').filter(ImageFilter.GaussianBlur(radius=6))
+            mode = image.mode
+            size = image.size
+            data = image.tobytes()
+            self.game_end_background = pygame.image.fromstring(data, size, mode)
+            image.close()
+
+        self.screen.blit(self.game_end_background, (0, 0))
+        self._render_game_over()
+
     def mouse_logic(self) -> None:
         mouse_pos = pygame.mouse.get_pos()
-        self.game_interface_logic(mouse_pos)
+        new_tile = [mouse_pos[0] // self.tile_size, 7 - (mouse_pos[1] // self.tile_size)]
+
+        if not self.tile_selected:
+            if self.engine.get_piece(new_tile) is None:
+                return
+
+            if self.engine.white_turn and not self.engine.get_piece(new_tile).is_white:
+                return
+
+            if not self.engine.white_turn and self.engine.get_piece(new_tile).is_white:
+                return
+
+        if self.tile_selected == new_tile:
+            self.tile_selected = []
+            self.tile_history = []
+            self.possible_moves = []
+
+        elif len(self.tile_history) == 1 and self.engine.get_piece(new_tile) is not None and (
+                self.engine.get_piece(self.tile_selected).is_white ==
+                self.engine.get_piece(new_tile).is_white):
+            self.tile_selected = new_tile
+            self.tile_history = []
+            self.tile_history.append(self.tile_selected)
+        else:
+            self.tile_selected = new_tile
+            self.tile_history.append(self.tile_selected)
+
+        if len(self.tile_history) == 1:
+            self.show_moves()
+
+        if len(self.tile_history) == 2:
+            self.move_interface.move(self)
+
+        if self.move_made:
+            self.valid_moves = self.engine.get_valid_moves()
+            self.move_made = False
 
     def _render_chess_board(self) -> None:
         for file in range(8):
@@ -115,51 +211,56 @@ class Render:
             _tile_render_position = pygame.math.Vector2(file * self.tile_size + 25, (7 - rank) * self.tile_size + 25)
             pygame.draw.rect(self.screen, self.possible_moves_color, (_tile_render_position, self.tile_size_vector))
 
-    def game_interface_logic(self, mouse_pos) -> None:
-        new_tile = [mouse_pos[0] // self.tile_size, 7 - (mouse_pos[1] // self.tile_size)]
-
-        if not self.tile_selected:
-            if self.engine.get_piece(new_tile) is None:
-                return
-
-            if self.engine.white_turn and not self.engine.get_piece(new_tile).is_white:
-                return
-
-            if not self.engine.white_turn and self.engine.get_piece(new_tile).is_white:
-                return
-
-        if self.tile_selected == new_tile:
-            self.tile_selected = []
-            self.tile_history = []
-            self.possible_moves = []
-
-        elif len(self.tile_history) == 1 and self.engine.get_piece(new_tile) is not None and (
-                self.engine.get_piece(self.tile_selected).is_white ==
-                self.engine.get_piece(new_tile).is_white):
-            self.tile_selected = new_tile
-            self.tile_history = []
-            self.tile_history.append(self.tile_selected)
-        else:
-            self.tile_selected = new_tile
-            self.tile_history.append(self.tile_selected)
-
-        if len(self.tile_history) == 1:
-            self.show_moves()
-
-        if len(self.tile_history) == 2:
-            self.make_move()
-
-        if self.move_made:
-            self.valid_moves = self.engine.get_valid_moves()
-            self.move_made = False
-
     def show_moves(self) -> None:
         self.possible_moves = []
         for move in self.valid_moves:
             if move.start_move == self.tile_history[0]:
                 self.possible_moves.append(move)
 
-    def make_move(self) -> None:
+    def mouse_menu_logic(self):
+        mouse_pos = pygame.mouse.get_pos()
+        if mouse_pos[0] < self.window_width / 2:
+            self.move_interface = Factory("PVP")
+            self.game_state += 1
+        else:
+            self.move_interface = Factory("AI")
+            self.game_state += 1
+
+    def _render_game_over(self):
+        if self.engine.is_game_over():
+            if self.engine.game_status().winner is not None:
+                text = "Wygrał " + str('Biały' if self.engine.game_status().winner else "Czarny")
+            else:
+                text = "Pat"
+
+            textsurface = self.font.render(text, True, (255, 0, 122))
+            self.screen.blit(textsurface, (255, 255))
+
+
+def Factory(game_mode="PVP"):
+    """Factory Method"""
+    localizers = {
+        "PVP": PvpMove,
+        "AI": AiMove,
+    }
+
+    return localizers[game_mode]()
+
+
+class MoveInterface(ABC):
+
+    @abstractmethod
+    def move(self: Render) -> None:
+        pass
+
+    @abstractmethod
+    def undo(self: Render) -> None:
+        pass
+
+
+class PvpMove(MoveInterface):
+    def move(self):
+        print(2)
         move = Move(self.engine.main_board, self.tile_history[0], self.tile_history[1])
         for valid_move in self.valid_moves:
             if move == valid_move:
@@ -171,9 +272,32 @@ class Render:
         self.tile_history = []
         self.tile_selected = []
 
-    def undo_move(self) -> None:
+    def undo(self):
         self.tile_selected = []
         self.tile_history = []
         self.possible_moves = []
+        self.engine.undo_move()
+        self.valid_moves = self.engine.get_valid_moves()
+
+
+class AiMove(MoveInterface):
+    def move(self):
+        print(1)
+        move = Move(self.engine.main_board, self.tile_history[0], self.tile_history[1])
+        for valid_move in self.valid_moves:
+            if move == valid_move:
+                self.engine.move(valid_move)
+                self.move_made = True
+                break
+
+        self.possible_moves = []
+        self.tile_history = []
+        self.tile_selected = []
+
+    def undo(self):
+        self.tile_selected = []
+        self.tile_history = []
+        self.possible_moves = []
+        self.engine.undo_move()
         self.engine.undo_move()
         self.valid_moves = self.engine.get_valid_moves()
