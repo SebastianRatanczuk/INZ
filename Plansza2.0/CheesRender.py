@@ -56,6 +56,9 @@ class Render:
 
         self.ai = chess.engine.SimpleEngine.popen_uci("resources/troutFish/troutFish.exe")
 
+    def __del__(self):
+        self.ai.close()
+
     def run(self) -> None:
         pygame.init()
         pygame.font.init()

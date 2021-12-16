@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c6b7e0c8-29cb-47d3-8a91-7b54b8b9b20c" name="Changes" comment="Plansza 2.0">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheesRender.py" beforeDir="false" afterPath="$PROJECT_DIR$/CheesRender.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChessEngine.py" beforeDir="false" afterPath="$PROJECT_DIR$/ChessEngine.py" afterDir="false" />
-    </list>
+    <list default="true" id="c6b7e0c8-29cb-47d3-8a91-7b54b8b9b20c" name="Changes" comment="Plansza 2.0" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -122,7 +118,7 @@
       <workItem from="1638791063189" duration="11038000" />
       <workItem from="1638896707376" duration="90000" />
       <workItem from="1639395569308" duration="4145000" />
-      <workItem from="1639676506765" duration="15613000" />
+      <workItem from="1639676506765" duration="15917000" />
     </task>
     <task id="LOCAL-00001" summary="Plansza 3.0">
       <created>1636632794817</created>
@@ -348,7 +344,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639692184201</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Plansza 2.0">
+      <created>1639694950361</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1639694950361</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -372,13 +375,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/CheesRender.py</url>
-          <line>116</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -390,7 +386,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Plansza3_0$main.coverage" NAME="main Coverage Results" MODIFIED="1638194982260" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Plansza2_0$Szaszki.coverage" NAME="Szaszki Coverage Results" MODIFIED="1639694669818" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Plansza2_0$Szaszki.coverage" NAME="Szaszki Coverage Results" MODIFIED="1639694906258" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Plansza3_0$Szaszki.coverage" NAME="Szaszki Coverage Results" MODIFIED="1638804214127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
