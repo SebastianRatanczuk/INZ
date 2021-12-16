@@ -1,56 +1,81 @@
-import io
-import math
-from tkinter import *
-from tkinter import ttk, filedialog
+from __future__ import annotations
 
-import cv2
-import matplotlib
-import numpy as np
-from PIL import ImageTk, Image
-
-matplotlib.use("TkAgg")
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
-from matplotlib.figure import Figure
+from abc import ABC, abstractmethod
+from typing import List
 
 
-class Widget(Frame):
+class Context:
 
-    def __init__(self, parent=None):
-        Frame.__init__(self, parent)
-        self.parent = parent
-        self.pack()
-        self.make_widgets()
+    def __init__(self, strategy: Strategy) -> None:
+        """
+        Usually, the Context accepts a strategy through the constructor, but
+        also provides a setter to change it at runtime.
+        """
 
-    def make_widgets(self):
-        self.winfo_toplevel().title("Szaszki")
-        self.winfo_toplevel().geometry("1200x900")
-        self.make_chess_board()
+        self._strategy = strategy
 
-    def make_chess_board(self):
-        board_size = 600
-        checker_size = board_size / 8
-        self.ImagePanel = Canvas(self.parent, height=board_size, width=board_size)
-        self.ImagePanel.pack(pady=20)
+    @property
+    def strategy(self) -> Strategy:
+        """
+        The Context maintains a reference to one of the Strategy objects. The
+        Context does not know the concrete class of a strategy. It should work
+        with all strategies via the Strategy interface.
+        """
 
-        color = 0
+        return self._strategy
 
-        for y in range(8):
-            for x in range(8):
-                x1 = x * checker_size
-                y1 = y * checker_size
-                x2 = x1 + checker_size
-                y2 = y1 + checker_size
-                if color:
-                    self.ImagePanel.create_rectangle((x1, y1, x2, y2), fill="#d8debd", outline="")
-                else:
-                    self.ImagePanel.create_rectangle((x1, y1, x2, y2), fill="#727567", outline="")
+    def do_some_business_logic(self) -> None:
+        """
+        The Context delegates some work to the Strategy object instead of
+        implementing multiple versions of the algorithm on its own.
+        """
 
-                color = not color
-            color = not color
+        # ...
+
+        print("Context: Sorting data using the strategy (not sure how it'll do it)")
+        result = self._strategy.do_algorithm(["a", "b", "c", "d", "e"])
+        print(",".join(result))
+
+        # ...
 
 
-if __name__ == '__main__':
-    root = Tk()
-    root.iconphoto(False, PhotoImage(file='sources/chess-3413420_640_cr.png'))
-    chessBoard = Widget(root)
-    root.mainloop()
+class Strategy(ABC):
+    """
+    The Strategy interface declares operations common to all supported versions
+    of some algorithm.
+
+    The Context uses this interface to call the algorithm defined by Concrete
+    Strategies.
+    """
+
+    @abstractmethod
+    def do_algorithm(self, data: List):
+        pass
+
+
+"""
+Concrete Strategies implement the algorithm while following the base Strategy
+interface. The interface makes them interchangeable in the Context.
+"""
+
+
+class ConcreteStrategyA(Strategy):
+    def do_algorithm(self, data: List) -> List:
+        return sorted(data)
+
+
+class ConcreteStrategyB(Strategy):
+    def do_algorithm(self, data: List) -> List:
+        return reversed(sorted(data))
+
+
+if __name__ == "__main__":
+    # The client code picks a concrete strategy and passes it to the context.
+    # The client should be aware of the differences between strategies in order
+    # to make the right choice.
+
+    context = Context(ConcreteStrategyA())
+    print("Client: Strategy is set to normal sorting.")
+    context.do_some_business_logic()
+    print()
+
