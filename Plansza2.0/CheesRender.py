@@ -245,12 +245,12 @@ class Render:
 
 def Factory(game_mode="PVP"):
     """Factory Method"""
-    localizers = {
+    game_modes = {
         "PVP": PvpMove(),
         "AI": AiMove(),
     }
 
-    return localizers[game_mode]
+    return game_modes[game_mode]
 
 
 class MoveInterface(ABC):
