@@ -1,0 +1,3 @@
+<div>PvP icon made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+<div>AI icon made by <a href="https://www.flaticon.com/authors/voysla" title="Voysla">Voysla</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+<div>Chess icons made by <a href="https://pixabay.com/pl/users/clker-free-vector-images-3736/">Clker</a> from <a href="https://pixabay.com/" title="Flaticon">www.pixabay.com</a></div>
