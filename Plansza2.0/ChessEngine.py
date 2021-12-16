@@ -2,6 +2,8 @@ import copy
 import dataclasses
 from typing import Optional, List
 
+import chess
+
 
 @dataclasses.dataclass
 class Status:
@@ -40,9 +42,10 @@ class Move:
 
 class Piece:
 
-    def __init__(self, is_white, pawn_number) -> None:
+    def __init__(self, is_white, pawn_number, symbol) -> None:
         self.is_white = is_white
         self.pawn_number = pawn_number
+        self.symbol = symbol
         self.has_moved = False
 
     def get_all_possible_moves(self, engine, move) -> List[Move]:
@@ -55,7 +58,8 @@ class Pawn(Piece):
     def __init__(self, is_white):
         number = 1
         pawn_number = number if is_white else 10 + number
-        super().__init__(is_white, pawn_number)
+        symbol = "P" if is_white else "p"
+        super().__init__(is_white, pawn_number, symbol)
 
     def get_all_possible_moves(self, engine, move):
         possible_moves = []
@@ -108,7 +112,8 @@ class Rook(Piece):
     def __init__(self, is_white):
         number = 2
         pawn_number = number if is_white else 10 + number
-        super().__init__(is_white, pawn_number)
+        symbol = "R" if is_white else "r"
+        super().__init__(is_white, pawn_number, symbol)
 
     def get_all_possible_moves(self, engine, move):
         possible_moves = []
@@ -133,7 +138,8 @@ class Bishop(Piece):
     def __init__(self, is_white):
         number = 4
         pawn_number = number if is_white else 10 + number
-        super().__init__(is_white, pawn_number)
+        symbol = "B" if is_white else "b"
+        super().__init__(is_white, pawn_number, symbol)
 
     def get_all_possible_moves(self, engine, move):
         possible_moves = []
@@ -156,7 +162,8 @@ class Knight(Piece):
     def __init__(self, is_white):
         number = 3
         pawn_number = number if is_white else 10 + number
-        super().__init__(is_white, pawn_number)
+        symbol = "N" if is_white else "n"
+        super().__init__(is_white, pawn_number, symbol)
 
     def get_all_possible_moves(self, engine, move):
         possible_moves = []
@@ -176,7 +183,8 @@ class Queen(Piece):
     def __init__(self, is_white):
         number = 5
         pawn_number = number if is_white else 10 + number
-        super().__init__(is_white, pawn_number)
+        symbol = "Q" if is_white else "q"
+        super().__init__(is_white, pawn_number, symbol)
 
     def get_all_possible_moves(self, engine, move):
         possible_moves = []
@@ -199,7 +207,8 @@ class King(Piece):
     def __init__(self, is_white):
         number = 6
         pawn_number = number if is_white else 10 + number
-        super().__init__(is_white, pawn_number)
+        symbol = "K" if is_white else "k"
+        super().__init__(is_white, pawn_number, symbol)
 
     def get_all_possible_moves(self, engine, move):
         possible_moves = []
@@ -435,3 +444,15 @@ class GameEngine:
         if not self.is_game_over():
             return None
         return Status(self.white_turn)
+
+    def get_chess_board(self) -> chess.Board:
+        board = chess.Board()
+        board.turn = self.white_turn
+        for file in range(8):
+            for rank in range(8):
+                if self.get_piece([file, rank]) is None:
+                    board.set_piece_at(file + rank * 8, None)
+                else:
+                    board.set_piece_at(file + rank * 8, chess.Piece.from_symbol(self.get_piece([file, rank]).symbol))
+
+        return board

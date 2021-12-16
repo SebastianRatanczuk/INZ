@@ -61,6 +61,7 @@ class Render:
         pygame.font.init()
         pygame.display.set_caption(self.window_title)
         self.font = pygame.font.SysFont('Times New Roman Font', 30)
+        self.end_font = pygame.font.SysFont('Times New Roman Font', 40)
         self.screen = pygame.display.set_mode((self.window_width, self.window_height))
         self._main_game_loop()
 
@@ -108,6 +109,8 @@ class Render:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_u:
                     self.move_interface.undo(self)
+
+        self.game_end_background = None
         self.screen.fill((0, 0, 0))
         self._render_chess_board()
         self._render_possible_moves()
@@ -190,7 +193,7 @@ class Render:
             else:
                 text = "Pat"
 
-            textsurface = self.font.render(text, True, (255, 0, 122))
+            textsurface = self.end_font.render(text, True, (255, 0, 122))
             self.screen.blit(textsurface, (255, 255))
 
     def _render_chess_board(self) -> None:
@@ -292,16 +295,20 @@ class AiMove(MoveInterface):
             if move == valid_move:
                 renderer.engine.move(valid_move)
                 renderer.move_made = True
-
-                result = renderer.ai.play(renderer.engine.main_board, chess.engine.Limit(time=0.1))
-                print(result)
+                if not renderer.engine.is_game_over():
+                    result = renderer.ai.play(renderer.engine.get_chess_board(), chess.engine.Limit(time=0.1))
+                    move = result.move
+                    file1 = move.from_square % 8
+                    rank1 = move.from_square // 8
+                    file2 = move.to_square % 8
+                    rank2 = move.to_square // 8
+                    newMove = Move(renderer.engine.main_board, [file1, rank1], [file2, rank2])
+                    renderer.engine.move(newMove)
                 break
 
         renderer.possible_moves = []
         renderer.tile_history = []
         renderer.tile_selected = []
-
-
 
     def undo(self, renderer):
         renderer.tile_selected = []
