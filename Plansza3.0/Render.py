@@ -44,6 +44,11 @@ class Render:
         self.game_mode_background = None
         self.game_end_background = None
 
+        self.menu_sprite = {
+            "pvp": pygame.image.load('resources/pvp.png'),
+            "ai": pygame.image.load('resources/ai.png'),
+        }
+
     def __del__(self):
         self.engine.close()
 
@@ -77,7 +82,7 @@ class Render:
     def _game_mode_selection(self):
         for event in self.events:
             if event.type == pygame.MOUSEBUTTONDOWN:
-                self.game_state += 1
+                self.mouse_menu_logic()
 
         if self.game_mode_background is None:
             image = Image.open('resources/background.png')
@@ -85,9 +90,11 @@ class Render:
             size = image.size
             data = image.tobytes()
             self.game_mode_background = pygame.image.fromstring(data, size, mode)
+            image.close()
 
         self.screen.blit(self.game_mode_background, (0, 0))
-
+        self.screen.blit(self.menu_sprite['pvp'], (self.window_width * 1 / 3 - 256, self.window_height / 2 - 128))
+        self.screen.blit(self.menu_sprite['ai'], (self.window_width * 2 / 3, self.window_height / 2 - 128))
 
     def _game_window(self):
         for event in self.events:
@@ -102,6 +109,7 @@ class Render:
         self._render_possible_moves()
         self._render_pieces()
         self._render_other()
+        self.game_end_background = None
 
         if self.board.is_game_over():
             self.game_state += 1
@@ -120,6 +128,7 @@ class Render:
             size = image.size
             data = image.tobytes()
             self.game_end_background = pygame.image.fromstring(data, size, mode)
+            image.close()
 
         self.screen.blit(self.game_end_background, (0, 0))
         self._render_game_over()
@@ -167,7 +176,15 @@ class Render:
         pygame.draw.rect(self.screen, (122, 122, 122), (_tile_render_position, (250, self.window_height)))
 
     def mouse_menu_logic(self):
-        pass
+        mouse_pos = pygame.mouse.get_pos()
+        if mouse_pos[0] < self.window_width / 2:
+            self.move = self.pvp_move
+            self.undo_move = self.pvp_undo_move
+            self.game_state += 1
+        else:
+            self.move = self.ai_move
+            self.undo_move = self.ai_undo_move
+            self.game_state += 1
 
     def mouse_logic(self):
         mouse_pos = pygame.mouse.get_pos()
@@ -231,7 +248,7 @@ class Render:
 
             self.promotion_request = False
 
-    def move(self):
+    def default_move(self):
         move = chess.Move.from_uci(self.tile_history)
 
         if self.board.piece_at(move.from_square) is not None:
@@ -249,22 +266,37 @@ class Render:
                         return
                     move = chess.Move.from_uci(self.tile_history + item)
                     self.pawn_promotion = ""
+        return move
+
+    def pvp_move(self):
+        move = self.default_move()
 
         if move in self.board.legal_moves:
             self.board.push(move)
-        if self.vs_AI:
+
+    def ai_move(self):
+        move = self.default_move()
+
+        if move in self.board.legal_moves:
+            self.board.push(move)
             if not self.board.is_game_over():
                 result = self.engine.play(self.board, chess.engine.Limit(time=0.1))
                 self.board.push(result.move)
 
-    def undo_move(self):
+    def pvp_undo_move(self):
         if len(self.board.move_stack) == 0:
             return
         self.board.pop()
-        if self.vs_AI:
-            if len(self.board.move_stack) == 0:
-                return
-            self.board.pop()
+        self.promotion_request = False
+        self.legal_moves = []
+
+    def ai_undo_move(self):
+        if len(self.board.move_stack) == 0:
+            return
+        self.board.pop()
+        if len(self.board.move_stack) == 0:
+            return
+        self.board.pop()
         self.promotion_request = False
         self.legal_moves = []
 

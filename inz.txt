@@ -45,6 +45,7 @@ Opis gry z innym graczem
 	kliknięcie pustego pola spowoduje anulowanie ruchu, kliknięcie na figurę o tym samym kolorze wyświetli legalne posunięcia nowo wybranej figury.
 	Bierki można równierz przemieszczać poprzez metodę "drag and drop", tylko legalne ruchy zostaną wykonane.
 
-		
+
+model analityczny vs model projektowy
 
 	
