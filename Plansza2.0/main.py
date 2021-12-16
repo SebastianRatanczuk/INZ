@@ -1,4 +1,4 @@
-from Render.CheesRender import Render
+from CheesRender import Render
 
 if __name__ == '__main__':
     render = Render()

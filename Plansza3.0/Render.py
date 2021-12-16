@@ -4,6 +4,63 @@ import pygame
 from PIL import Image, ImageFilter
 
 
+def default_move(self):
+    move = chess.Move.from_uci(self.tile_history)
+
+    if self.board.piece_at(move.from_square) is not None:
+        if self.board.piece_at(move.from_square).symbol() == "P":
+            if move.from_square // 8 == 6 and move.to_square // 8 == 7:
+                item = self.getPromotion()
+                if item == "":
+                    return
+                move = chess.Move.from_uci(self.tile_history + item)
+
+        if self.board.piece_at(move.from_square).symbol() == "p":
+            if move.from_square // 8 == 1 and move.to_square // 8 == 0:
+                item = self.getPromotion()
+                if item == "":
+                    return
+                move = chess.Move.from_uci(self.tile_history + item)
+                self.pawn_promotion = ""
+    return move
+
+
+def pvp_move(self):
+    move = default_move(self)
+
+    if move in self.board.legal_moves:
+        self.board.push(move)
+
+
+def ai_move(self):
+    move = self.default_move()
+
+    if move in self.board.legal_moves:
+        self.board.push(move)
+        if not self.board.is_game_over():
+            result = self.engine.play(self.board, chess.engine.Limit(time=0.1))
+            self.board.push(result.move)
+
+
+def pvp_undo_move(self):
+    if len(self.board.move_stack) == 0:
+        return
+    self.board.pop()
+    self.promotion_request = False
+    self.legal_moves = []
+
+
+def ai_undo_move(self):
+    if len(self.board.move_stack) == 0:
+        return
+    self.board.pop()
+    if len(self.board.move_stack) == 0:
+        return
+    self.board.pop()
+    self.promotion_request = False
+    self.legal_moves = []
+
+
 class Render:
     def __init__(self):
         self.vs_AI = False
@@ -43,7 +100,6 @@ class Render:
         self.game_state = 1
         self.game_mode_background = None
         self.game_end_background = None
-
         self.menu_sprite = {
             "pvp": pygame.image.load('resources/pvp.png'),
             "ai": pygame.image.load('resources/ai.png'),
@@ -97,12 +153,13 @@ class Render:
         self.screen.blit(self.menu_sprite['ai'], (self.window_width * 2 / 3, self.window_height / 2 - 128))
 
     def _game_window(self):
+        pass
         for event in self.events:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 self.mouse_logic()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_u:
-                    self.undo_move()
+                    self.undo_move(self)
 
         self.screen.fill((0, 0, 0))
         self._render_chess_board()
@@ -178,12 +235,12 @@ class Render:
     def mouse_menu_logic(self):
         mouse_pos = pygame.mouse.get_pos()
         if mouse_pos[0] < self.window_width / 2:
-            self.move = self.pvp_move
-            self.undo_move = self.pvp_undo_move
+            self.move = pvp_move
+            self.undo_move = pvp_undo_move
             self.game_state += 1
         else:
-            self.move = self.ai_move
-            self.undo_move = self.ai_undo_move
+            self.move = ai_move
+            self.undo_move = ai_undo_move
             self.game_state += 1
 
     def mouse_logic(self):
@@ -224,7 +281,7 @@ class Render:
             self.tile_history = self.tile_history + new_tile_selection
 
         if len(self.tile_history) == 4:
-            self.move()
+            self.move(self)
             self.tile_history = ""
             self.tile_selected = ""
 
@@ -247,58 +304,6 @@ class Render:
                     self.pawn_promotion = "r"
 
             self.promotion_request = False
-
-    def default_move(self):
-        move = chess.Move.from_uci(self.tile_history)
-
-        if self.board.piece_at(move.from_square) is not None:
-            if self.board.piece_at(move.from_square).symbol() == "P":
-                if move.from_square // 8 == 6 and move.to_square // 8 == 7:
-                    item = self.getPromotion()
-                    if item == "":
-                        return
-                    move = chess.Move.from_uci(self.tile_history + item)
-
-            if self.board.piece_at(move.from_square).symbol() == "p":
-                if move.from_square // 8 == 1 and move.to_square // 8 == 0:
-                    item = self.getPromotion()
-                    if item == "":
-                        return
-                    move = chess.Move.from_uci(self.tile_history + item)
-                    self.pawn_promotion = ""
-        return move
-
-    def pvp_move(self):
-        move = self.default_move()
-
-        if move in self.board.legal_moves:
-            self.board.push(move)
-
-    def ai_move(self):
-        move = self.default_move()
-
-        if move in self.board.legal_moves:
-            self.board.push(move)
-            if not self.board.is_game_over():
-                result = self.engine.play(self.board, chess.engine.Limit(time=0.1))
-                self.board.push(result.move)
-
-    def pvp_undo_move(self):
-        if len(self.board.move_stack) == 0:
-            return
-        self.board.pop()
-        self.promotion_request = False
-        self.legal_moves = []
-
-    def ai_undo_move(self):
-        if len(self.board.move_stack) == 0:
-            return
-        self.board.pop()
-        if len(self.board.move_stack) == 0:
-            return
-        self.board.pop()
-        self.promotion_request = False
-        self.legal_moves = []
 
     def _render_game_over(self):
         if self.board.outcome() is None or self.board.outcome().termination.value != 1:
