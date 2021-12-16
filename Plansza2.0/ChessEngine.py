@@ -2,6 +2,7 @@ import copy
 import dataclasses
 from typing import Optional, List
 
+
 @dataclasses.dataclass
 class Status:
     winner: Optional[bool]
@@ -59,21 +60,21 @@ class Pawn(Piece):
     def get_all_possible_moves(self, engine, move):
         possible_moves = []
         if self.is_white:
-            if move[1] + 1 < 8 and engine.main_board[move[0]][move[1] + 1] == 0:
+            if move[1] + 1 < 8 and engine.main_board[move[0]][move[1] + 1] is None:
 
                 possible_moves.append(Move(engine.main_board, move, [move[0], move[1] + 1]))
                 if not self.has_moved:
-                    if move[1] + 2 < 8 and engine.main_board[move[0]][move[1] + 2] == 0:
+                    if move[1] + 2 < 8 and engine.main_board[move[0]][move[1] + 2] is None:
                         possible_moves.append(Move(engine.main_board, move, [move[0], move[1] + 2]))
 
-            if move[0] + 1 < 8 and move[1] + 1 < 8 and engine.main_board[move[0] + 1][move[1] + 1] != 0 and not \
+            if move[0] + 1 < 8 and move[1] + 1 < 8 and engine.main_board[move[0] + 1][move[1] + 1] is not None and not \
                     engine.main_board[move[0] + 1][move[1] + 1].is_white:
                 possible_moves.append(Move(engine.main_board, move, [move[0] + 1, move[1] + 1]))
             elif (move[0] + 1, move[1] + 1) == engine.possible_enpassant:
                 possible_moves.append(
                     Move(engine.main_board, move, [move[0] + 1, move[1] + 1], True))
 
-            if move[0] - 1 >= 0 and move[1] + 1 < 8 and engine.main_board[move[0] - 1][move[1] + 1] != 0 and not \
+            if move[0] - 1 >= 0 and move[1] + 1 < 8 and engine.main_board[move[0] - 1][move[1] + 1] is not None and not \
                     engine.main_board[move[0] - 1][move[1] + 1].is_white:
                 possible_moves.append(Move(engine.main_board, move, [move[0] - 1, move[1] + 1]))
             elif (move[0] - 1, move[1] + 1) == engine.possible_enpassant:
@@ -81,20 +82,20 @@ class Pawn(Piece):
                     Move(engine.main_board, move, [move[0] - 1, move[1] + 1], True))
 
         else:
-            if move[1] - 1 >= 0 and engine.main_board[move[0]][move[1] - 1] == 0:
+            if move[1] - 1 >= 0 and engine.main_board[move[0]][move[1] - 1] is None:
                 possible_moves.append(Move(engine.main_board, move, [move[0], move[1] - 1]))
                 if not self.has_moved:
-                    if move[1] - 2 >= 0 and engine.main_board[move[0]][move[1] - 2] == 0:
+                    if move[1] - 2 >= 0 and engine.main_board[move[0]][move[1] - 2] is None:
                         possible_moves.append(Move(engine.main_board, move, [move[0], move[1] - 2]))
 
-            if move[0] + 1 < 8 and move[1] - 1 >= 0 and engine.main_board[move[0] + 1][move[1] - 1] != 0 and \
+            if move[0] + 1 < 8 and move[1] - 1 >= 0 and engine.main_board[move[0] + 1][move[1] - 1] is not None and \
                     engine.main_board[move[0] + 1][move[1] - 1].is_white:
                 possible_moves.append(Move(engine.main_board, move, [move[0] + 1, move[1] - 1]))
             elif (move[0] + 1, move[1] - 1) == engine.possible_enpassant:
                 possible_moves.append(
                     Move(engine.main_board, move, [move[0] + 1, move[1] - 1], True))
 
-            if move[0] - 1 >= 0 and move[1] - 0 >= 0 and engine.main_board[move[0] - 1][move[1] - 1] != 0 and \
+            if move[0] - 1 >= 0 and move[1] - 0 >= 0 and engine.main_board[move[0] - 1][move[1] - 1] is not None and \
                     engine.main_board[move[0] - 1][move[1] - 1].is_white:
                 possible_moves.append(Move(engine.main_board, move, [move[0] - 1, move[1] - 1]))
             elif (move[0] - 1, move[1] - 1) == engine.possible_enpassant:
@@ -117,7 +118,7 @@ class Rook(Piece):
             for i in range(1, 8):
                 new_move = [move[0] + i * destination[0], move[1] + i * destination[1]]
                 if 0 <= new_move[0] < 8 and 0 <= new_move[1] < 8:
-                    if engine.main_board[new_move[0]][new_move[1]] == 0:
+                    if engine.main_board[new_move[0]][new_move[1]] is None:
 
                         possible_moves.append(Move(engine.main_board, move, new_move))
                     elif engine.main_board[new_move[0]][new_move[1]].is_white != self.is_white:
@@ -141,7 +142,7 @@ class Bishop(Piece):
             for i in range(1, 8):
                 new_move = [move[0] + i * destination[0], move[1] + i * destination[1]]
                 if 0 <= new_move[0] < 8 and 0 <= new_move[1] < 8:
-                    if engine.main_board[new_move[0]][new_move[1]] == 0:
+                    if engine.main_board[new_move[0]][new_move[1]] is None:
                         possible_moves.append(Move(engine.main_board, move, new_move))
                     elif engine.main_board[new_move[0]][new_move[1]].is_white != self.is_white:
                         possible_moves.append(Move(engine.main_board, move, new_move))
@@ -163,7 +164,7 @@ class Knight(Piece):
         for destination in destinations:
             new_move = [move[0] + destination[0], move[1] + destination[1]]
             if 0 <= new_move[0] < 8 and 0 <= new_move[1] < 8:
-                if engine.main_board[new_move[0]][new_move[1]] == 0:
+                if engine.main_board[new_move[0]][new_move[1]] is None:
                     possible_moves.append(Move(engine.main_board, move, new_move))
                 elif engine.main_board[new_move[0]][new_move[1]].is_white != self.is_white:
                     possible_moves.append(Move(engine.main_board, move, new_move))
@@ -184,7 +185,7 @@ class Queen(Piece):
             for i in range(1, 8):
                 new_move = [move[0] + i * destination[0], move[1] + i * destination[1]]
                 if 0 <= new_move[0] < 8 and 0 <= new_move[1] < 8:
-                    if engine.main_board[new_move[0]][new_move[1]] == 0:
+                    if engine.main_board[new_move[0]][new_move[1]] is None:
                         possible_moves.append(Move(engine.main_board, move, new_move))
                     elif engine.main_board[new_move[0]][new_move[1]].is_white != self.is_white:
                         possible_moves.append(Move(engine.main_board, move, new_move))
@@ -206,7 +207,7 @@ class King(Piece):
         for destination in destinations:
             new_move = [move[0] + destination[0], move[1] + destination[1]]
             if 0 <= new_move[0] < 8 and 0 <= new_move[1] < 8:
-                if engine.main_board[new_move[0]][new_move[1]] == 0:
+                if engine.main_board[new_move[0]][new_move[1]] is None:
                     possible_moves.append(Move(engine.main_board, move, new_move))
                 elif engine.main_board[new_move[0]][new_move[1]].is_white != self.is_white:
                     possible_moves.append(Move(engine.main_board, move, new_move))
@@ -218,14 +219,14 @@ class GameEngine:
 
     def __init__(self) -> None:
         self.main_board = [
-            [Rook(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Rook(False)],  # A
-            [Knight(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Knight(False)],  # B
-            [Bishop(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Bishop(False)],  # C
-            [Queen(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Queen(False)],  # D
-            [King(True), Pawn(True), 0, 0, 0, 0, Pawn(False), King(False)],  # E
-            [Bishop(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Bishop(False)],  # F
-            [Knight(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Knight(False)],  # G
-            [Rook(True), Pawn(True), 0, 0, 0, 0, Pawn(False), Rook(False)],  # H
+            [Rook(True), Pawn(True), None, None, None, None, Pawn(False), Rook(False)],  # A
+            [Knight(True), Pawn(True), None, None, None, None, Pawn(False), Knight(False)],  # B
+            [Bishop(True), Pawn(True), None, None, None, None, Pawn(False), Bishop(False)],  # C
+            [Queen(True), Pawn(True), None, None, None, None, Pawn(False), Queen(False)],  # D
+            [King(True), Pawn(True), None, None, None, None, Pawn(False), King(False)],  # E
+            [Bishop(True), Pawn(True), None, None, None, None, Pawn(False), Bishop(False)],  # F
+            [Knight(True), Pawn(True), None, None, None, None, Pawn(False), Knight(False)],  # G
+            [Rook(True), Pawn(True), None, None, None, None, Pawn(False), Rook(False)],  # H
         ]
 
         self.white_turn = True
@@ -238,7 +239,7 @@ class GameEngine:
 
     def move(self, move) -> None:
         self.white_turn = not self.white_turn
-        self.main_board[move.start_move[0]][move.start_move[1]] = 0
+        self.main_board[move.start_move[0]][move.start_move[1]] = None
         moving_pawn = copy.deepcopy(move.moving_pawn)
         moving_pawn.has_moved = True
         self.main_board[move.end_move[0]][move.end_move[1]] = moving_pawn
@@ -255,7 +256,7 @@ class GameEngine:
             self.main_board[move.end_move[0]][move.end_move[1]] = Queen(move.moving_pawn.is_white)
 
         if move.is_enpassant_move:
-            self.main_board[move.end_move[0]][move.start_move[1]] = 0
+            self.main_board[move.end_move[0]][move.start_move[1]] = None
 
         if isinstance(move.moving_pawn, Pawn) and abs(move.start_move[1] - move.end_move[1]) == 2:
             self.possible_enpassant = (move.end_move[0], (move.start_move[1] + move.end_move[1]) // 2)
@@ -266,11 +267,11 @@ class GameEngine:
             if move.end_move[0] - move.start_move[0] == 2:
                 self.main_board[move.end_move[0] - 1][move.end_move[1]] = self.main_board[move.end_move[0] + 1][
                     move.end_move[1]]
-                self.main_board[move.end_move[0] + 1][move.end_move[1]] = 0
+                self.main_board[move.end_move[0] + 1][move.end_move[1]] = None
             else:
                 self.main_board[move.end_move[0] + 1][move.end_move[1]] = self.main_board[move.end_move[0] - 2][
                     move.end_move[1]]
-                self.main_board[move.end_move[0] - 2][move.end_move[1]] = 0
+                self.main_board[move.end_move[0] - 2][move.end_move[1]] = None
 
     def undo_move(self) -> None:
         if len(self._log) == 0:
@@ -287,7 +288,7 @@ class GameEngine:
                 self.black_king_pos = old_move.start_move
 
         if old_move.is_enpassant_move:
-            self.main_board[old_move.end_move[0]][old_move.end_move[1]] = 0
+            self.main_board[old_move.end_move[0]][old_move.end_move[1]] = None
             self.main_board[old_move.end_move[0]][old_move.start_move[1]] = old_move.target_pawn
 
         self.possible_enpassant = old_move.enpassant
@@ -296,11 +297,11 @@ class GameEngine:
             if old_move.end_move[0] - old_move.start_move[0] == 2:
                 self.main_board[old_move.end_move[0] + 1][old_move.end_move[1]] = \
                     self.main_board[old_move.end_move[0] - 1][old_move.end_move[1]]
-                self.main_board[old_move.end_move[0] - 1][old_move.end_move[1]] = 0
+                self.main_board[old_move.end_move[0] - 1][old_move.end_move[1]] = None
             else:
                 self.main_board[old_move.end_move[0] - 2][old_move.end_move[1]] = \
                     self.main_board[old_move.end_move[0] + 1][old_move.end_move[1]]
-                self.main_board[old_move.end_move[0] + 1][old_move.end_move[1]] = 0
+                self.main_board[old_move.end_move[0] + 1][old_move.end_move[1]] = None
 
     def get_piece(self, pos) -> Optional[Piece]:
         return self.main_board[pos[0]][pos[1]] if isinstance(self.main_board[pos[0]][pos[1]], Piece) else None
@@ -343,8 +344,9 @@ class GameEngine:
         possible_moves = []
         for file in range(8):
             for rank in range(8):
-                if (self.white_turn and self.main_board[file][rank] != 0 and self.main_board[file][rank].is_white) or (
-                        not self.white_turn and self.main_board[file][rank] != 0
+                if (self.white_turn and self.main_board[file][rank] is not None and self.main_board[file][
+                    rank].is_white) or (
+                        not self.white_turn and self.main_board[file][rank] is not None
                         and not self.main_board[file][rank].is_white):
                     allMoves = self.get_possible_piece_moves([file, rank])
                     for move in allMoves:
@@ -412,21 +414,22 @@ class GameEngine:
         return casstleMoves
 
     def getKingsCastle(self, move) -> Move:
-        if self.main_board[move[0] + 1][move[1]] == 0 and self.main_board[move[0] + 2][move[1]] == 0:
+        if self.main_board[move[0] + 1][move[1]] is None and \
+                self.main_board[move[0] + 2][move[1]] is None:
             if not self.check_for_attack([move[0] + 1, move[1]]) \
                     and not self.check_for_attack([move[0] + 2, move[1]]):
                 return Move(self.main_board, move, [move[0] + 2, move[1]], isCastle=True)
 
     def getQueensCastle(self, move) -> Move:
-        if self.main_board[move[0] - 1][move[1]] == 0 \
-                and self.main_board[move[0] - 2][move[1]] == 0 \
-                and self.main_board[move[0] - 3][move[1]] == 0:
+        if self.main_board[move[0] - 1][move[1]] is None \
+                and self.main_board[move[0] - 2][move[1]] is None \
+                and self.main_board[move[0] - 3][move[1]] is None:
             if not self.check_for_attack([move[0] - 1, move[1]]) \
                     and not self.check_for_attack([move[0] - 2, move[1]]):
                 return Move(self.main_board, move, [move[0] - 2, move[1]], isCastle=True)
 
     def is_game_over(self) -> bool:
-        return self.check_mate and self.stale_mate
+        return self.check_mate or self.stale_mate
 
     def game_status(self) -> Optional[Status]:
         if not self.is_game_over():

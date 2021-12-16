@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+import chess.engine
 import pygame
 from PIL import Image, ImageFilter
 
@@ -52,6 +53,8 @@ class Render:
             "pvp": pygame.image.load('resources/pvp.png'),
             "ai": pygame.image.load('resources/ai.png'),
         }
+
+        self.ai = chess.engine.SimpleEngine.popen_uci("resources/troutFish/troutFish.exe")
 
     def run(self) -> None:
         pygame.init()
@@ -109,6 +112,9 @@ class Render:
         self._render_chess_board()
         self._render_possible_moves()
         self._render_pieces()
+
+        if self.engine.is_game_over():
+            self.game_state += 1
 
     def _end_game_screen(self):
         for event in self.events:
@@ -168,6 +174,25 @@ class Render:
             self.valid_moves = self.engine.get_valid_moves()
             self.move_made = False
 
+    def mouse_menu_logic(self):
+        mouse_pos = pygame.mouse.get_pos()
+        if mouse_pos[0] < self.window_width / 2:
+            self.move_interface = Factory("PVP")
+            self.game_state += 1
+        else:
+            self.move_interface = Factory("AI")
+            self.game_state += 1
+
+    def _render_game_over(self):
+        if self.engine.is_game_over():
+            if self.engine.game_status().winner is not None:
+                text = "Wygrał " + str("Czarny" if self.engine.game_status().winner else "Biały")
+            else:
+                text = "Pat"
+
+            textsurface = self.font.render(text, True, (255, 0, 122))
+            self.screen.blit(textsurface, (255, 255))
+
     def _render_chess_board(self) -> None:
         for file in range(8):
             for rank in range(8):
@@ -217,87 +242,71 @@ class Render:
             if move.start_move == self.tile_history[0]:
                 self.possible_moves.append(move)
 
-    def mouse_menu_logic(self):
-        mouse_pos = pygame.mouse.get_pos()
-        if mouse_pos[0] < self.window_width / 2:
-            self.move_interface = Factory("PVP")
-            self.game_state += 1
-        else:
-            self.move_interface = Factory("AI")
-            self.game_state += 1
-
-    def _render_game_over(self):
-        if self.engine.is_game_over():
-            if self.engine.game_status().winner is not None:
-                text = "Wygrał " + str('Biały' if self.engine.game_status().winner else "Czarny")
-            else:
-                text = "Pat"
-
-            textsurface = self.font.render(text, True, (255, 0, 122))
-            self.screen.blit(textsurface, (255, 255))
-
 
 def Factory(game_mode="PVP"):
     """Factory Method"""
     localizers = {
-        "PVP": PvpMove,
-        "AI": AiMove,
+        "PVP": PvpMove(),
+        "AI": AiMove(),
     }
 
-    return localizers[game_mode]()
+    return localizers[game_mode]
 
 
 class MoveInterface(ABC):
 
     @abstractmethod
-    def move(self: Render) -> None:
+    def move(self, renderer: Render) -> None:
         pass
 
     @abstractmethod
-    def undo(self: Render) -> None:
+    def undo(self, renderer: Render) -> None:
         pass
 
 
 class PvpMove(MoveInterface):
-    def move(self):
-        print(2)
-        move = Move(self.engine.main_board, self.tile_history[0], self.tile_history[1])
-        for valid_move in self.valid_moves:
+    def move(self, renderer):
+        move = Move(renderer.engine.main_board, renderer.tile_history[0], renderer.tile_history[1])
+        for valid_move in renderer.valid_moves:
             if move == valid_move:
-                self.engine.move(valid_move)
-                self.move_made = True
+                renderer.engine.move(valid_move)
+                renderer.move_made = True
                 break
 
-        self.possible_moves = []
-        self.tile_history = []
-        self.tile_selected = []
+        renderer.possible_moves = []
+        renderer.tile_history = []
+        renderer.tile_selected = []
 
-    def undo(self):
-        self.tile_selected = []
-        self.tile_history = []
-        self.possible_moves = []
-        self.engine.undo_move()
-        self.valid_moves = self.engine.get_valid_moves()
+    def undo(self, renderer):
+        renderer.tile_selected = []
+        renderer.tile_history = []
+        renderer.possible_moves = []
+        renderer.engine.undo_move()
+        renderer.valid_moves = renderer.engine.get_valid_moves()
 
 
 class AiMove(MoveInterface):
-    def move(self):
-        print(1)
-        move = Move(self.engine.main_board, self.tile_history[0], self.tile_history[1])
-        for valid_move in self.valid_moves:
+    def move(self, renderer):
+        move = Move(renderer.engine.main_board, renderer.tile_history[0], renderer.tile_history[1])
+        for valid_move in renderer.valid_moves:
             if move == valid_move:
-                self.engine.move(valid_move)
-                self.move_made = True
+                renderer.engine.move(valid_move)
+                renderer.move_made = True
+
+                result = renderer.ai.play(renderer.engine.main_board, chess.engine.Limit(time=0.1))
+                print(result)
                 break
 
-        self.possible_moves = []
-        self.tile_history = []
-        self.tile_selected = []
+        renderer.possible_moves = []
+        renderer.tile_history = []
+        renderer.tile_selected = []
 
-    def undo(self):
-        self.tile_selected = []
-        self.tile_history = []
-        self.possible_moves = []
-        self.engine.undo_move()
-        self.engine.undo_move()
-        self.valid_moves = self.engine.get_valid_moves()
+
+
+    def undo(self, renderer):
+        renderer.tile_selected = []
+        renderer.tile_history = []
+        renderer.possible_moves = []
+        renderer.engine.undo_move()
+        renderer.engine.undo_move()
+        renderer.valid_moves = renderer.engine.get_valid_moves()
