@@ -1,7 +1,8 @@
 import copy
 import dataclasses
+import time
 from typing import Optional, List
-
+from numba import jit
 import chess
 
 
@@ -315,8 +316,11 @@ class GameEngine:
     def get_piece(self, pos) -> Optional[Piece]:
         return self.main_board[pos[0]][pos[1]] if isinstance(self.main_board[pos[0]][pos[1]], Piece) else None
 
+    @jit(nopython=True)
     def get_valid_moves(self) -> List[Move]:
         """Returns valid moves"""
+
+        start = time.time()
         tempEnp = self.possible_enpassant
         moves = self.get_possible_moves()
 
@@ -329,15 +333,16 @@ class GameEngine:
             for m in castleMoves:
                 moves.append(m)
 
-        for i in range(len(moves) - 1, -1, -1):
+        valid_moves = []
+        for i in range(len(moves)):
             self.move(moves[i])
             self.white_turn = not self.white_turn
-            if self.check_for_check():
-                moves.remove(moves[i])
+            if not self.check_for_check():
+                valid_moves.append(moves[i])
             self.white_turn = not self.white_turn
             self.undo_move()
 
-        if len(moves) == 0:
+        if len(valid_moves) == 0:
             if self.check_for_check():
                 self.check_mate = True
             else:
@@ -346,7 +351,9 @@ class GameEngine:
             self.check_mate = False
             self.stale_mate = False
         self.possible_enpassant = tempEnp
-        return moves
+        end = time.time()
+        print(end - start)
+        return valid_moves
 
     def get_possible_moves(self) -> List[Move]:
         """Returns all legal moves"""
