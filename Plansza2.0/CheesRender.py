@@ -1,3 +1,6 @@
+from os import environ
+
+environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 from abc import ABC, abstractmethod
 
 import chess.engine
@@ -10,6 +13,7 @@ from ChessEngine import Move
 
 class Render:
     def __init__(self) -> None:
+        self.ai = chess.engine.SimpleEngine.popen_uci("resources/troutFish/troutFish.exe")
 
         self.vs_AI = False
         self.tile_size = 110
@@ -54,8 +58,6 @@ class Render:
             "ai": pygame.image.load('resources/ai.png'),
         }
 
-        self.ai = chess.engine.SimpleEngine.popen_uci("resources/troutFish/troutFish.exe")
-
     def __del__(self):
         self.ai.close()
 
@@ -76,13 +78,12 @@ class Render:
                 if event.type == pygame.QUIT:
                     self.running = False
 
-            match self.game_state:
-                case 1:
-                    self._game_mode_selection()
-                case 2:
-                    self._game_window()
-                case 3:
-                    self._end_game_screen()
+            if self.game_state == 1:
+                self._game_mode_selection()
+            elif self.game_state == 2:
+                self._game_window()
+            elif self.game_state == 3:
+                self._end_game_screen()
 
             pygame.display.update()
         pygame.quit()

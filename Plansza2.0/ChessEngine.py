@@ -1,9 +1,12 @@
 import copy
 import dataclasses
+import multiprocessing
 import time
 from typing import Optional, List
-from numba import jit
+
 import chess
+
+num_cores = multiprocessing.cpu_count()
 
 
 @dataclasses.dataclass
@@ -316,11 +319,11 @@ class GameEngine:
     def get_piece(self, pos) -> Optional[Piece]:
         return self.main_board[pos[0]][pos[1]] if isinstance(self.main_board[pos[0]][pos[1]], Piece) else None
 
-    @jit(nopython=True)
     def get_valid_moves(self) -> List[Move]:
         """Returns valid moves"""
 
         start = time.time()
+
         tempEnp = self.possible_enpassant
         moves = self.get_possible_moves()
 
@@ -352,22 +355,22 @@ class GameEngine:
             self.stale_mate = False
         self.possible_enpassant = tempEnp
         end = time.time()
-        print(end - start)
+
         return valid_moves
 
     def get_possible_moves(self) -> List[Move]:
         """Returns all legal moves"""
+        start = time.time()
         possible_moves = []
         for file in range(8):
             for rank in range(8):
-                if (self.white_turn and self.main_board[file][rank] is not None and self.main_board[file][
-                    rank].is_white) or (
-                        not self.white_turn and self.main_board[file][rank] is not None
-                        and not self.main_board[file][rank].is_white):
+                if self.main_board[file][rank] is not None and (
+                        self.white_turn == self.main_board[file][rank].is_white):
                     allMoves = self.get_possible_piece_moves([file, rank])
                     for move in allMoves:
                         possible_moves.append(move)
-
+        end = time.time()
+        print(end - start)
         return possible_moves
 
     def get_possible_piece_moves(self, move) -> List[Move]:
@@ -388,9 +391,10 @@ class GameEngine:
         for move in enemyMoves:
             if move.end_move == position:
                 return True
+
         return False
 
-    def getCastileMoves(self, move) -> list[Move]:
+    def getCastileMoves(self, move) -> List[Move]:
         casstleMoves = []
         if self.check_for_check():
             return casstleMoves
@@ -463,3 +467,10 @@ class GameEngine:
                     board.set_piece_at(file + rank * 8, chess.Piece.from_symbol(self.get_piece([file, rank]).symbol))
 
         return board
+
+    def my_function(self, move):
+        self.move(move)
+        self.white_turn = not self.white_turn
+        if self.check_for_check():
+            return None
+        return move
