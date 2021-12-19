@@ -387,11 +387,9 @@ class GameEngine:
         enemyMoves = self.get_possible_moves()
         self.white_turn = not self.white_turn
 
-        for move in enemyMoves:
-            if move.end_move == position:
-                return True
+        end_moves = list(map(lambda move: move.end_move, enemyMoves))
 
-        return False
+        return any(position == move for move in end_moves)
 
     def getCastileMoves(self, move) -> List[Move]:
         casstleMoves = []
