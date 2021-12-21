@@ -6,6 +6,7 @@ from typing import Optional, List
 
 import chess
 import numpy as np
+from numba import prange, jit
 
 num_cores = multiprocessing.cpu_count()
 
@@ -24,7 +25,7 @@ class Move:
         self.end_move = end_move
         self.moving_pawn = board[start_move[0] * 8 + start_move[1]]
         self.target_pawn = board[end_move[0] * 8 + end_move[1]]
-        self.move_pos = 1000 * start_move[0] + 100 * start_move[1] + 10 * end_move[0] + end_move[1]
+        self.move_pos = chr(start_move[0] + 97) + str(start_move[1] + 1) + chr(end_move[0] + 97) + str(end_move[1] + 1)
         self.is_pawn_promotion = False
         self.enpassant = ()
 
@@ -340,7 +341,7 @@ class GameEngine:
                 moves.append(m)
 
         valid_moves = []
-        for i in range(len(moves)):
+        for i in prange(len(moves)):
             self.move(moves[i])
             self.white_turn = not self.white_turn
             if not self.check_for_check():
@@ -358,13 +359,14 @@ class GameEngine:
             self.stale_mate = False
         self.possible_enpassant = tempEnp
         end = time.time()
-        print(end - start)
+
         return valid_moves
 
+    @jit(parallel=True, forceobj=True)
     def get_possible_moves(self) -> List[Move]:
         """Returns all legal moves"""
         possible_moves = []
-        for square in range(64):
+        for square in prange(64):
             if self.main_board[square] is not None and (
                     self.white_turn == self.main_board[square].is_white):
                 allMoves = self.get_possible_piece_moves([square // 8, square % 8])

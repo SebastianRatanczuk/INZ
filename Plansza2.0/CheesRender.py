@@ -1,19 +1,20 @@
-from os import environ
-
-environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
-from abc import ABC, abstractmethod
-
 import chess.engine
 import pygame
+import szaszki
 from PIL import Image, ImageFilter
+from more_itertools import run_length
 
 import ChessEngine
+from ChessAI import bestMove
 from ChessEngine import Move
 
 
 class Render:
     def __init__(self) -> None:
-        self.ai = chess.engine.SimpleEngine.popen_uci("resources/troutFish/troutFish.exe")
+        self.white_ai = chess.engine.SimpleEngine.popen_uci("resources/troutFish/troutFish.exe")
+        self.black_ai = chess.engine.SimpleEngine.popen_uci("resources/troutFish/troutFish.exe")
+        self.white_ai.configure(options={"Skill Level": 1})
+        self.black_ai.configure(options={"Skill Level": 1})
 
         self.vs_AI = False
         self.tile_size = 110
@@ -32,7 +33,8 @@ class Render:
         self.tile_selected = []
         self.tile_history = []
 
-        self.move_interface = PvpMove
+        self.player_one = True
+        self.player_two = True
 
         self.piece_sprite = {
             1: pygame.image.load('resources/pieces/white/pawn.png'),
@@ -59,12 +61,14 @@ class Render:
         }
 
     def __del__(self):
-        self.ai.close()
+        self.white_ai.close()
+        self.black_ai.close()
 
     def run(self) -> None:
         pygame.init()
         pygame.font.init()
         pygame.display.set_caption(self.window_title)
+        pygame.time.Clock().tick(60)
         self.font = pygame.font.SysFont('Times New Roman Font', 30)
         self.end_font = pygame.font.SysFont('Times New Roman Font', 40)
         self.screen = pygame.display.set_mode((self.window_width, self.window_height))
@@ -73,6 +77,9 @@ class Render:
     def _main_game_loop(self) -> None:
         self.running = True
         while self.running:
+            self.human_turn = (self.engine.white_turn and self.player_one) or \
+                              (not self.engine.white_turn and self.player_two)
+
             self.events = pygame.event.get()
             for event in self.events:
                 if event.type == pygame.QUIT:
@@ -86,6 +93,7 @@ class Render:
                 self._end_game_screen()
 
             pygame.display.update()
+
         pygame.quit()
 
     def _game_mode_selection(self):
@@ -107,27 +115,49 @@ class Render:
         self.screen.blit(self.menu_sprite['ai'], (self.window_width * 2 / 3, self.window_height / 2 - 128))
 
     def _game_window(self):
+
         for event in self.events:
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.type == pygame.MOUSEBUTTONDOWN and self.human_turn:
                 self.mouse_logic()
-            elif event.type == pygame.KEYDOWN:
+            elif event.type == pygame.KEYDOWN and self.human_turn:
                 if event.key == pygame.K_u:
-                    self.move_interface.undo(self)
+                    self.undo()
 
         self.game_end_background = None
         self.screen.fill((0, 0, 0))
         self._render_chess_board()
         self._render_possible_moves()
         self._render_pieces()
-
+        pygame.display.update()
         if self.engine.is_game_over():
             self.game_state += 1
+
+        if not self.human_turn:
+            if not self.engine.is_game_over():
+                # if self.engine.white_turn:
+                #     result = self.white_ai.play(self.engine.get_chess_board(), chess.engine.Limit(time=0.1))
+                # else:
+                #     result = self.black_ai.play(self.engine.get_chess_board(), chess.engine.Limit(time=0.1))
+                #
+                # move = result.move
+                # file1 = move.from_square % 8
+                # rank1 = move.from_square // 8
+                # file2 = move.to_square % 8
+                # rank2 = move.to_square // 8
+                # newMove = Move(self.engine.main_board, [file1, rank1], [file2, rank2])
+                # self.engine.move(newMove)
+                # self.move_made = True
+
+                move = bestMove(self.engine)
+                self.engine.move(move)
+                self.valid_moves = self.engine.get_valid_moves()
+                self.move_made = True
 
     def _end_game_screen(self):
         for event in self.events:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_u:
-                    self.move_interface.undo(self)
+                    self.undo()
                     self.game_state -= 1
 
         if self.game_end_background is None:
@@ -144,7 +174,11 @@ class Render:
 
     def mouse_logic(self) -> None:
         mouse_pos = pygame.mouse.get_pos()
-        new_tile = [mouse_pos[0] // self.tile_size, 7 - (mouse_pos[1] // self.tile_size)]
+
+        if 25 < mouse_pos[0] < 900 and 25 < mouse_pos[1] < 900:
+            new_tile = [(mouse_pos[0] - 25) // self.tile_size, 7 - ((mouse_pos[1] - 25) // self.tile_size)]
+        else:
+            return
 
         if not self.tile_selected:
             if self.engine.get_piece(new_tile) is None:
@@ -175,7 +209,7 @@ class Render:
             self.show_moves()
 
         if len(self.tile_history) == 2:
-            self.move_interface.move(self)
+            self.move()
 
         if self.move_made:
             self.valid_moves = self.engine.get_valid_moves()
@@ -184,10 +218,8 @@ class Render:
     def mouse_menu_logic(self):
         mouse_pos = pygame.mouse.get_pos()
         if mouse_pos[0] < self.window_width / 2:
-            self.move_interface = Factory("PVP")
             self.game_state += 1
         else:
-            self.move_interface = Factory("AI")
             self.game_state += 1
 
     def _render_game_over(self):
@@ -249,75 +281,55 @@ class Render:
             if move.start_move == self.tile_history[0]:
                 self.possible_moves.append(move)
 
-
-def Factory(game_mode="PVP"):
-    """Factory Method"""
-    game_modes = {
-        "PVP": PvpMove(),
-        "AI": AiMove(),
-    }
-
-    return game_modes[game_mode]
-
-
-class MoveInterface(ABC):
-
-    @abstractmethod
-    def move(self, renderer: Render) -> None:
-        pass
-
-    @abstractmethod
-    def undo(self, renderer: Render) -> None:
-        pass
-
-
-class PvpMove(MoveInterface):
-    def move(self, renderer):
-        move = Move(renderer.engine.main_board, renderer.tile_history[0], renderer.tile_history[1])
-        for valid_move in renderer.valid_moves:
+    def move(self):
+        move = Move(self.engine.main_board, self.tile_history[0], self.tile_history[1])
+        for valid_move in self.valid_moves:
             if move == valid_move:
-                renderer.engine.move(valid_move)
-                renderer.move_made = True
+                self.engine.move(valid_move)
+                self.move_made = True
                 break
 
-        renderer.possible_moves = []
-        renderer.tile_history = []
-        renderer.tile_selected = []
+        self.possible_moves = []
+        self.tile_history = []
+        self.tile_selected = []
 
-    def undo(self, renderer):
-        renderer.tile_selected = []
-        renderer.tile_history = []
-        renderer.possible_moves = []
-        renderer.engine.undo_move()
-        renderer.valid_moves = renderer.engine.get_valid_moves()
+        fen = self.get_board_fen()
+        x = szaszki.PyChess(fen)
+        print(x.getBoard())
+
+    def undo(self):
+        self.tile_selected = []
+        self.tile_history = []
+        self.possible_moves = []
+        self.engine.undo_move()
+        if self.player_one and not self.player_two:
+            self.engine.undo_move()
+        self.valid_moves = self.engine.get_valid_moves()
+
+    def get_main_board(self):
+
+        x = self.engine.main_board.reshape(8, 8)
+        x = list(zip(*x[::-1]))
+        x = list(zip(*x[::-1]))
+        x = list(zip(*x[::-1]))
+
+        return x
+
+    def get_board_fen(self):
+        color = 'w' if self.engine.white_turn else 'b'
+        castlng = self.engine.c
+        return '/'.join(map(convert_rank, self.get_main_board())) + ' ' + color + ' 'KQkq - '0 1'  # ' w KQkq - 0 1'
 
 
-class AiMove(MoveInterface):
-    def move(self, renderer):
-        move = Move(renderer.engine.main_board, renderer.tile_history[0], renderer.tile_history[1])
-        for valid_move in renderer.valid_moves:
-            if move == valid_move:
-                renderer.engine.move(valid_move)
-                renderer.move_made = True
-                if not renderer.engine.is_game_over():
-                    result = renderer.ai.play(renderer.engine.get_chess_board(), chess.engine.Limit(time=0.1))
-                    move = result.move
-                    file1 = move.from_square % 8
-                    rank1 = move.from_square // 8
-                    file2 = move.to_square % 8
-                    rank2 = move.to_square // 8
-                    newMove = Move(renderer.engine.main_board, [file1, rank1], [file2, rank2])
-                    renderer.engine.move(newMove)
-                break
+def convert_cell(value):
+    if value is None:
+        return None
+    else:
+        return value.symbol
 
-        renderer.possible_moves = []
-        renderer.tile_history = []
-        renderer.tile_selected = []
 
-    def undo(self, renderer):
-        renderer.tile_selected = []
-        renderer.tile_history = []
-        renderer.possible_moves = []
-        renderer.engine.undo_move()
-        renderer.engine.undo_move()
-        renderer.valid_moves = renderer.engine.get_valid_moves()
+def convert_rank(rank):
+    return ''.join(
+        value * count if value else str(count)
+        for value, count in run_length.encode(map(convert_cell, rank))
+    )
