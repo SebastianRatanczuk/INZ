@@ -1,7 +1,6 @@
 import copy
 import dataclasses
 import multiprocessing
-import time
 from typing import Optional, List
 
 import chess
@@ -326,8 +325,6 @@ class GameEngine:
     def get_valid_moves(self) -> List[Move]:
         """Returns valid moves"""
 
-        start = time.time()
-
         tempEnp = self.possible_enpassant
         moves = self.get_possible_moves()
 
@@ -358,7 +355,6 @@ class GameEngine:
             self.check_mate = False
             self.stale_mate = False
         self.possible_enpassant = tempEnp
-        end = time.time()
 
         return valid_moves
 
@@ -446,6 +442,30 @@ class GameEngine:
             if not self.check_for_attack([move[0] - 1, move[1]]) \
                     and not self.check_for_attack([move[0] - 2, move[1]]):
                 return Move(self.main_board, move, [move[0] - 2, move[1]], isCastle=True)
+
+    def getCastleRights(self) -> str:
+        rights = list("----")
+
+        # WhiteKingSide
+        if not self.get_piece(self.white_king_pos).has_moved:
+            if isinstance(self.get_piece([7, 0]), Rook) and not self.get_piece([7, 0]).has_moved:
+                rights[0] = 'K'
+
+        # WhiteQueenSide
+        if not self.get_piece(self.white_king_pos).has_moved:
+            if isinstance(self.get_piece([0, 0]), Rook) and not self.get_piece([0, 0]).has_moved:
+                rights[1] = 'Q'
+
+        # BlackKingSide
+        if not self.get_piece(self.black_king_pos).has_moved:
+            if isinstance(self.get_piece([7, 7]), Rook) and not self.get_piece([7, 7]).has_moved:
+                rights[2] = 'k'
+
+        # BlackQueenSide
+        if not self.get_piece(self.black_king_pos).has_moved:
+            if isinstance(self.get_piece([0, 7]), Rook) and not self.get_piece([0, 7]).has_moved:
+                rights[3] = 'q'
+        return ''.join(rights)
 
     def is_game_over(self) -> bool:
         return self.check_mate or self.stale_mate

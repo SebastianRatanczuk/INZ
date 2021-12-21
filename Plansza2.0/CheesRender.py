@@ -1,6 +1,5 @@
 import chess.engine
 import pygame
-import szaszki
 from PIL import Image, ImageFilter
 from more_itertools import run_length
 
@@ -294,8 +293,9 @@ class Render:
         self.tile_selected = []
 
         fen = self.get_board_fen()
-        x = szaszki.PyChess(fen)
-        print(x.getBoard())
+        print(fen)
+        # x = szaszki.PyChess(fen)
+        # print(x.getBoard())
 
     def undo(self):
         self.tile_selected = []
@@ -317,8 +317,8 @@ class Render:
 
     def get_board_fen(self):
         color = 'w' if self.engine.white_turn else 'b'
-        castlng = self.engine.c
-        return '/'.join(map(convert_rank, self.get_main_board())) + ' ' + color + ' 'KQkq - '0 1'  # ' w KQkq - 0 1'
+        castlng = self.engine.getCastleRights()
+        return '/'.join(map(convert_rank, self.get_main_board())) + ' ' + color + ' ' + castlng + ' - 0 1'  # ' w KQkq - 0 1'
 
 
 def convert_cell(value):
