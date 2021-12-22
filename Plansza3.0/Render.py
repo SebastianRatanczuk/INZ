@@ -1,64 +1,8 @@
-import chess
-import chess.engine
+# import chess.engine
+
 import pygame
+import szaszki
 from PIL import Image, ImageFilter
-
-
-def default_move(self):
-    move = chess.Move.from_uci(self.tile_history)
-
-    if self.board.piece_at(move.from_square) is not None:
-        if self.board.piece_at(move.from_square).symbol() == "P":
-            if move.from_square // 8 == 6 and move.to_square // 8 == 7:
-                item = self.getPromotion()
-                if item == "":
-                    return
-                move = chess.Move.from_uci(self.tile_history + item)
-
-        if self.board.piece_at(move.from_square).symbol() == "p":
-            if move.from_square // 8 == 1 and move.to_square // 8 == 0:
-                item = self.getPromotion()
-                if item == "":
-                    return
-                move = chess.Move.from_uci(self.tile_history + item)
-                self.pawn_promotion = ""
-    return move
-
-
-def pvp_move(self):
-    move = default_move(self)
-
-    if move in self.board.legal_moves:
-        self.board.push(move)
-
-
-def ai_move(self):
-    move = default_move(self)
-
-    if move in self.board.legal_moves:
-        self.board.push(move)
-        if not self.board.is_game_over():
-            result = self.engine.play(self.board, chess.engine.Limit(time=0.1))
-            self.board.push(result.move)
-
-
-def pvp_undo_move(self):
-    if len(self.board.move_stack) == 0:
-        return
-    self.board.pop()
-    self.promotion_request = False
-    self.legal_moves = []
-
-
-def ai_undo_move(self):
-    if len(self.board.move_stack) == 0:
-        return
-    self.board.pop()
-    if len(self.board.move_stack) == 0:
-        return
-    self.board.pop()
-    self.promotion_request = False
-    self.legal_moves = []
 
 
 class Render:
@@ -73,13 +17,13 @@ class Render:
         self.dark_color = (180, 140, 120)
         self.selected_color = (255, 123, 123)
         self.possible_moves_color = (123, 255, 123)
-        self.board = chess.Board()
+        self.board = szaszki.PyChess("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
         self.tile_history = ""
         self.tile_selected = ""
         self.pawn_promotion = ""
         self.promotion_request = False
         self.legal_moves = []
-        self.engine = chess.engine.SimpleEngine.popen_uci("resources/troutFish/troutFish.exe")
+        # self.engine = chess.engine.SimpleEngine.popen_uci("resources/troutFish/troutFish.exe")
 
         self.piece_sprite = {
             'P': pygame.image.load('resources/pieces/white/pawn.png'),
@@ -106,7 +50,8 @@ class Render:
         }
 
     def __del__(self):
-        self.engine.close()
+        # self.engine.close()3
+        pass
 
     def run(self):
         pygame.init()
@@ -157,7 +102,7 @@ class Render:
                 self.mouse_logic()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_u:
-                    self.undo_move(self)
+                    self.undo_move()
 
         self.screen.fill((0, 0, 0))
         self._render_chess_board()
@@ -166,7 +111,7 @@ class Render:
         self._render_other()
         self.game_end_background = None
 
-        if self.board.is_game_over():
+        if self.board.is_game_over:
             self.game_state += 1
 
     def _end_game_screen(self):
@@ -207,22 +152,22 @@ class Render:
     def _render_pieces(self):
         for file in range(8):
             for rank in range(8):
-                if self.board.piece_at(file + rank * 8) is not None:
+                if self.board.piece_at(rank, file) != '.':
                     self.screen.blit(
-                        self.piece_sprite[self.board.piece_at(file + rank * 8).symbol()],
-                        (30 + file * self.tile_size, 25 + (7 - rank) * self.tile_size)
+                        self.piece_sprite[self.board.piece_at(rank, file)],
+                        (30 + file * self.tile_size, 25 + rank * self.tile_size)
                     )
 
     def _render_possible_moves(self):
         for move in self.legal_moves:
-            file = move.to_square % 8
-            rank = move.to_square // 8
-            _tile_render_position = pygame.math.Vector2(file * self.tile_size + 25, (7 - rank) * self.tile_size + 25)
+            file = move.endingCol
+            rank = move.endingRow
+            _tile_render_position = pygame.math.Vector2(file * self.tile_size + 25, (rank) * self.tile_size + 25)
             pygame.draw.rect(self.screen, self.possible_moves_color, (_tile_render_position, self.tile_size_vector))
         for move in self.legal_moves:
-            file = move.from_square % 8
-            rank = move.from_square // 8
-            _tile_render_position = pygame.math.Vector2(file * self.tile_size + 25, (7 - rank) * self.tile_size + 25)
+            file = move.startingCol
+            rank = move.startingRow
+            _tile_render_position = pygame.math.Vector2(file * self.tile_size + 25, (rank) * self.tile_size + 25)
             pygame.draw.rect(self.screen, self.selected_color, (_tile_render_position, self.tile_size_vector))
             break
 
@@ -232,14 +177,7 @@ class Render:
 
     def mouse_menu_logic(self):
         mouse_pos = pygame.mouse.get_pos()
-        if mouse_pos[0] < self.window_width / 2:
-            self.move = pvp_move
-            self.undo_move = pvp_undo_move
-            self.game_state += 1
-        else:
-            self.move = ai_move
-            self.undo_move = ai_undo_move
-            self.game_state += 1
+        self.game_state += 1
 
     def mouse_logic(self):
         mouse_pos = pygame.mouse.get_pos()
@@ -252,19 +190,19 @@ class Render:
         new_tile_selection = chr((mouse_pos[0] - 25) // self.tile_size + 97) + str(
             7 - ((mouse_pos[1] - 25) // self.tile_size) + 1)
 
-        legal_moves = list(self.board.legal_moves)
-        self.legal_moves = list(filter(lambda move: str(move).startswith(new_tile_selection), legal_moves))
+        legal_moves = list(self.board.valid_moves())
+
+        self.legal_moves = list(filter(lambda move: str(move.uci).startswith(new_tile_selection), legal_moves))
 
         if len(self.tile_history) == 0:
-            if self.board.piece_at(
-                    (mouse_pos[0] - 25) // self.tile_size + 8 * (7 - (mouse_pos[1] - 25) // self.tile_size)) is None:
+            piece = self.board.piece_at(new_tile_selection)
+            if piece == ".":
                 self.tile_selected = ""
                 self.tile_history = ""
                 self.legal_moves = []
                 return
 
-            if self.board.color_at((mouse_pos[0] - 25) // self.tile_size + 8 * (
-                    7 - (mouse_pos[1] - 25) // self.tile_size)) != self.board.turn:
+            if piece.isupper() == self.board.turn.value:
                 self.tile_selected = ""
                 self.tile_history = ""
                 self.legal_moves = []
@@ -279,7 +217,7 @@ class Render:
             self.tile_history = self.tile_history + new_tile_selection
 
         if len(self.tile_history) == 4:
-            self.move(self)
+            self.move()
             self.tile_history = ""
             self.tile_selected = ""
 
@@ -299,18 +237,50 @@ class Render:
                 if 25 + 2 * self.tile_size < mouse_pos[1] < 25 + 3 * self.tile_size:
                     self.pawn_promotion = "r"
                 if 25 + 3 * self.tile_size < mouse_pos[1] < 25 + 5 * self.tile_size:
-                    self.pawn_promotion = "r"
+                    self.pawn_promotion = "n"
 
             self.promotion_request = False
 
     def _render_game_over(self):
-        if self.board.outcome() is None or self.board.outcome().termination.value != 1:
+        if self.board.is_stale_mate:
             text = "Pat"
         else:
-            text = "Wygrał " + str('Biały' if self.board.outcome().winner else "Czarny")
+            text = "Wygrał " + str('Biały' if self.board.turn.value else "Czarny")
 
         textsurface = self.font.render(text, True, (255, 0, 122))
         self.screen.blit(textsurface, (255, 255))
+
+    def move(self):
+        move = self.tile_history
+        piece = self.board.piece_at(move[0:2])
+        if piece != ".":
+            if piece == "P":
+                if move[1] == "7" and move[3] == "8":
+                    item = self.getPromotion()
+                    if item == "":
+                        return
+                    move = (self.tile_history + item)
+
+            if piece == "p":
+                if move[1] == "2" and move[3] == "1":
+                    item = self.getPromotion()
+                    if item == "":
+                        return
+                    move = (self.tile_history + item)
+                    self.pawn_promotion = ""
+
+        valid_moves = self.board.valid_moves()
+        if any(valid_move.uci == move for valid_move in valid_moves):
+            self.board.move(move)
+        self.board.valid_moves()
+
+    def undo_move(self):
+        if len(self.board.move_stack) == 0:
+            return
+        m = self.board.pop_move()
+        print(m.castle_rights)
+        self.promotion_request = False
+        self.legal_moves = []
 
     def getPromotion(self):
         self.promotion_request = True

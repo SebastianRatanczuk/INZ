@@ -429,18 +429,14 @@ class GameEngine:
         return casstleMoves
 
     def getKingsCastle(self, move) -> Move:
-        if self.get_piece([move[0] + 1, move[1]]) is None and \
-                self.get_piece([move[0] + 2, move[1]]) is None:
-            if not self.check_for_attack([move[0] + 1, move[1]]) \
-                    and not self.check_for_attack([move[0] + 2, move[1]]):
+        if self.get_piece([move[0] + 1, move[1]]) is None and self.get_piece([move[0] + 2, move[1]]) is None:
+            if not self.check_for_attack([move[0] + 1, move[1]]) and not self.check_for_attack([move[0] + 2, move[1]]):
                 return Move(self.main_board, move, [move[0] + 2, move[1]], isCastle=True)
 
     def getQueensCastle(self, move) -> Move:
-        if self.get_piece([move[0] - 1, move[1]]) is None \
-                and self.get_piece([move[0] - 2, move[1]]) is None \
-                and self.get_piece([move[0] - 3, move[1]]) is None:
-            if not self.check_for_attack([move[0] - 1, move[1]]) \
-                    and not self.check_for_attack([move[0] - 2, move[1]]):
+        if self.get_piece([move[0] - 1, move[1]]) is None and self.get_piece([move[0] - 2, move[1]]) is None and self.get_piece(
+                [move[0] - 3, move[1]]) is None:
+            if not self.check_for_attack([move[0] - 1, move[1]]) and not self.check_for_attack([move[0] - 2, move[1]]):
                 return Move(self.main_board, move, [move[0] - 2, move[1]], isCastle=True)
 
     def getCastleRights(self) -> str:
