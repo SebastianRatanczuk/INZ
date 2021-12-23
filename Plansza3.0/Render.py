@@ -1,4 +1,5 @@
 # import chess.engine
+import time
 
 import pygame
 import szaszki
@@ -18,12 +19,14 @@ class Render:
         self.selected_color = (255, 123, 123)
         self.possible_moves_color = (123, 255, 123)
         self.board = szaszki.PyChess("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
+        # self.board = szaszki.PyChess("r3k2r/8/8/8/8/8/8/4K3 w ---- - 0 1")
+        # self.board = szaszki.PyChess("4k3/8/8/8/8/8/8/R3K2R w ---- - 0 1")
+        self.depth = 5
         self.tile_history = ""
         self.tile_selected = ""
         self.pawn_promotion = ""
         self.promotion_request = False
         self.legal_moves = []
-        # self.engine = chess.engine.SimpleEngine.popen_uci("resources/troutFish/troutFish.exe")
 
         self.piece_sprite = {
             'P': pygame.image.load('resources/pieces/white/pawn.png'),
@@ -49,8 +52,10 @@ class Render:
             "ai": pygame.image.load('resources/ai.png'),
         }
 
+        self.player_one = False
+        self.player_two = False
+
     def __del__(self):
-        # self.engine.close()3
         pass
 
     def run(self):
@@ -68,6 +73,8 @@ class Render:
             for event in self.events:
                 if event.type == pygame.QUIT:
                     self.running = False
+
+            self.human_turn = (not self.board.turn.value and self.player_one) or (self.board.turn.value and self.player_two)
 
             if self.game_state == 1:
                 self._game_mode_selection()
@@ -98,9 +105,9 @@ class Render:
 
     def _game_window(self):
         for event in self.events:
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.type == pygame.MOUSEBUTTONDOWN and self.human_turn:
                 self.mouse_logic()
-            elif event.type == pygame.KEYDOWN:
+            elif event.type == pygame.KEYDOWN and self.human_turn:
                 if event.key == pygame.K_u:
                     self.undo_move()
 
@@ -110,9 +117,24 @@ class Render:
         self._render_pieces()
         self._render_other()
         self.game_end_background = None
-
+        pygame.display.update()
         if self.board.is_game_over:
             self.game_state += 1
+
+        self.board.valid_moves()
+        if not self.human_turn:
+            if not self.board.is_game_over:
+                start = time.time()
+                ai = szaszki.PyAI(self.board.generate_fen(), self.depth)
+                ai_move = ai.get_best_move()
+
+                self.board.move(ai_move.uci)
+                self.valid_moves = self.board.valid_moves()
+                stop = time.time()
+                print(ai_move.uci)
+                print(stop - start)
+                self.move_made = True
+        pygame.display.update()
 
     def _end_game_screen(self):
         for event in self.events:
@@ -277,8 +299,10 @@ class Render:
     def undo_move(self):
         if len(self.board.move_stack) == 0:
             return
-        m = self.board.pop_move()
-        print(m.castle_rights)
+        self.board.pop_move()
+        if not self.player_two or not self.player_one:
+            self.board.pop_move()
+
         self.promotion_request = False
         self.legal_moves = []
 
