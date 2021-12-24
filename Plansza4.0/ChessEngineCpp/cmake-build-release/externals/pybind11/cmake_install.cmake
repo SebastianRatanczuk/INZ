@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/sebol/CLionProjects/Szaszki/externals/pybind11
+# Install script for directory: C:/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/externals/pybind11
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Szaszki")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/ChessEngineCpp")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

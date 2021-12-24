@@ -4,10 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/mnt/c/Users/sebol/CLionProjects/Szaszki/source/app/main.cpp" "/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/CMakeFiles/szaszkiapp.dir/source/app/main.cpp.o"
-  "/mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/Ai.cpp" "/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/CMakeFiles/szaszkiapp.dir/source/module/Ai.cpp.o"
-  "/mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/Board.cpp" "/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/CMakeFiles/szaszkiapp.dir/source/module/Board.cpp.o"
-  "/mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/Move.cpp" "/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/CMakeFiles/szaszkiapp.dir/source/module/Move.cpp.o"
+  "/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/app/main.cpp" "/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszkiapp.dir/source/app/main.cpp.o"
+  "/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Ai.cpp" "/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszkiapp.dir/source/module/Ai.cpp.o"
+  "/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Board.cpp" "/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszkiapp.dir/source/module/Board.cpp.o"
+  "/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Move.cpp" "/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszkiapp.dir/source/module/Move.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

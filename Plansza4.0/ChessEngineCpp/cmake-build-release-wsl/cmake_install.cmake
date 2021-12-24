@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/c/Users/sebol/CLionProjects/Szaszki
+# Install script for directory: /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/externals/pybind11/cmake_install.cmake")
+  include("/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/externals/pybind11/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

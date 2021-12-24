@@ -33,6 +33,7 @@ public:
     bool isGameOver;
     bool isCheckMate;
     bool isStaleMate;
+    bool surended = false;
     std::string en_passant;
     bool castle_rights[NB_COLOR][NB_CASTLE]{};
 
@@ -52,8 +53,6 @@ public:
 
     static std::string getUci(int row, int col);
 
-    std::vector<Move> generatePawnMoves(int boxNumber);
-
     std::vector<Move> generateValidMoves();
 
     std::vector<Move> generateLegalMoves();
@@ -72,12 +71,17 @@ public:
 
     std::vector<Move> QueenSideCastle(std::string uci);
 
-    bool move(std::string uci);
+    bool moveUci(std::string uci);
 
     Move pop();
 
     std::string translateBoardToFEN();
 
+    std::vector<Move> generatePawnMoves(int row, int col);
+
+    std::vector<Move> generateValidMovesSequential();
+
+    bool move(Move *move);
 };
 
 

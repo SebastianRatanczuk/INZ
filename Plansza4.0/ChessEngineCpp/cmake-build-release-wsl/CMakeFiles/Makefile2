@@ -44,10 +44,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/sebol/CLionProjects/Szaszki
+CMAKE_SOURCE_DIR = /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl
+CMAKE_BINARY_DIR = /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-release-wsl
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -96,14 +96,14 @@ externals/pybind11/clean:
 CMakeFiles/szaszkiapp.dir/all:
 	$(MAKE) -f CMakeFiles/szaszkiapp.dir/build.make CMakeFiles/szaszkiapp.dir/depend
 	$(MAKE) -f CMakeFiles/szaszkiapp.dir/build.make CMakeFiles/szaszkiapp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/CMakeFiles --progress-num=6,7,8,9,10 "Built target szaszkiapp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles --progress-num=6,7,8,9,10 "Built target szaszkiapp"
 .PHONY : CMakeFiles/szaszkiapp.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/szaszkiapp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/szaszkiapp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles 0
 .PHONY : CMakeFiles/szaszkiapp.dir/rule
 
 # Convenience name for target.
@@ -123,14 +123,14 @@ CMakeFiles/szaszkiapp.dir/clean:
 CMakeFiles/szaszki.dir/all:
 	$(MAKE) -f CMakeFiles/szaszki.dir/build.make CMakeFiles/szaszki.dir/depend
 	$(MAKE) -f CMakeFiles/szaszki.dir/build.make CMakeFiles/szaszki.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/CMakeFiles --progress-num=1,2,3,4,5 "Built target szaszki"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles --progress-num=1,2,3,4,5 "Built target szaszki"
 .PHONY : CMakeFiles/szaszki.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/szaszki.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/szaszki.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles 0
 .PHONY : CMakeFiles/szaszki.dir/rule
 
 # Convenience name for target.

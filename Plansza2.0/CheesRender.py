@@ -1,3 +1,5 @@
+import time
+
 import chess.engine
 import pygame
 from PIL import Image, ImageFilter
@@ -6,6 +8,8 @@ from more_itertools import run_length
 import ChessEngine
 from ChessAI import bestMove
 from ChessEngine import Move
+
+ar = []
 
 
 class Render:
@@ -32,8 +36,8 @@ class Render:
         self.tile_selected = []
         self.tile_history = []
 
-        self.player_one = True
-        self.player_two = True
+        self.player_one = False
+        self.player_two = False
 
         self.piece_sprite = {
             1: pygame.image.load('resources/pieces/white/pawn.png'),
@@ -130,7 +134,6 @@ class Render:
         pygame.display.update()
         if self.engine.is_game_over():
             self.game_state += 1
-
         if not self.human_turn:
             if not self.engine.is_game_over():
                 # if self.engine.white_turn:
@@ -146,8 +149,12 @@ class Render:
                 # newMove = Move(self.engine.main_board, [file1, rank1], [file2, rank2])
                 # self.engine.move(newMove)
                 # self.move_made = True
-
+                start = time.time()
                 move = bestMove(self.engine)
+                stop = time.time()
+                ar.append(stop - start)
+                if len(ar) > 0:
+                    print(sum(ar) / len(ar))
                 self.engine.move(move)
                 self.valid_moves = self.engine.get_valid_moves()
                 self.move_made = True

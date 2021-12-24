@@ -3,6 +3,9 @@
 //
 
 #include "Ai.h"
+
+#include <utility>
+
 std::mt19937 gen(std::chrono::system_clock::now().time_since_epoch().count());
 
 Ai::Ai() {
@@ -18,26 +21,25 @@ int Ai::boardHeuristic(Board board) {
     if (board.isStaleMate)
         return 0;
     if (board.isCheckMate) {
-        if (board.turn == Color::white)
-            return CHECKMATE;
-        else
-            return -CHECKMATE;
+        return -CHECKMATE;
     }
 
     int pieceValue = 0;
     int mobilityValue = 0;
 
-    for (int square = 0; square < 64; square++) {
-        auto piece = board.board[square];
-        if (piece == '.')
-            continue;
+    for (int row = 0; row < 8; row++) {
+        for (int col = 0; col < 8; ++col) {
+            auto piece = board.getPieceAt(row, col);
+            if (piece == '.')
+                continue;
 
-        if (board.turn == Color::white && isupper(piece)) {
-            pieceValue += piece_value[(char) tolower(piece)];
-            mobilityValue += board.generatePawnMoves(square).size();
-        } else {
-            pieceValue -= piece_value[(char) tolower(piece)];
-            mobilityValue -= board.generatePawnMoves(square).size();
+            if ((board.turn == Color::white) == isupper(piece)) {
+                pieceValue += piece_value[(char) tolower(piece)];
+                mobilityValue += board.generatePawnMoves(row, col).size();
+            } else {
+                pieceValue -= piece_value[(char) tolower(piece)];
+                mobilityValue -= board.generatePawnMoves(row, col).size();
+            }
         }
     }
 
@@ -59,8 +61,8 @@ int Ai::nega(int depth, Board &board, int turn, int alfa, int beta) {
     std::shuffle(moves.begin(), moves.end(), gen);
     int score = -CHECKMATE;
 
-    for (const auto &move: moves) {
-        board.move(move.moveUci);
+    for (auto move: moves) {
+        board.move(&move);
         int negaScore = -nega(depth - 1, board, -turn, -beta, -alfa);
         if (negaScore > score) {
             score = negaScore;
@@ -79,7 +81,17 @@ int Ai::nega(int depth, Board &board, int turn, int alfa, int beta) {
 }
 
 Move Ai::negaAlfABeta() {
-    mainMove = mainBoard.generateValidMoves().back();
     nega(mainDepth, mainBoard, mainBoard.turn == Color::white ? 1 : -1, -CHECKMATE, CHECKMATE);
+    if (mainMove.moveUci == "null") {
+        std::vector<Move> moves = mainBoard.generateValidMoves();
+        if (!moves.empty()) {
+            mainMove = moves[0];
+        }
+    }
     return mainMove;
+}
+
+Ai::Ai(Board board, int depth) {
+    mainBoard = std::move(board);
+    mainDepth = depth;
 }

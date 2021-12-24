@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/sebol/CLionProjects/Szaszki
+CMAKE_SOURCE_DIR = /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-debug-wsl
+CMAKE_BINARY_DIR = /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl
 
 # Include any dependencies generated for this target.
 include CMakeFiles/szaszki.dir/depend.make
@@ -59,55 +59,55 @@ include CMakeFiles/szaszki.dir/flags.make
 
 CMakeFiles/szaszki.dir/source/module/module.cpp.o: CMakeFiles/szaszki.dir/flags.make
 CMakeFiles/szaszki.dir/source/module/module.cpp.o: ../source/module/module.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-debug-wsl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/szaszki.dir/source/module/module.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/szaszki.dir/source/module/module.cpp.o -c /mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/module.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/szaszki.dir/source/module/module.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/szaszki.dir/source/module/module.cpp.o -c /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/module.cpp
 
 CMakeFiles/szaszki.dir/source/module/module.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/szaszki.dir/source/module/module.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/module.cpp > CMakeFiles/szaszki.dir/source/module/module.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/module.cpp > CMakeFiles/szaszki.dir/source/module/module.cpp.i
 
 CMakeFiles/szaszki.dir/source/module/module.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/szaszki.dir/source/module/module.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/module.cpp -o CMakeFiles/szaszki.dir/source/module/module.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/module.cpp -o CMakeFiles/szaszki.dir/source/module/module.cpp.s
 
 CMakeFiles/szaszki.dir/source/module/Board.cpp.o: CMakeFiles/szaszki.dir/flags.make
 CMakeFiles/szaszki.dir/source/module/Board.cpp.o: ../source/module/Board.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-debug-wsl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/szaszki.dir/source/module/Board.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/szaszki.dir/source/module/Board.cpp.o -c /mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/Board.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/szaszki.dir/source/module/Board.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/szaszki.dir/source/module/Board.cpp.o -c /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Board.cpp
 
 CMakeFiles/szaszki.dir/source/module/Board.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/szaszki.dir/source/module/Board.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/Board.cpp > CMakeFiles/szaszki.dir/source/module/Board.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Board.cpp > CMakeFiles/szaszki.dir/source/module/Board.cpp.i
 
 CMakeFiles/szaszki.dir/source/module/Board.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/szaszki.dir/source/module/Board.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/Board.cpp -o CMakeFiles/szaszki.dir/source/module/Board.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Board.cpp -o CMakeFiles/szaszki.dir/source/module/Board.cpp.s
 
 CMakeFiles/szaszki.dir/source/module/Move.cpp.o: CMakeFiles/szaszki.dir/flags.make
 CMakeFiles/szaszki.dir/source/module/Move.cpp.o: ../source/module/Move.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-debug-wsl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/szaszki.dir/source/module/Move.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/szaszki.dir/source/module/Move.cpp.o -c /mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/Move.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/szaszki.dir/source/module/Move.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/szaszki.dir/source/module/Move.cpp.o -c /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Move.cpp
 
 CMakeFiles/szaszki.dir/source/module/Move.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/szaszki.dir/source/module/Move.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/Move.cpp > CMakeFiles/szaszki.dir/source/module/Move.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Move.cpp > CMakeFiles/szaszki.dir/source/module/Move.cpp.i
 
 CMakeFiles/szaszki.dir/source/module/Move.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/szaszki.dir/source/module/Move.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/Move.cpp -o CMakeFiles/szaszki.dir/source/module/Move.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Move.cpp -o CMakeFiles/szaszki.dir/source/module/Move.cpp.s
 
 CMakeFiles/szaszki.dir/source/module/Ai.cpp.o: CMakeFiles/szaszki.dir/flags.make
 CMakeFiles/szaszki.dir/source/module/Ai.cpp.o: ../source/module/Ai.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-debug-wsl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/szaszki.dir/source/module/Ai.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/szaszki.dir/source/module/Ai.cpp.o -c /mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/Ai.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/szaszki.dir/source/module/Ai.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/szaszki.dir/source/module/Ai.cpp.o -c /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Ai.cpp
 
 CMakeFiles/szaszki.dir/source/module/Ai.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/szaszki.dir/source/module/Ai.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/Ai.cpp > CMakeFiles/szaszki.dir/source/module/Ai.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Ai.cpp > CMakeFiles/szaszki.dir/source/module/Ai.cpp.i
 
 CMakeFiles/szaszki.dir/source/module/Ai.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/szaszki.dir/source/module/Ai.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/Ai.cpp -o CMakeFiles/szaszki.dir/source/module/Ai.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Ai.cpp -o CMakeFiles/szaszki.dir/source/module/Ai.cpp.s
 
 # Object files for target szaszki
 szaszki_OBJECTS = \
@@ -125,7 +125,7 @@ szaszki.cpython-38-x86_64-linux-gnu.so: CMakeFiles/szaszki.dir/source/module/Mov
 szaszki.cpython-38-x86_64-linux-gnu.so: CMakeFiles/szaszki.dir/source/module/Ai.cpp.o
 szaszki.cpython-38-x86_64-linux-gnu.so: CMakeFiles/szaszki.dir/build.make
 szaszki.cpython-38-x86_64-linux-gnu.so: CMakeFiles/szaszki.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-debug-wsl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX shared module szaszki.cpython-38-x86_64-linux-gnu.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX shared module szaszki.cpython-38-x86_64-linux-gnu.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/szaszki.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -138,6 +138,6 @@ CMakeFiles/szaszki.dir/clean:
 .PHONY : CMakeFiles/szaszki.dir/clean
 
 CMakeFiles/szaszki.dir/depend:
-	cd /mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-debug-wsl && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/c/Users/sebol/CLionProjects/Szaszki /mnt/c/Users/sebol/CLionProjects/Szaszki /mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-debug-wsl /mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-debug-wsl /mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-debug-wsl/CMakeFiles/szaszki.dir/DependInfo.cmake --color=$(COLOR)
+	cd /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszki.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/szaszki.dir/depend
 

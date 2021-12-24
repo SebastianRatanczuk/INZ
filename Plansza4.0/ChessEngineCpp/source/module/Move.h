@@ -13,7 +13,7 @@
 
 class Move {
 public:
-    std::string moveUci;
+    std::string moveUci = "null";
     char movingPawn;
     char takenPawn;
     bool isEnpassant;

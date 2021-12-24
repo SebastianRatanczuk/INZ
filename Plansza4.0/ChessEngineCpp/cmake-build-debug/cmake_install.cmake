@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/sebol/CLionProjects/Szaszki
+# Install script for directory: C:/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Szaszki")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/ChessEngineCpp")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,7 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/sebol/CLionProjects/Szaszki/cmake-build-debug/externals/pybind11/cmake_install.cmake")
+  include("C:/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-debug/externals/pybind11/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/sebol/CLionProjects/Szaszki/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

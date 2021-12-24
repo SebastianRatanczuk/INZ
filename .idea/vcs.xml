@@ -2,5 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Plansza4.0/ChessEngineCpp/externals/pybind11" vcs="Git" />
   </component>
 </project>

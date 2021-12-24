@@ -2,6 +2,7 @@
 // Created by sebol on 23.12.2021.
 //
 
+#include <thread>
 #include "Board.h"
 
 // trim from start
@@ -134,462 +135,453 @@ char Board::getPieceUci(std::string uci) {
 }
 
 bool Board::isPieceAtPosWhite(int row, int col) {
-    std::string s = "PRBNKQ";
+    auto piece = getPieceAt(row, col);
 
-    if (s.find(getPieceAt(row, col)) != std::string::npos) {
-        return true;
-    } else {
+    if (piece == '.')
         return false;
-    }
+
+    return std::isupper(piece);
 }
 
 bool Board::isPieceAtPosBlack(int row, int col) {
-    std::string s = "prbnkq";
+    auto piece = getPieceAt(row, col);
 
-    if (s.find(getPieceAt(row, col)) != std::string::npos) {
-        return true;
-    } else {
+    if (piece == '.')
         return false;
-    }
+
+    return !std::isupper(piece);
 }
 
 std::string Board::getUci(int row, int col) {
     return char(col + 97) + std::to_string(8 - row);
 }
 
-std::vector<Move> Board::generatePawnMoves(int boxNumber) {
+std::vector<Move> Board::generatePawnMoves(int row, int col) {
     std::vector<Move> listOfMoves;
 
-    int row = boxNumber / 8;
-    int col = boxNumber % 8;
     std::string startingUci = getUci(row, col);
 
-    if (turn == Color::white) {
-        switch (board[boxNumber]) {
-            case 'P': {
-                if (row - 1 > 0) {
-                    if (getPieceAt(row - 1, col) == '.') { //przestrzen wolna nad pionkiem
-                        listOfMoves.emplace_back(startingUci + getUci(row - 1, col), getPieceAt(row, col),
-                                                 getPieceAt(row - 1, col));
-                        if (row == 6) { //podwojny ruch
-                            if (getPieceAt(row - 2, col) == '.')
-                                listOfMoves.emplace_back(startingUci + getUci(row - 2, col), getPieceAt(row, col),
-                                                         getPieceAt(row - 2, col));
-                        }
+    switch (board[row * 8 + col]) {
+        case 'P': {
+            if (row - 1 > 0) {
+                if (getPieceAt(row - 1, col) == '.') { //przestrzen wolna nad pionkiem
+                    listOfMoves.emplace_back(startingUci + getUci(row - 1, col), getPieceAt(row, col),
+                                             getPieceAt(row - 1, col));
+                    if (row == 6) { //podwojny ruch
+                        if (getPieceAt(row - 2, col) == '.')
+                            listOfMoves.emplace_back(startingUci + getUci(row - 2, col), getPieceAt(row, col),
+                                                     getPieceAt(row - 2, col));
                     }
                 }
+            }
 
-                if (row - 1 > 0 && col - 1 >= 0) {
+            if (row - 1 > 0 && col - 1 >= 0) {
+                if (isPieceAtPosBlack(row - 1, col - 1)) {
+                    listOfMoves.emplace_back(startingUci + getUci(row - 1, col - 1), getPieceAt(row, col),
+                                             getPieceAt(row - 1, col - 1));
+                }
+                if (en_passant == getUci(row - 1, col - 1)) {
+                    listOfMoves.emplace_back(startingUci + getUci(row - 1, col - 1), getPieceAt(row, col),
+                                             getPieceAt(row - 1, col - 1), true, false, false, '0');
+                }
+            }
+
+            if (row - 1 > 0 && col + 1 < 8) {
+                if (isPieceAtPosBlack(row - 1, col + 1)) {
+                    listOfMoves.emplace_back(startingUci + getUci(row - 1, col + 1), getPieceAt(row, col),
+                                             getPieceAt(row - 1, col + 1));
+                }
+                if (en_passant == getUci(row - 1, col + 1)) {
+                    listOfMoves.emplace_back(startingUci + getUci(row - 1, col + 1), getPieceAt(row, col),
+                                             getPieceAt(row - 1, col + 1), true, false, false, '0');
+                }
+            }
+
+            if (row - 1 == 0) {
+                if (getPieceAt(row - 1, col) == '.') { //przestrzen wolna nad pionkiem
+
+                    listOfMoves.emplace_back(startingUci + getUci(row - 1, col), getPieceAt(row, col),
+                                             getPieceAt(row - 1, col), false, false, true, 'q');
+                    listOfMoves.emplace_back(startingUci + getUci(row - 1, col), getPieceAt(row, col),
+                                             getPieceAt(row - 1, col), false, false, true, 'b');
+                    listOfMoves.emplace_back(startingUci + getUci(row - 1, col), getPieceAt(row, col),
+                                             getPieceAt(row - 1, col), false, false, true, 'r');
+                    listOfMoves.emplace_back(startingUci + getUci(row - 1, col), getPieceAt(row, col),
+                                             getPieceAt(row - 1, col), false, false, true, 'n');
+
+                }
+                if (col - 1 >= 0)
                     if (isPieceAtPosBlack(row - 1, col - 1)) {
                         listOfMoves.emplace_back(startingUci + getUci(row - 1, col - 1), getPieceAt(row, col),
-                                                 getPieceAt(row - 1, col - 1));
-                    }
-                    if (en_passant == getUci(row - 1, col - 1)) {
+                                                 getPieceAt(row - 1, col - 1), false, false, true, 'q');
                         listOfMoves.emplace_back(startingUci + getUci(row - 1, col - 1), getPieceAt(row, col),
-                                                 getPieceAt(row - 1, col - 1), true, false, false, '0');
+                                                 getPieceAt(row - 1, col - 1), false, false, true, 'b');
+                        listOfMoves.emplace_back(startingUci + getUci(row - 1, col - 1), getPieceAt(row, col),
+                                                 getPieceAt(row - 1, col - 1), false, false, true, 'r');
+                        listOfMoves.emplace_back(startingUci + getUci(row - 1, col - 1), getPieceAt(row, col),
+                                                 getPieceAt(row - 1, col - 1), false, false, true, 'n');
                     }
-                }
 
-                if (row - 1 > 0 && col + 1 < 8) {
+                if (col + 1 < 8)
                     if (isPieceAtPosBlack(row - 1, col + 1)) {
                         listOfMoves.emplace_back(startingUci + getUci(row - 1, col + 1), getPieceAt(row, col),
-                                                 getPieceAt(row - 1, col + 1));
-                    }
-                    if (en_passant == getUci(row - 1, col + 1)) {
+                                                 getPieceAt(row - 1, col + 1), false, false, true, 'q');
                         listOfMoves.emplace_back(startingUci + getUci(row - 1, col + 1), getPieceAt(row, col),
-                                                 getPieceAt(row - 1, col + 1), true, false, false, '0');
+                                                 getPieceAt(row - 1, col + 1), false, false, true, 'b');
+                        listOfMoves.emplace_back(startingUci + getUci(row - 1, col + 1), getPieceAt(row, col),
+                                                 getPieceAt(row - 1, col + 1), false, false, true, 'r');
+                        listOfMoves.emplace_back(startingUci + getUci(row - 1, col + 1), getPieceAt(row, col),
+                                                 getPieceAt(row - 1, col + 1), false, false, true, 'n');
                     }
-                }
-
-                if (row - 1 == 0) {
-                    if (getPieceAt(row - 1, col) == '.') { //przestrzen wolna nad pionkiem
-
-                        listOfMoves.emplace_back(startingUci + getUci(row - 1, col), getPieceAt(row, col),
-                                                 getPieceAt(row - 1, col), false, false, true, 'q');
-                        listOfMoves.emplace_back(startingUci + getUci(row - 1, col), getPieceAt(row, col),
-                                                 getPieceAt(row - 1, col), false, false, true, 'b');
-                        listOfMoves.emplace_back(startingUci + getUci(row - 1, col), getPieceAt(row, col),
-                                                 getPieceAt(row - 1, col), false, false, true, 'r');
-                        listOfMoves.emplace_back(startingUci + getUci(row - 1, col), getPieceAt(row, col),
-                                                 getPieceAt(row - 1, col), false, false, true, 'n');
-
-                    }
-                    if (col - 1 >= 0)
-                        if (isPieceAtPosBlack(row - 1, col - 1)) {
-                            listOfMoves.emplace_back(startingUci + getUci(row - 1, col - 1), getPieceAt(row, col),
-                                                     getPieceAt(row - 1, col - 1), false, false, true, 'q');
-                            listOfMoves.emplace_back(startingUci + getUci(row - 1, col - 1), getPieceAt(row, col),
-                                                     getPieceAt(row - 1, col - 1), false, false, true, 'b');
-                            listOfMoves.emplace_back(startingUci + getUci(row - 1, col - 1), getPieceAt(row, col),
-                                                     getPieceAt(row - 1, col - 1), false, false, true, 'r');
-                            listOfMoves.emplace_back(startingUci + getUci(row - 1, col - 1), getPieceAt(row, col),
-                                                     getPieceAt(row - 1, col - 1), false, false, true, 'n');
-                        }
-
-                    if (col + 1 < 8)
-                        if (isPieceAtPosBlack(row - 1, col + 1)) {
-                            listOfMoves.emplace_back(startingUci + getUci(row - 1, col + 1), getPieceAt(row, col),
-                                                     getPieceAt(row - 1, col + 1), false, false, true, 'q');
-                            listOfMoves.emplace_back(startingUci + getUci(row - 1, col + 1), getPieceAt(row, col),
-                                                     getPieceAt(row - 1, col + 1), false, false, true, 'b');
-                            listOfMoves.emplace_back(startingUci + getUci(row - 1, col + 1), getPieceAt(row, col),
-                                                     getPieceAt(row - 1, col + 1), false, false, true, 'r');
-                            listOfMoves.emplace_back(startingUci + getUci(row - 1, col + 1), getPieceAt(row, col),
-                                                     getPieceAt(row - 1, col + 1), false, false, true, 'n');
-                        }
-                }
-
-                break;
             }
-            case 'R': {
-                int directions[4][2] = {{1,  0},
-                                        {-1, 0},
-                                        {0,  1},
-                                        {0,  -1}};
 
-                for (auto direction: directions) {
-                    for (int i = 1; i < 8; i++) {
-                        int newRow = row + direction[0] * i;
-                        int newCol = col + direction[1] * i;
-
-                        if (0 <= newRow && newRow < 8 && 0 <= newCol && newCol < 8) {
-                            if (getPieceAt(newRow, newCol) == '.')
-                                listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
-                                                         getPieceAt(newRow, newCol));
-                            else if (isPieceAtPosBlack(newRow, newCol)) {
-                                listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
-                                                         getPieceAt(newRow, newCol));
-                                break;
-                            } else {
-                                break;
-                            }
-                        }
-                    }
-                }
-                break;
-            }
-            case 'N': {
-                int jumps[8][2] = {{1,  2},
-                                   {-1, 2},
-                                   {2,  1},
-                                   {2,  -1},
-                                   {1,  -2},
-                                   {-1, -2},
-                                   {-2, 1},
-                                   {-2, -1}};
-
-                for (auto jump: jumps) {
-                    int newRow = row + jump[0];
-                    int newCol = col + jump[1];
-
-                    if (0 <= newRow && newRow < 8 && 0 <= newCol && newCol < 8) {
-                        if (!isPieceAtPosWhite(newRow, newCol)) {
-                            listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
-                                                     getPieceAt(newRow, newCol));
-                        }
-                    }
-                }
-                break;
-            }
-            case 'B': {
-                int directions[4][2] = {{1,  1},
-                                        {-1, -1},
-                                        {-1, 1},
-                                        {1,  -1}};
-
-                for (auto direction: directions) {
-                    for (int i = 1; i < 8; i++) {
-                        int newRow = row + direction[0] * i;
-                        int newCol = col + direction[1] * i;
-
-                        if (0 <= newRow && newRow < 8 && 0 <= newCol && newCol < 8) {
-                            if (getPieceAt(newRow, newCol) == '.')
-                                listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
-                                                         getPieceAt(newRow, newCol));
-                            else if (isPieceAtPosBlack(newRow, newCol)) {
-                                listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
-                                                         getPieceAt(newRow, newCol));
-                                break;
-                            } else {
-                                break;
-                            }
-                        }
-                    }
-                }
-                break;
-            }
-            case 'Q': {
-                int directions[8][2] = {{1,  1},
-                                        {-1, -1},
-                                        {-1, 1},
-                                        {1,  -1},
-                                        {1,  0},
-                                        {-1, 0},
-                                        {0,  1},
-                                        {0,  -1}};
-
-                for (auto direction: directions) {
-                    for (int i = 1; i < 8; i++) {
-                        int newRow = row + direction[0] * i;
-                        int newCol = col + direction[1] * i;
-
-                        if (0 <= newRow && newRow < 8 && 0 <= newCol && newCol < 8) {
-                            if (getPieceAt(newRow, newCol) == '.')
-                                listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
-                                                         getPieceAt(newRow, newCol));
-                            else if (isPieceAtPosBlack(newRow, newCol)) {
-                                listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
-                                                         getPieceAt(newRow, newCol));
-                                break;
-                            } else {
-                                break;
-                            }
-                        }
-                    }
-                }
-                break;
-            }
-            case 'K': {
-                int jumps[8][2] = {{1,  0},
-                                   {-1, 0},
-                                   {0,  1},
-                                   {0,  -1},
-                                   {1,  1},
-                                   {-1, -1},
-                                   {-1, 1},
-                                   {1,  -1}};
-
-                for (auto jump: jumps) {
-                    int newRow = row + jump[0];
-                    int newCol = col + jump[1];
-
-                    if (0 <= newRow && newRow < 8 && 0 <= newCol && newCol < 8) {
-                        if (!isPieceAtPosWhite(newRow, newCol)) {
-                            listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
-                                                     getPieceAt(newRow, newCol));
-                        }
-                    }
-                }
-                break;
-            }
+            break;
         }
-    } else {
-        switch (board[boxNumber]) {
-            case 'p': {
-                if (row + 1 < 7) {
-                    if (getPieceAt(row + 1, col) == '.') { //przestrzen wolna nad pionkiem
-                        listOfMoves.emplace_back(startingUci + getUci(row + 1, col), getPieceAt(row, col),
-                                                 getPieceAt(row + 1, col));
-                        if (row == 1) { //podwojny ruch
-                            if (getPieceAt(row + 2, col) == '.')
-                                listOfMoves.emplace_back(startingUci + getUci(row + 2, col), getPieceAt(row, col),
-                                                         getPieceAt(row + 2, col));
+        case 'R': {
+            int directions[4][2] = {{1,  0},
+                                    {-1, 0},
+                                    {0,  1},
+                                    {0,  -1}};
+
+            for (auto direction: directions) {
+                for (int i = 1; i < 8; i++) {
+                    int newRow = row + direction[0] * i;
+                    int newCol = col + direction[1] * i;
+
+                    if (0 <= newRow && newRow < 8 && 0 <= newCol && newCol < 8) {
+                        if (getPieceAt(newRow, newCol) == '.')
+                            listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
+                                                     getPieceAt(newRow, newCol));
+                        else if (isPieceAtPosBlack(newRow, newCol)) {
+                            listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
+                                                     getPieceAt(newRow, newCol));
+                            break;
+                        } else {
+                            break;
                         }
                     }
                 }
+            }
+            break;
+        }
+        case 'N': {
+            int jumps[8][2] = {{1,  2},
+                               {-1, 2},
+                               {2,  1},
+                               {2,  -1},
+                               {1,  -2},
+                               {-1, -2},
+                               {-2, 1},
+                               {-2, -1}};
 
-                if (row + 1 < 7 && col - 1 >= 0) {
+            for (auto jump: jumps) {
+                int newRow = row + jump[0];
+                int newCol = col + jump[1];
+
+                if (0 <= newRow && newRow < 8 && 0 <= newCol && newCol < 8) {
+                    if (!isPieceAtPosWhite(newRow, newCol)) {
+                        listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
+                                                 getPieceAt(newRow, newCol));
+                    }
+                }
+            }
+            break;
+        }
+        case 'B': {
+            int directions[4][2] = {{1,  1},
+                                    {-1, -1},
+                                    {-1, 1},
+                                    {1,  -1}};
+
+            for (auto direction: directions) {
+                for (int i = 1; i < 8; i++) {
+                    int newRow = row + direction[0] * i;
+                    int newCol = col + direction[1] * i;
+
+                    if (0 <= newRow && newRow < 8 && 0 <= newCol && newCol < 8) {
+                        if (getPieceAt(newRow, newCol) == '.')
+                            listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
+                                                     getPieceAt(newRow, newCol));
+                        else if (isPieceAtPosBlack(newRow, newCol)) {
+                            listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
+                                                     getPieceAt(newRow, newCol));
+                            break;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+            break;
+        }
+        case 'Q': {
+            int directions[8][2] = {{1,  1},
+                                    {-1, -1},
+                                    {-1, 1},
+                                    {1,  -1},
+                                    {1,  0},
+                                    {-1, 0},
+                                    {0,  1},
+                                    {0,  -1}};
+
+            for (auto direction: directions) {
+                for (int i = 1; i < 8; i++) {
+                    int newRow = row + direction[0] * i;
+                    int newCol = col + direction[1] * i;
+
+                    if (0 <= newRow && newRow < 8 && 0 <= newCol && newCol < 8) {
+                        if (getPieceAt(newRow, newCol) == '.')
+                            listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
+                                                     getPieceAt(newRow, newCol));
+                        else if (isPieceAtPosBlack(newRow, newCol)) {
+                            listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
+                                                     getPieceAt(newRow, newCol));
+                            break;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+            break;
+        }
+        case 'K': {
+            int jumps[8][2] = {{1,  0},
+                               {-1, 0},
+                               {0,  1},
+                               {0,  -1},
+                               {1,  1},
+                               {-1, -1},
+                               {-1, 1},
+                               {1,  -1}};
+
+            for (auto jump: jumps) {
+                int newRow = row + jump[0];
+                int newCol = col + jump[1];
+
+                if (0 <= newRow && newRow < 8 && 0 <= newCol && newCol < 8) {
+                    if (!isPieceAtPosWhite(newRow, newCol)) {
+                        listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
+                                                 getPieceAt(newRow, newCol));
+                    }
+                }
+            }
+            break;
+        }
+        case 'p': {
+            if (row + 1 < 7) {
+                if (getPieceAt(row + 1, col) == '.') { //przestrzen wolna nad pionkiem
+                    listOfMoves.emplace_back(startingUci + getUci(row + 1, col), getPieceAt(row, col),
+                                             getPieceAt(row + 1, col));
+                    if (row == 1) { //podwojny ruch
+                        if (getPieceAt(row + 2, col) == '.')
+                            listOfMoves.emplace_back(startingUci + getUci(row + 2, col), getPieceAt(row, col),
+                                                     getPieceAt(row + 2, col));
+                    }
+                }
+            }
+
+            if (row + 1 < 7 && col - 1 >= 0) {
+                if (isPieceAtPosWhite(row + 1, col - 1)) {
+                    listOfMoves.emplace_back(startingUci + getUci(row + 1, col - 1), getPieceAt(row, col),
+                                             getPieceAt(row + 1, col - 1));
+                }
+
+                if (en_passant == getUci(row + 1, col - 1)) {
+                    listOfMoves.emplace_back(startingUci + getUci(row + 1, col - 1), getPieceAt(row, col),
+                                             getPieceAt(row + 1, col - 1), true, false, false, '0');
+                }
+            }
+
+            if (row + 1 < 7 && col + 1 < 8) {
+                if (isPieceAtPosWhite(row + 1, col + 1)) {
+                    listOfMoves.emplace_back(startingUci + getUci(row + 1, col + 1), getPieceAt(row, col),
+                                             getPieceAt(row + 1, col + 1));
+                }
+
+                if (en_passant == getUci(row + 1, col + 1)) {
+                    listOfMoves.emplace_back(startingUci + getUci(row + 1, col + 1), getPieceAt(row, col),
+                                             getPieceAt(row + 1, col + 1), true, false, false, '0');
+                }
+            }
+
+            if (row + 1 == 7) {
+                if (getPieceAt(row + 1, col) == '.') { //przestrzen wolna nad pionkiem
+
+                    listOfMoves.emplace_back(startingUci + getUci(row + 1, col), getPieceAt(row, col),
+                                             getPieceAt(row + 1, col), false, false, true, 'q');
+                    listOfMoves.emplace_back(startingUci + getUci(row + 1, col), getPieceAt(row, col),
+                                             getPieceAt(row + 1, col), false, false, true, 'b');
+                    listOfMoves.emplace_back(startingUci + getUci(row + 1, col), getPieceAt(row, col),
+                                             getPieceAt(row + 1, col), false, false, true, 'r');
+                    listOfMoves.emplace_back(startingUci + getUci(row + 1, col), getPieceAt(row, col),
+                                             getPieceAt(row + 1, col), false, false, true, 'n');
+
+                }
+                if (col - 1 >= 0)
                     if (isPieceAtPosWhite(row + 1, col - 1)) {
                         listOfMoves.emplace_back(startingUci + getUci(row + 1, col - 1), getPieceAt(row, col),
-                                                 getPieceAt(row + 1, col - 1));
-                    }
-
-                    if (en_passant == getUci(row + 1, col - 1)) {
+                                                 getPieceAt(row + 1, col - 1), false, false, true, 'q');
                         listOfMoves.emplace_back(startingUci + getUci(row + 1, col - 1), getPieceAt(row, col),
-                                                 getPieceAt(row + 1, col - 1), true, false, false, '0');
+                                                 getPieceAt(row + 1, col - 1), false, false, true, 'b');
+                        listOfMoves.emplace_back(startingUci + getUci(row + 1, col - 1), getPieceAt(row, col),
+                                                 getPieceAt(row + 1, col - 1), false, false, true, 'r');
+                        listOfMoves.emplace_back(startingUci + getUci(row + 1, col - 1), getPieceAt(row, col),
+                                                 getPieceAt(row + 1, col - 1), false, false, true, 'n');
                     }
-                }
 
-                if (row + 1 < 7 && col + 1 < 8) {
+                if (col + 1 < 8)
                     if (isPieceAtPosWhite(row + 1, col + 1)) {
                         listOfMoves.emplace_back(startingUci + getUci(row + 1, col + 1), getPieceAt(row, col),
-                                                 getPieceAt(row + 1, col + 1));
-                    }
-
-                    if (en_passant == getUci(row + 1, col + 1)) {
+                                                 getPieceAt(row + 1, col + 1), false, false, true, 'q');
                         listOfMoves.emplace_back(startingUci + getUci(row + 1, col + 1), getPieceAt(row, col),
-                                                 getPieceAt(row + 1, col + 1), true, false, false, '0');
+                                                 getPieceAt(row + 1, col + 1), false, false, true, 'b');
+                        listOfMoves.emplace_back(startingUci + getUci(row + 1, col + 1), getPieceAt(row, col),
+                                                 getPieceAt(row + 1, col + 1), false, false, true, 'r');
+                        listOfMoves.emplace_back(startingUci + getUci(row + 1, col + 1), getPieceAt(row, col),
+                                                 getPieceAt(row + 1, col + 1), false, false, true, 'n');
                     }
-                }
-
-                if (row + 1 == 7) {
-                    if (getPieceAt(row + 1, col) == '.') { //przestrzen wolna nad pionkiem
-
-                        listOfMoves.emplace_back(startingUci + getUci(row + 1, col), getPieceAt(row, col),
-                                                 getPieceAt(row + 1, col), false, false, true, 'q');
-                        listOfMoves.emplace_back(startingUci + getUci(row + 1, col), getPieceAt(row, col),
-                                                 getPieceAt(row + 1, col), false, false, true, 'b');
-                        listOfMoves.emplace_back(startingUci + getUci(row + 1, col), getPieceAt(row, col),
-                                                 getPieceAt(row + 1, col), false, false, true, 'r');
-                        listOfMoves.emplace_back(startingUci + getUci(row + 1, col), getPieceAt(row, col),
-                                                 getPieceAt(row + 1, col), false, false, true, 'n');
-
-                    }
-                    if (col - 1 >= 0)
-                        if (isPieceAtPosWhite(row + 1, col - 1)) {
-                            listOfMoves.emplace_back(startingUci + getUci(row + 1, col - 1), getPieceAt(row, col),
-                                                     getPieceAt(row + 1, col - 1), false, false, true, 'q');
-                            listOfMoves.emplace_back(startingUci + getUci(row + 1, col - 1), getPieceAt(row, col),
-                                                     getPieceAt(row + 1, col - 1), false, false, true, 'b');
-                            listOfMoves.emplace_back(startingUci + getUci(row + 1, col - 1), getPieceAt(row, col),
-                                                     getPieceAt(row + 1, col - 1), false, false, true, 'r');
-                            listOfMoves.emplace_back(startingUci + getUci(row + 1, col - 1), getPieceAt(row, col),
-                                                     getPieceAt(row + 1, col - 1), false, false, true, 'n');
-                        }
-
-                    if (col + 1 < 8)
-                        if (isPieceAtPosWhite(row + 1, col + 1)) {
-                            listOfMoves.emplace_back(startingUci + getUci(row + 1, col + 1), getPieceAt(row, col),
-                                                     getPieceAt(row + 1, col + 1), false, false, true, 'q');
-                            listOfMoves.emplace_back(startingUci + getUci(row + 1, col + 1), getPieceAt(row, col),
-                                                     getPieceAt(row + 1, col + 1), false, false, true, 'b');
-                            listOfMoves.emplace_back(startingUci + getUci(row + 1, col + 1), getPieceAt(row, col),
-                                                     getPieceAt(row + 1, col + 1), false, false, true, 'r');
-                            listOfMoves.emplace_back(startingUci + getUci(row + 1, col + 1), getPieceAt(row, col),
-                                                     getPieceAt(row + 1, col + 1), false, false, true, 'n');
-                        }
-                }
-                break;
             }
-            case 'r': {
-                int directions[4][2] = {{1,  0},
-                                        {-1, 0},
-                                        {0,  1},
-                                        {0,  -1}};
+            break;
+        }
+        case 'r': {
+            int directions[4][2] = {{1,  0},
+                                    {-1, 0},
+                                    {0,  1},
+                                    {0,  -1}};
 
-                for (auto direction: directions) {
-                    for (int i = 1; i < 8; i++) {
-                        int newRow = row + direction[0] * i;
-                        int newCol = col + direction[1] * i;
-
-                        if (0 <= newRow && newRow < 8 && 0 <= newCol && newCol < 8) {
-                            if (getPieceAt(newRow, newCol) == '.')
-                                listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
-                                                         getPieceAt(newRow, newCol));
-                            else if (isPieceAtPosWhite(newRow, newCol)) {
-                                listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
-                                                         getPieceAt(newRow, newCol));
-                                break;
-                            } else {
-                                break;
-                            }
-                        }
-                    }
-                }
-                break;
-            }
-            case 'n': {
-                int jumps[8][2] = {{1,  2},
-                                   {-1, 2},
-                                   {2,  1},
-                                   {2,  -1},
-                                   {1,  -2},
-                                   {-1, -2},
-                                   {-2, 1},
-                                   {-2, -1}};
-
-                for (auto jump: jumps) {
-                    int newRow = row + jump[0];
-                    int newCol = col + jump[1];
+            for (auto direction: directions) {
+                for (int i = 1; i < 8; i++) {
+                    int newRow = row + direction[0] * i;
+                    int newCol = col + direction[1] * i;
 
                     if (0 <= newRow && newRow < 8 && 0 <= newCol && newCol < 8) {
-                        if (!isPieceAtPosBlack(newRow, newCol)) {
+                        if (getPieceAt(newRow, newCol) == '.')
                             listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
                                                      getPieceAt(newRow, newCol));
+                        else if (isPieceAtPosWhite(newRow, newCol)) {
+                            listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
+                                                     getPieceAt(newRow, newCol));
+                            break;
+                        } else {
+                            break;
                         }
                     }
                 }
-                break;
             }
-            case 'b': {
-                int directions[4][2] = {{1,  1},
-                                        {-1, -1},
-                                        {-1, 1},
-                                        {1,  -1}};
+            break;
+        }
+        case 'n': {
+            int jumps[8][2] = {{1,  2},
+                               {-1, 2},
+                               {2,  1},
+                               {2,  -1},
+                               {1,  -2},
+                               {-1, -2},
+                               {-2, 1},
+                               {-2, -1}};
 
-                for (auto direction: directions) {
-                    for (int i = 1; i < 8; i++) {
-                        int newRow = row + direction[0] * i;
-                        int newCol = col + direction[1] * i;
+            for (auto jump: jumps) {
+                int newRow = row + jump[0];
+                int newCol = col + jump[1];
 
-                        if (0 <= newRow && newRow < 8 && 0 <= newCol && newCol < 8) {
-                            if (getPieceAt(newRow, newCol) == '.')
-                                listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
-                                                         getPieceAt(newRow, newCol));
-                            else if (isPieceAtPosWhite(newRow, newCol)) {
-                                listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
-                                                         getPieceAt(newRow, newCol));
-                                break;
-                            } else {
-                                break;
-                            }
-                        }
+                if (0 <= newRow && newRow < 8 && 0 <= newCol && newCol < 8) {
+                    if (!isPieceAtPosBlack(newRow, newCol)) {
+                        listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
+                                                 getPieceAt(newRow, newCol));
                     }
                 }
-                break;
             }
-            case 'q': {
-                int directions[8][2] = {{1,  1},
-                                        {-1, -1},
-                                        {-1, 1},
-                                        {1,  -1},
-                                        {1,  0},
-                                        {-1, 0},
-                                        {0,  1},
-                                        {0,  -1}};
+            break;
+        }
+        case 'b': {
+            int directions[4][2] = {{1,  1},
+                                    {-1, -1},
+                                    {-1, 1},
+                                    {1,  -1}};
 
-                for (auto direction: directions) {
-                    for (int i = 1; i < 8; i++) {
-                        int newRow = row + direction[0] * i;
-                        int newCol = col + direction[1] * i;
-
-                        if (0 <= newRow && newRow < 8 && 0 <= newCol && newCol < 8) {
-                            if (getPieceAt(newRow, newCol) == '.')
-                                listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
-                                                         getPieceAt(newRow, newCol));
-                            else if (isPieceAtPosWhite(newRow, newCol)) {
-                                listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
-                                                         getPieceAt(newRow, newCol));
-                                break;
-                            } else {
-                                break;
-                            }
-                        }
-                    }
-                }
-                break;
-            }
-            case 'k': {
-                int jumps[8][2] = {{1,  0},
-                                   {-1, 0},
-                                   {0,  1},
-                                   {0,  -1},
-                                   {1,  1},
-                                   {-1, -1},
-                                   {-1, 1},
-                                   {1,  -1}};
-
-                for (auto jump: jumps) {
-                    int newRow = row + jump[0];
-                    int newCol = col + jump[1];
+            for (auto direction: directions) {
+                for (int i = 1; i < 8; i++) {
+                    int newRow = row + direction[0] * i;
+                    int newCol = col + direction[1] * i;
 
                     if (0 <= newRow && newRow < 8 && 0 <= newCol && newCol < 8) {
-                        if (!isPieceAtPosBlack(newRow, newCol)) {
+                        if (getPieceAt(newRow, newCol) == '.')
                             listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
                                                      getPieceAt(newRow, newCol));
+                        else if (isPieceAtPosWhite(newRow, newCol)) {
+                            listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
+                                                     getPieceAt(newRow, newCol));
+                            break;
+                        } else {
+                            break;
                         }
                     }
                 }
-                break;
             }
+            break;
+        }
+        case 'q': {
+            int directions[8][2] = {{1,  1},
+                                    {-1, -1},
+                                    {-1, 1},
+                                    {1,  -1},
+                                    {1,  0},
+                                    {-1, 0},
+                                    {0,  1},
+                                    {0,  -1}};
+
+            for (auto direction: directions) {
+                for (int i = 1; i < 8; i++) {
+                    int newRow = row + direction[0] * i;
+                    int newCol = col + direction[1] * i;
+
+                    if (0 <= newRow && newRow < 8 && 0 <= newCol && newCol < 8) {
+                        if (getPieceAt(newRow, newCol) == '.')
+                            listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
+                                                     getPieceAt(newRow, newCol));
+                        else if (isPieceAtPosWhite(newRow, newCol)) {
+                            listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
+                                                     getPieceAt(newRow, newCol));
+                            break;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+            break;
+        }
+        case 'k': {
+            int jumps[8][2] = {{1,  0},
+                               {-1, 0},
+                               {0,  1},
+                               {0,  -1},
+                               {1,  1},
+                               {-1, -1},
+                               {-1, 1},
+                               {1,  -1}};
+
+            for (auto jump: jumps) {
+                int newRow = row + jump[0];
+                int newCol = col + jump[1];
+
+                if (0 <= newRow && newRow < 8 && 0 <= newCol && newCol < 8) {
+                    if (!isPieceAtPosBlack(newRow, newCol)) {
+                        listOfMoves.emplace_back(startingUci + getUci(newRow, newCol), getPieceAt(row, col),
+                                                 getPieceAt(newRow, newCol));
+                    }
+                }
+            }
+            break;
         }
     }
+
     return listOfMoves;
 }
 
-std::vector<Move> Board::generateValidMoves() {
+std::vector<Move> Board::generateValidMovesSequential() {
     std::string tmpEnpassant = en_passant;
-    bool tmp_castle_rights[NB_COLOR][NB_CASTLE]{};
 
     auto legalMoves = generateLegalMoves();
 
@@ -601,13 +593,14 @@ std::vector<Move> Board::generateValidMoves() {
         validMoves.insert(validMoves.end(), castleMoves.begin(), castleMoves.end());
 
 
-    for (const auto &legalMove: legalMoves) {
-        move(legalMove.moveUci);
-        turn = static_cast<Color>(!turn);
-        if (!checkForCheck())
+    for (auto legalMove: legalMoves) {
+        Board copy(*this);
+        copy.move(&legalMove);
+        copy.turn = static_cast<Color>(!copy.turn);
+        if (!copy.checkForCheck())
             validMoves.push_back(legalMove);
-        turn = static_cast<Color>(!turn);
-        pop();
+        copy.turn = static_cast<Color>(!copy.turn);
+        copy.pop();
     }
 
     en_passant = tmpEnpassant;
@@ -627,13 +620,91 @@ std::vector<Move> Board::generateValidMoves() {
     return validMoves;
 }
 
+std::vector<Move> Board::generateValidMoves() {
+    std::string tmpEnpassant = en_passant;
+
+    auto legalMoves = generateLegalMoves();
+
+    std::vector<Move> validMoves;
+
+    auto castleMoves = generateCastlingMoves();
+
+    if (!castleMoves.empty())
+        validMoves.insert(validMoves.end(), castleMoves.begin(), castleMoves.end());
+
+    auto arraySize = legalMoves.size();
+    auto threadCount = 4;
+    auto threads = std::vector<std::thread>(threadCount);
+    auto threadArraySize = arraySize / threadCount;
+
+    std::vector<std::vector<Move>> results(threadCount);
+
+    for (size_t i = 0; i < threadCount; i++) {
+        threads[i] =
+                std::thread(
+                        [this](size_t threadNumber, size_t iStart, size_t iEnd, std::vector<Move> &legalMoves,
+                               std::vector<std::vector<Move>> &validMoves) {
+                            for (size_t i = iStart; i < iEnd; i++) {
+                                Board newBoard(*this);
+                                newBoard.move(&legalMoves[i]);
+                                newBoard.turn = static_cast<Color>(!newBoard.turn);
+                                if (!newBoard.checkForCheck()) {
+                                    validMoves[threadNumber].push_back(legalMoves[i]);
+                                }
+                                newBoard.turn = static_cast<Color>(!newBoard.turn);
+                                newBoard.pop();
+                            }
+                        },
+
+                        i,
+                        threadArraySize * i,
+                        threadArraySize * (i + 1) + ((i + 1) != threadCount ? 0 : arraySize % threadCount),
+                        std::ref(legalMoves),
+                        std::ref(results)
+                );
+    }
+
+    std::for_each(threads.begin(), threads.end(), [](std::thread &thread) { thread.join(); });
+    for (size_t i = 0; i < threadCount; i++) {
+        if (!results[i].empty())
+            validMoves.insert(validMoves.end(), results[i].begin(), results[i].end());
+    }
+
+
+    en_passant = tmpEnpassant;
+
+    if (validMoves.empty()) {
+        isGameOver = true;
+        if (checkForCheck()) {
+            isCheckMate = true;
+        } else {
+            isStaleMate = true;
+        }
+    } else {
+        isGameOver = false;
+        isStaleMate = false;
+        isCheckMate = false;
+    }
+
+    return validMoves;
+}
+
 std::vector<Move> Board::generateLegalMoves() {
     std::vector<Move> legalMoves;
-    for (int i = 0; i < 64; i++) {
-        std::vector<Move> result = generatePawnMoves(i);
 
-        if (!result.empty())
-            legalMoves.insert(legalMoves.end(), result.begin(), result.end());
+    for (int row = 0; row < 8; row++) {
+        for (int col = 0; col < 8; col++) {
+            auto piece = getPieceAt(row, col);
+            if (piece == '.')
+                continue;
+
+            if (isupper(piece) != (turn == Color::white)) {
+                continue;
+            }
+            std::vector<Move> result = generatePawnMoves(row, col);
+            if (!result.empty())
+                legalMoves.insert(legalMoves.end(), result.begin(), result.end());
+        }
     }
 
     return legalMoves;
@@ -696,17 +767,22 @@ std::string Board::get_board() {
 }
 
 bool Board::checkForCheck() {
-    if (turn == Color::white) {
-        return checkForAttack(whiteKingPos);
-    } else {
-        return checkForAttack(blackKingPos);
+    turn = static_cast<Color>(!turn);
+    auto enemyMoves = generateLegalMoves();
+    turn = static_cast<Color>(!turn);
+    for (const auto &enemyMove: enemyMoves) {
+        if (enemyMove.takenPawn == ((turn == Color::white) ? 'K' : 'k')) {
+            return true;
+        }
     }
+    return false;
+
 }
 
 bool Board::checkForAttack(const std::string &uci) {
     turn = static_cast<Color>(!turn);
     auto enemyMoves = generateLegalMoves();
-    turn = static_cast<Color>(!turn);
+    turn = static_cast<Color>(!turn);//
 
     for (const auto &enemyMove: enemyMoves) {
         if (enemyMove.moveUci.substr(2, 2) == uci) {
@@ -746,7 +822,92 @@ std::vector<Move> Board::QueenSideCastle(std::string uci) {
     return list;
 }
 
-bool Board::move(std::string uci) {
+bool Board::move(Move *move) {
+
+    move->castle_rights[Color::white][Castle::king_side] = castle_rights[Color::white][Castle::king_side];
+    move->castle_rights[Color::white][Castle::queen_side] = castle_rights[Color::white][Castle::queen_side];
+    move->castle_rights[Color::black][Castle::king_side] = castle_rights[Color::black][Castle::king_side];
+    move->castle_rights[Color::black][Castle::queen_side] = castle_rights[Color::black][Castle::queen_side];
+
+    setPieceAt(move->endingRow, move->endingCol, move->movingPawn);
+    setPieceAt(move->startingRow, move->startingCol, '.');
+
+    if (move->isPromotion) {
+        char promotedTo = move->moveUci[4];
+        if (turn == Color::white)
+            promotedTo = toupper(promotedTo);
+        setPieceAt(move->endingRow, move->endingCol, promotedTo);
+    }
+    move->possibleEnpassant = en_passant;
+
+    if ((move->movingPawn == 'P' || move->movingPawn == 'p') && (abs(move->startingRow - move->endingRow) == 2)) {
+        en_passant = getUci((move->startingRow + move->endingRow) / 2, move->startingCol);
+    } else {
+        en_passant = "-";
+    }
+
+    if (move->isEnpassant) {
+        move->takenPawn = getPieceAt(move->startingRow, move->endingCol);
+        setPieceAt(move->startingRow, move->endingCol, '.');
+    }
+
+    if (move->movingPawn == 'K') {
+        castle_rights[Color::white][Castle::king_side] = false;
+        castle_rights[Color::white][Castle::queen_side] = false;
+        whiteKingPos = move->moveUci.substr(2, 2);
+    } else if (move->movingPawn == 'k') {
+        castle_rights[Color::black][Castle::king_side] = false;
+        castle_rights[Color::black][Castle::queen_side] = false;
+        blackKingPos = move->moveUci.substr(2, 2);
+    }
+
+    if (move->movingPawn == 'R') {
+        if (move->startingRow == 7) {
+            if (move->startingCol == 0) {
+                castle_rights[Color::white][Castle::queen_side] = false;
+            } else if (move->startingCol == 7) {
+                castle_rights[Color::white][Castle::king_side] = false;
+            }
+        }
+    }
+
+    if (move->movingPawn == 'r') {
+        if (move->startingRow == 0) {
+            if (move->startingCol == 0) {
+                castle_rights[Color::black][Castle::queen_side] = false;
+            } else if (move->startingCol == 7) {
+                castle_rights[Color::black][Castle::king_side] = false;
+            }
+        }
+    }
+
+    if (move->isCastle) {
+        if (move->endingCol - move->startingCol == 2) {
+            char oldPiece = getPieceAt(move->endingRow, move->endingCol + 1);
+            setPieceAt(move->endingRow, move->endingCol - 1, oldPiece);
+            setPieceAt(move->endingRow, move->endingCol + 1, '.');
+        } else {
+            char oldPiece = getPieceAt(move->endingRow, move->endingCol - 2);
+            setPieceAt(move->endingRow, move->endingCol + 1, oldPiece);
+            setPieceAt(move->endingRow, move->endingCol - 2, '.');
+        }
+    }
+
+
+    moves.push_back(*move);
+    turn = static_cast<Color>(!turn);
+
+    return true;
+}
+
+bool Board::moveUci(std::string uci) {
+
+    if (uci == "null") {
+        isGameOver = true;
+        isCheckMate = true;
+        surended = true;
+        return true;
+    }
     auto validMoves = generateLegalMoves();
     auto castleMoves = generateCastlingMoves();
 
@@ -905,7 +1066,6 @@ std::string Board::translateBoardToFEN() {
             fen += " ";
         }
     }
-    //rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
 
     std::string player = (turn == Color::white) ? "w" : "b";
     std::string castle;

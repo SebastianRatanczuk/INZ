@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.16)
-project(Szaszki)
+project(ChessEngineCpp)
 set(CMAKE_CXX_STANDARD 14)
 
 set(APP_SOURCE "${PROJECT_SOURCE_DIR}/source/app")
 set(MODULE_SOURCE "${PROJECT_SOURCE_DIR}/source/module")
 set(EXTERNALS "${PROJECT_SOURCE_DIR}/externals")
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 # pybind11
 add_subdirectory(${EXTERNALS}/pybind11)

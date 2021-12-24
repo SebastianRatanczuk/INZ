@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/c/Users/sebol/CLionProjects/Szaszki/externals/pybind11
+# Install script for directory: /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/externals/pybind11
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

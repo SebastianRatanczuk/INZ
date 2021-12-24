@@ -6,6 +6,7 @@
 #define SZASZKI_AI_H
 
 #include "Board.h"
+
 class Ai {
 private:
     Board mainBoard;
@@ -21,11 +22,18 @@ private:
 
     int CHECKMATE = 100000;
     Move mainMove;
+
     int boardHeuristic(Board board);
+
     int nega(int depth, Board &board, int turn, int alfa, int beta);
+
 public:
     Ai();
+
     explicit Ai(const std::string &fen, int depth);
+
+    Ai(Board b, int depth);
+
     Move negaAlfABeta();
 };
 

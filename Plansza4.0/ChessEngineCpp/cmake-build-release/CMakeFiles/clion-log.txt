@@ -1,5 +1,5 @@
-C:\Users\sebol\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\213.5744.254\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=C:/Users/sebol/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/213.5744.254/bin/ninja/win/ninja.exe -G Ninja C:\Users\sebol\CLionProjects\Szaszki
+C:\Users\sebol\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\213.6461.46\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=C:/Users/sebol/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/ninja/win/ninja.exe -G Ninja C:\Users\sebol\Desktop\INZ\Plansza4.0\ChessEngineCpp
 -- pybind11 v2.9.0 dev1
 -- Configuring done
 -- Generating done
--- Build files have been written to: C:/Users/sebol/CLionProjects/Szaszki/cmake-build-release
+-- Build files have been written to: C:/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/cmake-build-release

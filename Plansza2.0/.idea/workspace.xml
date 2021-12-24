@@ -5,8 +5,255 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="82d033bd-0c63-44fc-9bbc-835d0b39b254" name="Changes" comment="123">
-      <change beforePath="$PROJECT_DIR$/../Plansza3.0/Render.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza3.0/Render.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Plansza3.0/resources/ScreenShot.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza3.0/resources/ScreenShot.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CheesRender.py" beforeDir="false" afterPath="$PROJECT_DIR$/CheesRender.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChessAI.py" beforeDir="false" afterPath="$PROJECT_DIR$/ChessAI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszki.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszki.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszki.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszki.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszki.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszki.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszki.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszki.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszki.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszki.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszki.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszki.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszki.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszki.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszki.dir/source/module/module.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszki.dir/source/module/module.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszkiapp.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszkiapp.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszkiapp.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszkiapp.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszkiapp.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszkiapp.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszkiapp.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszkiapp.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszkiapp.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszkiapp.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszkiapp.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszkiapp.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszkiapp.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszkiapp.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszkiapp.dir/source/app/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/CMakeFiles/szaszkiapp.dir/source/app/main.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/Szaszki.cbp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/externals/pybind11/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/externals/pybind11/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/externals/pybind11/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/externals/pybind11/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/externals/pybind11/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/externals/pybind11/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/externals/pybind11/pybind11.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/externals/pybind11/pybind11.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/szaszkiapp" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug-wsl/szaszkiapp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/.cmake/api/v1/reply/cache-v2-31de01221ecb19797eee.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-43fe7b9d738cfbc41e47.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-37fc75b48f46f054eed4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/.cmake/api/v1/reply/index-2021-12-23T23-45-37-0086.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/.cmake/api/v1/reply/target-szaszki-Debug-99422dd796ec4f59dc8a.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/.cmake/api/v1/reply/target-szaszkiapp-Debug-c9d8090a09b0fbbf5478.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/3.21.1/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/3.21.1/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/3.21.1/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/3.21.1/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/3.21.1/CompilerIdC/CMakeCCompilerId.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/3.21.1/CompilerIdC/CMakeCCompilerId.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/3.21.1/CompilerIdC/CMakeCCompilerId.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/3.21.1/CompilerIdC/CMakeCCompilerId.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/3.21.1/CompilerIdCXX/CMakeCXXCompilerId.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/3.21.1/CompilerIdCXX/CMakeCXXCompilerId.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/3.21.1/CompilerIdCXX/CMakeCXXCompilerId.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/3.21.1/CompilerIdCXX/CMakeCXXCompilerId.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/ShowIncludes/main.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/ShowIncludes/main.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/pybind11app.dir/manifest.rc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/pybind11app.dir/manifest.res" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/pybind11app.dir/source/app/main.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/pybind11app.dir/vc140.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/pybind11module.dir/manifest.rc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/pybind11module.dir/manifest.res" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/pybind11module.dir/source/module/module.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/pybind11module.dir/vc140.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/rules.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszki.dir/manifest.rc" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszki.dir/manifest.rc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszki.dir/source/module/Chess.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszki.dir/source/module/Move.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszki.dir/source/module/Move.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszki.dir/source/module/module.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszki.dir/source/module/module.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszki.dir/vc140.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszki.dir/vc140.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszkiapp.dir/manifest.rc" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszkiapp.dir/manifest.rc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszkiapp.dir/source/app/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszkiapp.dir/source/app/main.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszkiapp.dir/source/module/Chess.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszkiapp.dir/source/module/Move.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszkiapp.dir/source/module/Move.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszkiapp.dir/source/module/module.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszkiapp.dir/vc140.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/CMakeFiles/szaszkiapp.dir/vc140.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/externals/pybind11/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/externals/pybind11/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/szaszki.cp38-win_amd64.ilk" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/szaszki.cp38-win_amd64.ilk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/szaszki.exp" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/szaszki.exp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/szaszki.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/szaszki.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/szaszkiapp.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/szaszkiapp.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/szaszkiapp.exp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/szaszkiapp.ilk" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/szaszkiapp.ilk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/szaszkiapp.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/szaszkiapp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-debug/szaszkiapp.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszki.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszki.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszki.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszki.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszki.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszki.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszki.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszki.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszki.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszki.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszkiapp.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszkiapp.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszkiapp.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszkiapp.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszkiapp.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszkiapp.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszkiapp.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszkiapp.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszkiapp.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/CMakeFiles/szaszkiapp.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/Szaszki.cbp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/externals/pybind11/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/externals/pybind11/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/externals/pybind11/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/externals/pybind11/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/externals/pybind11/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/externals/pybind11/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/externals/pybind11/pybind11.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release-wsl/externals/pybind11/pybind11.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/.cmake/api/v1/reply/cache-v2-eb1a9e22aa3f1c0f439a.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/.cmake/api/v1/reply/cmakeFiles-v1-bbbd4285a1b4ccb1ed59.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/.cmake/api/v1/reply/codemodel-v2-e6e4d257abac07d6c4f8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/.cmake/api/v1/reply/index-2021-12-23T23-45-37-0046.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/.cmake/api/v1/reply/target-szaszki-Release-42335f19b72ea635ceda.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/.cmake/api/v1/reply/target-szaszkiapp-Release-cc074a22f247490bbf79.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/3.21.1/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/3.21.1/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/3.21.1/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/3.21.1/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/3.21.1/CompilerIdC/CMakeCCompilerId.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/3.21.1/CompilerIdC/CMakeCCompilerId.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/3.21.1/CompilerIdC/CMakeCCompilerId.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/3.21.1/CompilerIdC/CMakeCCompilerId.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/3.21.1/CompilerIdCXX/CMakeCXXCompilerId.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/3.21.1/CompilerIdCXX/CMakeCXXCompilerId.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/3.21.1/CompilerIdCXX/CMakeCXXCompilerId.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/3.21.1/CompilerIdCXX/CMakeCXXCompilerId.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/ShowIncludes/main.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/ShowIncludes/main.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/rules.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/rules.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszki.dir/source/module/Ai.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszki.dir/source/module/Ai.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszki.dir/source/module/Board.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszki.dir/source/module/Board.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszki.dir/source/module/Chess.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszki.dir/source/module/Move.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszki.dir/source/module/Move.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszki.dir/source/module/module.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszki.dir/source/module/module.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszkiapp.dir/source/app/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszkiapp.dir/source/app/main.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszkiapp.dir/source/module/Ai.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszkiapp.dir/source/module/Ai.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszkiapp.dir/source/module/Board.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszkiapp.dir/source/module/Board.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszkiapp.dir/source/module/Chess.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszkiapp.dir/source/module/Move.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszkiapp.dir/source/module/Move.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/CMakeFiles/szaszkiapp.dir/source/module/module.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/externals/pybind11/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/externals/pybind11/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/szaszki.exp" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/szaszki.exp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/szaszkiapp.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/szaszkiapp.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/szaszkiapp.exp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/cmake-build-release/szaszkiapp.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/source/app/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/source/app/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/source/module/Ai.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/source/module/Ai.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/source/module/Ai.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/source/module/Ai.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/source/module/Board.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/source/module/Board.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/source/module/Board.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/source/module/Board.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/source/module/Move.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/source/module/Move.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/source/module/module.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/source/module/module.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/.vs/Szaszki/v16/.suo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/.vs/Szaszki/v16/Browse.VC.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/.vs/Szaszki/v16/Solution.VC.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/ALL_BUILD.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/ALL_BUILD.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/ALL_BUILD.vcxproj.user" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeCache.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CMakeRCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdC/CompilerIdC.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdC/CompilerIdC.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdC/Debug/CMakeCCompilerId.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdC/Debug/CompilerIdC.exe.recipe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdC/Debug/CompilerIdC.tlog/CL.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdC/Debug/CompilerIdC.tlog/CL.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdC/Debug/CompilerIdC.tlog/CL.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdC/Debug/CompilerIdC.tlog/CompilerIdC.lastbuildstate" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdC/Debug/CompilerIdC.tlog/link.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdC/Debug/CompilerIdC.tlog/link.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdC/Debug/CompilerIdC.tlog/link.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdCXX/CompilerIdCXX.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdCXX/CompilerIdCXX.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdCXX/Debug/CMakeCXXCompilerId.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdCXX/Debug/CompilerIdCXX.exe.recipe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdCXX/Debug/CompilerIdCXX.tlog/CL.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdCXX/Debug/CompilerIdCXX.tlog/CL.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdCXX/Debug/CompilerIdCXX.tlog/CL.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdCXX/Debug/CompilerIdCXX.tlog/CompilerIdCXX.lastbuildstate" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdCXX/Debug/CompilerIdCXX.tlog/link.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdCXX/Debug/CompilerIdCXX.tlog/link.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/CompilerIdCXX/Debug/CompilerIdCXX.tlog/link.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/VCTargetsPath.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/VCTargetsPath.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/x64/Debug/VCTargetsPath.recipe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/3.22.1/x64/Debug/VCTargetsPath.tlog/VCTargetsPath.lastbuildstate" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/8e961cb34f7e52b14d4193afa7e29986/generate.stamp.rule" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/cmake.check_cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/generate.stamp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/generate.stamp.depend" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/CMakeFiles/generate.stamp.list" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/Szaszki.sln" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/ZERO_CHECK.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/ZERO_CHECK.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/cmake_install.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/externals/pybind11/ALL_BUILD.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/externals/pybind11/ALL_BUILD.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/externals/pybind11/CMakeFiles/generate.stamp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/externals/pybind11/CMakeFiles/generate.stamp.depend" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/externals/pybind11/cmake_install.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/externals/pybind11/pybind11.sln" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/generate.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11app.dir/Debug/main.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11app.dir/Debug/pybind11app.exe.recipe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11app.dir/Debug/pybind11app.ilk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11app.dir/Debug/pybind11app.tlog/CL.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11app.dir/Debug/pybind11app.tlog/CL.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11app.dir/Debug/pybind11app.tlog/CL.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11app.dir/Debug/pybind11app.tlog/CustomBuild.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11app.dir/Debug/pybind11app.tlog/CustomBuild.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11app.dir/Debug/pybind11app.tlog/CustomBuild.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11app.dir/Debug/pybind11app.tlog/link.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11app.dir/Debug/pybind11app.tlog/link.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11app.dir/Debug/pybind11app.tlog/link.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11app.dir/Debug/pybind11app.tlog/pybind11app.lastbuildstate" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11app.dir/Debug/vc142.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11app.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11app.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11module.dir/Debug/module.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11module.dir/Debug/pybind11module.cp38-win_amd64.ilk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11module.dir/Debug/pybind11module.cp38-win_amd64.pyd.recipe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11module.dir/Debug/pybind11module.tlog/CL.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11module.dir/Debug/pybind11module.tlog/CL.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11module.dir/Debug/pybind11module.tlog/CL.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11module.dir/Debug/pybind11module.tlog/CustomBuild.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11module.dir/Debug/pybind11module.tlog/CustomBuild.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11module.dir/Debug/pybind11module.tlog/CustomBuild.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11module.dir/Debug/pybind11module.tlog/link.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11module.dir/Debug/pybind11module.tlog/link.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11module.dir/Debug/pybind11module.tlog/link.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11module.dir/Debug/pybind11module.tlog/pybind11module.lastbuildstate" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11module.dir/Debug/pybind11module.tlog/pybind11module.write.1u.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11module.dir/Debug/vc142.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11module.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/pybind11module.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/x64/Debug/ZERO_CHECK/ZERO_CHECK.recipe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/x64/Debug/ZERO_CHECK/ZERO_CHECK.tlog/CustomBuild.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/x64/Debug/ZERO_CHECK/ZERO_CHECK.tlog/CustomBuild.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/x64/Debug/ZERO_CHECK/ZERO_CHECK.tlog/CustomBuild.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessEngineCpp/vsStudio/x64/Debug/ZERO_CHECK/ZERO_CHECK.tlog/ZERO_CHECK.lastbuildstate" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessGui/Render.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessGui/Render.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Plansza4.0/ChessGui/resources/ScreenShot.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Plansza4.0/ChessGui/resources/ScreenShot.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +355,7 @@
       <workItem from="1640266090969" duration="23000" />
       <workItem from="1640266777675" duration="20000" />
       <workItem from="1640279572793" duration="628000" />
+      <workItem from="1640376991562" duration="729000" />
     </task>
     <task id="LOCAL-00001" summary="123">
       <created>1639745189423</created>
@@ -191,6 +439,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Plansza2_0$Szaszki.coverage" NAME="Szaszki Coverage Results" MODIFIED="1640176847132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Plansza2_0$Szaszki.coverage" NAME="Szaszki Coverage Results" MODIFIED="1640377466987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

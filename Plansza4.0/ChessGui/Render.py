@@ -1,10 +1,13 @@
 import random
+import time
 from multiprocessing import Process, Queue
 
 import pygame
 from PIL import Image, ImageFilter
 
 from resources import szaszki
+
+ai_time = []
 
 
 class Render:
@@ -22,6 +25,7 @@ class Render:
         self.board = szaszki.PyChess("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
         # self.board = szaszki.PyChess("r3k2r/8/8/8/8/8/8/4K3 w ---- - 0 1")
         # self.board = szaszki.PyChess("4k3/8/8/8/8/8/8/R3K2R w ---- - 0 1")
+        # self.board = szaszki.PyChess("rnbq2nr/pppp1kpp/8/8/1b3Q2/4P3/PPPP1PPP/RNB1KBNR b KQ-- - 0 1")
         self.depth = 3
         self.tile_history = ""
         self.tile_selected = ""
@@ -132,10 +136,7 @@ class Render:
                     self.ai_Move()
                 else:
                     if not self.ai_process.is_alive():
-                        ai_move = self.queue.get()
-                        self.board.move(ai_move)
-                        self.board.valid_moves()
-                        self.thinking = False
+                        self.ai_do_move()
 
         pygame.display.update()
 
@@ -145,6 +146,10 @@ class Render:
                 if event.key == pygame.K_u:
                     self.undo_move()
                     self.game_state -= 1
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_a:
+                        print(sum(ai_time) / len(ai_time))
 
         if self.game_end_background is None:
             pygame.image.save(self.screen, 'resources/ScreenShot.png')
@@ -213,7 +218,7 @@ class Render:
             else:
                 self.player_one = True
                 self.player_two = False
-            self.player_one = True
+            self.player_one = False
             self.player_two = False
         self.game_state += 1
 
@@ -357,12 +362,28 @@ class Render:
         self.thinking = True
         self.queue = Queue()
 
-        self.ai_process = Process(target=ai_Wrapper, args=(self.board.generate_fen(), self.depth, self.queue))
+        self.ai_process = Process(target=ai_Wrapper, args=(self.board.generate_fen(), self.depth, self.queue, ai_time))
         self.ai_process.start()
 
+    def ai_do_move(self):
+        ai_move = self.queue.get()
+        self.board.move(ai_move[0])
 
-def ai_Wrapper(fen, depth, queue):
-    ai = szaszki.PyAI(fen, depth)
+        if not self.board.surended:
+            self.board.valid_moves()
+
+        print(self.board.generate_fen())
+        self.thinking = False
+
+        ai_time.append(ai_move[1])
+
+
+def ai_Wrapper(board, depth, queue, ai_time):
+    start = time.time()
+    ai = szaszki.PyAI(board, depth)
     ai_move = ai.get_best_move()
-    print(ai_move)
-    queue.put(ai_move.uci)
+    stop = time.time()
+    if len(ai_time) > 0:
+        print(sum(ai_time) / len(ai_time))
+    print(ai_move.uci)
+    queue.put([ai_move.uci, stop - start])

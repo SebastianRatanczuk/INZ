@@ -3,7 +3,7 @@
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
-
+#include <string>
 
 #include "Board.h"
 #include "Move.h"
@@ -37,7 +37,7 @@ PYBIND11_MODULE(szaszki, module) {
             .def(py::init())
             .def(py::init<std::string>())
             .def("getBoard", &Board::get_board)
-            .def("move", &Board::move)
+            .def("move", &Board::moveUci)
             .def("pop_move", &Board::pop)
             .def("piece_at", &Board::getPieceAt)
             .def("piece_at", &Board::getPieceUci)
@@ -51,10 +51,12 @@ PYBIND11_MODULE(szaszki, module) {
             .def_readonly("castle_rights", &Board::castle_rights)
             .def_readonly("is_game_over", &Board::isGameOver)
             .def_readonly("is_check_mate", &Board::isCheckMate)
-            .def_readonly("is_stale_mate", &Board::isStaleMate);
+            .def_readonly("is_stale_mate", &Board::isStaleMate)
+            .def_readonly("surended", &Board::surended);
 
     py::class_<Ai>(module, "PyAI")
             .def(py::init())
             .def(py::init<std::string, int>())
+            .def(py::init<Board, int>())
             .def("get_best_move", &Ai::negaAlfABeta);
 }

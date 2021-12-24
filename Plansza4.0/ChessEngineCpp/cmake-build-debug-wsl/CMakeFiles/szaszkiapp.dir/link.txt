@@ -1,1 +1,1 @@
-/usr/bin/c++  -g   CMakeFiles/szaszkiapp.dir/source/app/main.cpp.o CMakeFiles/szaszkiapp.dir/source/module/Board.cpp.o CMakeFiles/szaszkiapp.dir/source/module/Move.cpp.o CMakeFiles/szaszkiapp.dir/source/module/Ai.cpp.o  -o szaszkiapp  /usr/lib/x86_64-linux-gnu/libpython3.8.so 
+/usr/bin/c++   -pthread -g   CMakeFiles/szaszkiapp.dir/source/app/main.cpp.o CMakeFiles/szaszkiapp.dir/source/module/Board.cpp.o CMakeFiles/szaszkiapp.dir/source/module/Move.cpp.o CMakeFiles/szaszkiapp.dir/source/module/Ai.cpp.o  -o szaszkiapp  /usr/lib/x86_64-linux-gnu/libpython3.8.so 

@@ -12,7 +12,7 @@ piece_relative_value = {
 }
 
 CHECKMATE = 500
-MD = 3
+MD = 2
 
 
 def bestMove(engine: ChessEngine.GameEngine) -> ChessEngine.Move:
