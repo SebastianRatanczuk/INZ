@@ -1,0 +1,13 @@
+# ninja log v5
+1	1933	6618124333789073	CMakeFiles/pybind11module.dir/source/module/module.cpp.obj	4b03ce5e2c5bbfc9
+1	101	6618125729952750	CMakeFiles/pybind11app.dir/source/app/main.cpp.obj	cfb357303e1908ee
+2666	3164	6620003965051278	szaszki.cp38-win_amd64.pyd	2c51420b5cccde38
+497	754	6620006126503183	szaszkiapp.exe	d44797527cb30aa0
+5	660	6620005876461506	CMakeFiles/szaszkiapp.dir/source/module/Chess.cpp.obj	89c2845489628d5d
+1	377	6620063369492682	build.ninja	8db688ce5ea63e9b
+21	1333	6620000190952591	CMakeFiles/szaszki.dir/source/module/Move.cpp.obj	fb40c4a15f37d03f
+1	2666	6620003960371262	CMakeFiles/szaszki.dir/source/module/module.cpp.obj	7bb29b76170dc4c4
+0	496	6620006124353159	CMakeFiles/szaszkiapp.dir/source/app/main.cpp.obj	7a146bdcdca68bda
+16	952	6620003943281311	CMakeFiles/szaszki.dir/source/module/Chess.cpp.obj	4a23e576a4c9fc49
+3	273	6620005872611496	CMakeFiles/szaszkiapp.dir/source/module/Move.cpp.obj	810cd463978fb223
+0	2725	6620005897071505	CMakeFiles/szaszkiapp.dir/source/module/module.cpp.obj	74f33a80601f9084

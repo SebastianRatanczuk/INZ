@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/sebol/CLionProjects/Szaszki/source/app/main.cpp
+random
+-
+string
+-
+utility
+-
+vector
+-
+algorithm
+-
+cctype
+-
+chrono
+-
+functional
+-
+iostream
+-
+locale
+-
+map
+-
+

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Szaszki"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\externals\;CMake Files\externals\pybind11\;CMake Files\externals\pybind11\tools\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="szaszkiapp">
+				<Option output="/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/szaszkiapp" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/sebol/CLionProjects/Szaszki/source/app"/>
+					<Add directory="/mnt/c/Users/sebol/CLionProjects/Szaszki/source/module"/>
+					<Add directory="/mnt/c/Users/sebol/CLionProjects/Szaszki/externals/pybind11/include"/>
+					<Add directory="/usr/include/python3.8"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 szaszkiapp"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="szaszkiapp/fast">
+				<Option output="/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/szaszkiapp" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/sebol/CLionProjects/Szaszki/source/app"/>
+					<Add directory="/mnt/c/Users/sebol/CLionProjects/Szaszki/source/module"/>
+					<Add directory="/mnt/c/Users/sebol/CLionProjects/Szaszki/externals/pybind11/include"/>
+					<Add directory="/usr/include/python3.8"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 szaszkiapp/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="szaszki">
+				<Option output="/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/szaszki.cpython-38-x86_64-linux-gnu.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/sebol/CLionProjects/Szaszki/source/module"/>
+					<Add directory="/mnt/c/Users/sebol/CLionProjects/Szaszki/externals/pybind11/include"/>
+					<Add directory="/usr/include/python3.8"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 szaszki"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="szaszki/fast">
+				<Option output="/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/szaszki.cpython-38-x86_64-linux-gnu.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/sebol/CLionProjects/Szaszki/source/module"/>
+					<Add directory="/mnt/c/Users/sebol/CLionProjects/Szaszki/externals/pybind11/include"/>
+					<Add directory="/usr/include/python3.8"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 szaszki/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-release-wsl/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/mnt/c/Users/sebol/CLionProjects/Szaszki/source/app/main.cpp">
+			<Option target="szaszkiapp"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/Ai.cpp">
+			<Option target="szaszkiapp"/>
+			<Option target="szaszki"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/Ai.h">
+			<Option target="szaszkiapp"/>
+			<Option target="szaszki"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/Board.cpp">
+			<Option target="szaszkiapp"/>
+			<Option target="szaszki"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/Board.h">
+			<Option target="szaszkiapp"/>
+			<Option target="szaszki"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/Move.cpp">
+			<Option target="szaszkiapp"/>
+			<Option target="szaszki"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/Move.h">
+			<Option target="szaszkiapp"/>
+			<Option target="szaszki"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/sebol/CLionProjects/Szaszki/source/module/module.cpp">
+			<Option target="szaszki"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/sebol/CLionProjects/Szaszki/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/sebol/CLionProjects/Szaszki/externals/pybind11/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\externals\pybind11\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/sebol/CLionProjects/Szaszki/externals/pybind11/tools/FindPythonLibsNew.cmake">
+			<Option virtualFolder="CMake Files\externals\pybind11\tools\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/sebol/CLionProjects/Szaszki/externals/pybind11/tools/pybind11Common.cmake">
+			<Option virtualFolder="CMake Files\externals\pybind11\tools\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/sebol/CLionProjects/Szaszki/externals/pybind11/tools/pybind11Tools.cmake">
+			<Option virtualFolder="CMake Files\externals\pybind11\tools\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -g  -shared  -o szaszki.cpython-38-x86_64-linux-gnu.so CMakeFiles/szaszki.dir/source/module/module.cpp.o CMakeFiles/szaszki.dir/source/module/Board.cpp.o CMakeFiles/szaszki.dir/source/module/Move.cpp.o CMakeFiles/szaszki.dir/source/module/Ai.cpp.o 

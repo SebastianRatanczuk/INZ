@@ -1,0 +1,6 @@
+/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-debug-wsl/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-debug-wsl/CMakeFiles/edit_cache.dir
+/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-debug-wsl/CMakeFiles/szaszkiapp.dir
+/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-debug-wsl/CMakeFiles/szaszki.dir
+/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-debug-wsl/externals/pybind11/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/sebol/CLionProjects/Szaszki/cmake-build-debug-wsl/externals/pybind11/CMakeFiles/edit_cache.dir

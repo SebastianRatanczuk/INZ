@@ -1,0 +1,5 @@
+C:/Users/sebol/CLionProjects/Szaszki/vsStudio/CMakeFiles/pybind11module.dir
+C:/Users/sebol/CLionProjects/Szaszki/vsStudio/CMakeFiles/pybind11app.dir
+C:/Users/sebol/CLionProjects/Szaszki/vsStudio/CMakeFiles/ALL_BUILD.dir
+C:/Users/sebol/CLionProjects/Szaszki/vsStudio/CMakeFiles/ZERO_CHECK.dir
+C:/Users/sebol/CLionProjects/Szaszki/vsStudio/externals/pybind11/CMakeFiles/ALL_BUILD.dir

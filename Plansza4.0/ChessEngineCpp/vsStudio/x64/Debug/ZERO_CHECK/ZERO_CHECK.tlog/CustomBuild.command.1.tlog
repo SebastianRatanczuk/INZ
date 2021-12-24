@@ -1,0 +1,10 @@
+^C:\USERS\SEBOL\CLIONPROJECTS\SZASZKI\VSSTUDIO\CMAKEFILES\8E961CB34F7E52B14D4193AFA7E29986\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/sebol/CLionProjects/Szaszki -BC:/Users/sebol/CLionProjects/Szaszki/vsStudio --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/sebol/CLionProjects/Szaszki/vsStudio/Szaszki.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
