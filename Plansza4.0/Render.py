@@ -1,5 +1,5 @@
-# import chess.engine
-import time
+import random
+from multiprocessing import Process, Queue
 
 import pygame
 import szaszki
@@ -8,7 +8,7 @@ from PIL import Image, ImageFilter
 
 class Render:
     def __init__(self):
-        self.vs_AI = False
+
         self.tile_size = 110
         self.tile_size_vector = pygame.math.Vector2(self.tile_size, self.tile_size)
         self.window_width = self.tile_size * 10 + 50
@@ -19,7 +19,7 @@ class Render:
         self.selected_color = (255, 123, 123)
         self.possible_moves_color = (123, 255, 123)
         self.board = szaszki.PyChess("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
-        # self.board = szaszki.PyChess("r3k2r/8/8/8/8/8/8/4K3 w ---- - 0 1")
+        self.board = szaszki.PyChess("r3k2r/8/8/8/8/8/8/4K3 w ---- - 0 1")
         # self.board = szaszki.PyChess("4k3/8/8/8/8/8/8/R3K2R w ---- - 0 1")
         self.depth = 5
         self.tile_history = ""
@@ -52,8 +52,11 @@ class Render:
             "ai": pygame.image.load('resources/ai.png'),
         }
 
-        self.player_one = False
+        self.player_one = True
         self.player_two = False
+        self.thinking = False
+        self.queue = None
+        self.ai_process = None
 
     def __del__(self):
         pass
@@ -105,7 +108,7 @@ class Render:
 
     def _game_window(self):
         for event in self.events:
-            if event.type == pygame.MOUSEBUTTONDOWN and self.human_turn:
+            if event.type == pygame.MOUSEBUTTONDOWN:
                 self.mouse_logic()
             elif event.type == pygame.KEYDOWN and self.human_turn:
                 if event.key == pygame.K_u:
@@ -124,16 +127,15 @@ class Render:
         self.board.valid_moves()
         if not self.human_turn:
             if not self.board.is_game_over:
-                start = time.time()
-                ai = szaszki.PyAI(self.board.generate_fen(), self.depth)
-                ai_move = ai.get_best_move()
+                if not self.thinking:
+                    self.ai_Move()
+                else:
+                    if not self.ai_process.is_alive():
+                        ai_move = self.queue.get()
+                        self.board.move(ai_move)
+                        self.board.valid_moves()
+                        self.thinking = False
 
-                self.board.move(ai_move.uci)
-                self.valid_moves = self.board.valid_moves()
-                stop = time.time()
-                print(ai_move.uci)
-                print(stop - start)
-                self.move_made = True
         pygame.display.update()
 
     def _end_game_screen(self):
@@ -199,6 +201,19 @@ class Render:
 
     def mouse_menu_logic(self):
         mouse_pos = pygame.mouse.get_pos()
+        if mouse_pos[0] < self.window_width / 2:
+            self.player_one = True
+            self.player_two = True
+        else:
+            k = random.randint(0, 1)
+            if k == 0:
+                self.player_one = False
+                self.player_two = True
+            else:
+                self.player_one = True
+                self.player_two = False
+            self.player_one = True
+            self.player_two = False
         self.game_state += 1
 
     def mouse_logic(self):
@@ -238,7 +253,7 @@ class Render:
             self.tile_selected = new_tile_selection
             self.tile_history = self.tile_history + new_tile_selection
 
-        if len(self.tile_history) == 4:
+        if len(self.tile_history) == 4 and not self.thinking:
             self.move()
             self.tile_history = ""
             self.tile_selected = ""
@@ -305,6 +320,7 @@ class Render:
 
         self.promotion_request = False
         self.legal_moves = []
+        self.board.valid_moves()
 
     def getPromotion(self):
         self.promotion_request = True
@@ -335,3 +351,16 @@ class Render:
                 )
                 pygame.display.update()
         return self.pawn_promotion
+
+    def ai_Move(self):
+        self.thinking = True
+        self.queue = Queue()
+
+        self.ai_process = Process(target=ai_Wrapper, args=(self.board.generate_fen(), self.depth, self.queue))
+        self.ai_process.start()
+
+
+def ai_Wrapper(fen, depth, queue):
+    ai = szaszki.PyAI(fen, depth)
+    ai_move = ai.get_best_move()
+    queue.put(ai_move.uci)
