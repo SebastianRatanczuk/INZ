@@ -3,6 +3,7 @@
 //
 
 #include <thread>
+#include <string>
 #include "Board.h"
 
 // trim from start
@@ -140,7 +141,7 @@ bool Board::isPieceAtPosWhite(int row, int col) {
     if (piece == '.')
         return false;
 
-    return std::isupper(piece);
+    return (bool)isupper(piece);
 }
 
 bool Board::isPieceAtPosBlack(int row, int col) {
@@ -149,7 +150,7 @@ bool Board::isPieceAtPosBlack(int row, int col) {
     if (piece == '.')
         return false;
 
-    return !std::isupper(piece);
+    return !(bool)isupper(piece);
 }
 
 std::string Board::getUci(int row, int col) {
@@ -580,7 +581,8 @@ std::vector<Move> Board::generatePawnMoves(int row, int col) {
     return listOfMoves;
 }
 
-std::vector<Move> Board::generateValidMovesSequential() {
+//sequentialValidMoves
+std::vector<Move> Board::generateValidMoves() {
     std::string tmpEnpassant = en_passant;
 
     auto legalMoves = generateLegalMoves();
@@ -620,7 +622,8 @@ std::vector<Move> Board::generateValidMovesSequential() {
     return validMoves;
 }
 
-std::vector<Move> Board::generateValidMoves() {
+//parallelValidMoves
+std::vector<Move> Board::generateValidMovesAlternative() {
     std::string tmpEnpassant = en_passant;
 
     auto legalMoves = generateLegalMoves();
@@ -698,7 +701,7 @@ std::vector<Move> Board::generateLegalMoves() {
             if (piece == '.')
                 continue;
 
-            if (isupper(piece) != (turn == Color::white)) {
+            if ((bool)isupper(piece) != (turn == Color::white)) {
                 continue;
             }
             std::vector<Move> result = generatePawnMoves(row, col);

@@ -24,9 +24,9 @@ class Render:
         self.possible_moves_color = (123, 255, 123)
         self.board = szaszki.PyChess("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
         # self.board = szaszki.PyChess("r3k2r/8/8/8/8/8/8/4K3 w ---- - 0 1")
-        # self.board = szaszki.PyChess("4k3/8/8/8/8/8/8/R3K2R w ---- - 0 1")
+        # self.board = szaszki.PyChess("4kR2/8/8/8/8/8/8/R3K3 b ---- - 1 0")
         # self.board = szaszki.PyChess("rnbq2nr/pppp1kpp/8/8/1b3Q2/4P3/PPPP1PPP/RNB1KBNR b KQ-- - 0 1")
-        self.depth = 3
+        self.depth = 5
         self.tile_history = ""
         self.tile_selected = ""
         self.pawn_promotion = ""
@@ -218,8 +218,6 @@ class Render:
             else:
                 self.player_one = True
                 self.player_two = False
-            self.player_one = False
-            self.player_two = False
         self.game_state += 1
 
     def mouse_logic(self):

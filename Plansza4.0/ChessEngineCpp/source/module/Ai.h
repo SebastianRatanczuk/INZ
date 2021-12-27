@@ -9,7 +9,6 @@
 
 class Ai {
 private:
-    Board mainBoard;
     int mainDepth = 4;
     std::map<char, int> piece_value = {
             {'p', 1},
@@ -23,13 +22,15 @@ private:
     int CHECKMATE = 100000;
     Move mainMove;
 
-    int boardHeuristic(Board board);
+
 
     int nega(int depth, Board &board, int turn, int alfa, int beta);
 
 public:
-    Ai();
+    Board mainBoard;
 
+    Ai();
+    int boardHeuristic(Board board);
     explicit Ai(const std::string &fen, int depth);
 
     Ai(Board b, int depth);

@@ -6,61 +6,11 @@
 
 #IncludeRegexTransform: 
 
-../source/module/Ai.h
-Board.h
-../source/module/Board.h
-
-../source/module/Board.h
-algorithm
--
-cctype
--
-chrono
--
-functional
--
-iostream
--
-map
--
-random
--
-string
--
-utility
--
-vector
--
-Move.h
-../source/module/Move.h
-Enums.h
-../source/module/Enums.h
-
-../source/module/Enums.h
-
-../source/module/Move.h
-string
--
-
-/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/app/main.cpp
-Board.h
-/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/app/Board.h
-Ai.h
-/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/app/Ai.h
-
-/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Ai.cpp
-Ai.h
-/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Ai.h
-utility
--
-
-/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Ai.h
-Board.h
-/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Board.h
-
 /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Board.cpp
 thread
 -
+string
+-
 Board.h
 /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Board.h
 
@@ -91,10 +41,6 @@ Enums.h
 /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Enums.h
 
 /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Enums.h
-
-/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Move.cpp
-Move.h
-/mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Move.h
 
 /mnt/c/Users/sebol/Desktop/INZ/Plansza4.0/ChessEngineCpp/source/module/Move.h
 string

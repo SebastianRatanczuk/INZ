@@ -79,7 +79,7 @@ public:
 
     std::vector<Move> generatePawnMoves(int row, int col);
 
-    std::vector<Move> generateValidMovesSequential();
+    std::vector<Move> generateValidMovesAlternative();
 
     bool move(Move *move);
 };

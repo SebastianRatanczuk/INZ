@@ -33,7 +33,7 @@ int Ai::boardHeuristic(Board board) {
             if (piece == '.')
                 continue;
 
-            if ((board.turn == Color::white) == isupper(piece)) {
+            if ((bool) isupper(piece)) {
                 pieceValue += piece_value[(char) tolower(piece)];
                 mobilityValue += board.generatePawnMoves(row, col).size();
             } else {
@@ -55,10 +55,12 @@ int Ai::nega(int depth, Board &board, int turn, int alfa, int beta) {
     auto moves = board.generateValidMoves();
 
     if (moves.empty()) {
+        if (board.isStaleMate)
+            return 0;
         return -CHECKMATE;
     }
 
-    std::shuffle(moves.begin(), moves.end(), gen);
+//    std::shuffle(moves.begin(), moves.end(), gen);
     int score = -CHECKMATE;
 
     for (auto move: moves) {
