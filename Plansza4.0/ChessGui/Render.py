@@ -26,7 +26,7 @@ class Render:
         # self.board = szaszki.PyChess("r3k2r/8/8/8/8/8/8/4K3 w ---- - 0 1")
         # self.board = szaszki.PyChess("4kR2/8/8/8/8/8/8/R3K3 b ---- - 1 0")
         # self.board = szaszki.PyChess("rnbq2nr/pppp1kpp/8/8/1b3Q2/4P3/PPPP1PPP/RNB1KBNR b KQ-- - 0 1")
-        self.depth = 5
+        self.depth = 4
         self.tile_history = ""
         self.tile_selected = ""
         self.pawn_promotion = ""

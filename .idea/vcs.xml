@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Plansza4.0/ChessEngineCpp/externals/pybind11" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/djangoProject/channels" vcs="Git" />
   </component>
 </project>

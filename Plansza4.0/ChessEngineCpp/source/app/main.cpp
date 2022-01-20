@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-    Ai ai = Ai("4kR2/8/8/8/8/8/8/R3K3 b ---- - 1 0", 1);
+    Ai ai = Ai("k7/8/8/8/4K3/8/7R/1Q6 w ---- - 0 1", 1);
 
     Move a = ai.negaAlfABeta();
     cout << a.moveUci;

@@ -17,34 +17,6 @@ biblioteki i interfejsy
 i włąsny progeam na podstawie dobrych zeczy z innych bibliotek 
 mdoel wymagan i dokumentacja 
 
-analiza
-
-chess.com
-
-Największy portal społecznościowy poświęcający sie szachom.
-Strona posiada wiele różnego rodzaju funkcji, rozpoczynając od panelu z aktualnościami profesjonalnej sceny szachowej, 
-lekcji nauki gry w szachy, a kończąc na analizie meczów zawodowców. Oczywiście główną funkcjonalnością strony jest umożliwienie gry w szachy.
-Strona umożliwia przeprowadzenie rozgrywki online z losowo dobranym graczem o posobnym poziomie umiejętności,
-granie przeciwko stucznej inteligencji z wybranym poziomem zaawansowania, gra ze znajomym graczem w platformie.
-
-Oprócz standardowej odmiany gry w szachy strona umożliwia również kilka wariantów zabawy a miedzy innymi: grę w czterech, tryb bughouse, tryb mgły wojny
-
-Opis gry ze sztuczną inteligencją
-	W grze ze sztuczną inteligencją możemy wybrać charakter oraz rodzaj zaawansowania przeciwnika wraz z ilością dostępnych pomocy w rozgrywce.
-	Wybierając rozgrywkę ze wszystkimi pomocami mamy dodatkowo do dyspozycji 
-		Cofanie ruchu
-		Analizę planszy
-		Najlepsze zagrania
-
-Opis gry z innym graczem
-	W tym trybie możemy wybrać rempo rozgrywki, od szybkich jednominutowych gier "Bullet", dłuższe 30 minutowe oraz rozgrywki kilkudniowe.
-	Poruszanie pionami
-	
-	W trakcie rozgrywki mamy możliwość podejżenia ruchów naszych pionów poprzez kliknięcie na nie,
-	wyświetlane są wtedy wszystkie możliwe ruchy wybranej figury, kliknięcie na podświetlone pole spowoduje przesunięcie figury w wybrane miejsce
-	kliknięcie pustego pola spowoduje anulowanie ruchu, kliknięcie na figurę o tym samym kolorze wyświetli legalne posunięcia nowo wybranej figury.
-	Bierki można równierz przemieszczać poprzez metodę "drag and drop", tylko legalne ruchy zostaną wykonane.
-
 
 model analityczny vs model projektowy
 

@@ -37,3 +37,8 @@
 1062	1410	6623367600359849	szaszki.cp38-win_amd64.pyd	2df84ea02638356e
 0	651	6623367609979834	CMakeFiles/szaszkiapp.dir/source/module/Ai.cpp.obj	38fde736b03d9b8a
 652	934	6623367612479824	szaszkiapp.exe	aff29ce90c19182d
+1	1330	6623384474585287	CMakeFiles/szaszki.dir/source/module/Ai.cpp.obj	9238d6c8483e67af
+1331	1697	6623384477885278	szaszki.cp38-win_amd64.pyd	2df84ea02638356e
+1	770	6623384488385301	CMakeFiles/szaszkiapp.dir/source/app/main.cpp.obj	719d8e959c79cb87
+21	803	6623384488725281	CMakeFiles/szaszkiapp.dir/source/module/Ai.cpp.obj	38fde736b03d9b8a
+803	1171	6623384491965285	szaszkiapp.exe	aff29ce90c19182d

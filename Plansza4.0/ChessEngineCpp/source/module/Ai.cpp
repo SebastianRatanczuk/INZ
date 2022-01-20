@@ -47,20 +47,13 @@ int Ai::boardHeuristic(Board board) {
 }
 
 int Ai::nega(int depth, Board &board, int turn, int alfa, int beta) {
+    auto moves = board.generateValidMoves();
 
-    if (depth == 0) {
+    if (depth == 0 || moves.empty()) {
         return boardHeuristic(board) * turn;
     }
 
-    auto moves = board.generateValidMoves();
-
-    if (moves.empty()) {
-        if (board.isStaleMate)
-            return 0;
-        return -CHECKMATE;
-    }
-
-//    std::shuffle(moves.begin(), moves.end(), gen);
+    std::shuffle(moves.begin(), moves.end(), gen);
     int score = -CHECKMATE;
 
     for (auto move: moves) {
