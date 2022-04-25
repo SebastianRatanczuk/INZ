@@ -5,6 +5,7 @@
 #include "Ai.h"
 
 #include <utility>
+#include <string>
 
 std::mt19937 gen(std::chrono::system_clock::now().time_since_epoch().count());
 
@@ -20,8 +21,9 @@ Ai::Ai(const std::string &fen, int depth) {
 int Ai::boardHeuristic(Board board) {
     if (board.isStaleMate)
         return 0;
+
     if (board.isCheckMate) {
-        return -CHECKMATE;
+        return CHECKMATE;
     }
 
     int pieceValue = 0;
@@ -49,14 +51,20 @@ int Ai::boardHeuristic(Board board) {
 int Ai::nega(int depth, Board &board, int turn, int alfa, int beta) {
     auto moves = board.generateValidMoves();
 
-    if (depth == 0 || moves.empty()) {
+    if (moves.empty()) {
         return boardHeuristic(board) * turn;
     }
 
-    std::shuffle(moves.begin(), moves.end(), gen);
+    if (depth == 0) {
+        auto flag = std::find_if(moves.begin(), moves.end(), [](Move m) { return m.takenPawn != '.'; }) != moves.end();
+        return boardHeuristic(board) * turn;
+    }
+
+//    std::shuffle(moves.begin(), moves.end(), gen);
     int score = -CHECKMATE;
 
     for (auto move: moves) {
+
         board.move(&move);
         int negaScore = -nega(depth - 1, board, -turn, -beta, -alfa);
         if (negaScore > score) {

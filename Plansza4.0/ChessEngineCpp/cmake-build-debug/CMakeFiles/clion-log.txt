@@ -1,4 +1,4 @@
-C:\Users\sebol\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\213.6461.46\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/Users/sebol/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.46/bin/ninja/win/ninja.exe -G Ninja C:\Users\sebol\Desktop\INZ\Plansza4.0\ChessEngineCpp
+C:\Users\sebol\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\221.5080.224\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/Users/sebol/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/221.5080.224/bin/ninja/win/ninja.exe -G Ninja -S C:\Users\sebol\Desktop\INZ\Plansza4.0\ChessEngineCpp -B C:\Users\sebol\Desktop\INZ\Plansza4.0\ChessEngineCpp\cmake-build-debug
 -- pybind11 v2.9.0 dev1
 -- Configuring done
 -- Generating done

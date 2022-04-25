@@ -23,10 +23,11 @@ class Render:
         self.selected_color = (255, 123, 123)
         self.possible_moves_color = (123, 255, 123)
         self.board = szaszki.PyChess("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
+        self.board = szaszki.PyChess("k7/8/8/8/4K3/8/7R/1Q6 w ---- - 1 0")
         # self.board = szaszki.PyChess("r3k2r/8/8/8/8/8/8/4K3 w ---- - 0 1")
         # self.board = szaszki.PyChess("4kR2/8/8/8/8/8/8/R3K3 b ---- - 1 0")
         # self.board = szaszki.PyChess("rnbq2nr/pppp1kpp/8/8/1b3Q2/4P3/PPPP1PPP/RNB1KBNR b KQ-- - 0 1")
-        self.depth = 4
+        self.depth = 3
         self.tile_history = ""
         self.tile_selected = ""
         self.pawn_promotion = ""

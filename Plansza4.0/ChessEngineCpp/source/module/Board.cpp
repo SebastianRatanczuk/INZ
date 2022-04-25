@@ -594,7 +594,6 @@ std::vector<Move> Board::generateValidMoves() {
     if (!castleMoves.empty())
         validMoves.insert(validMoves.end(), castleMoves.begin(), castleMoves.end());
 
-
     for (auto legalMove: legalMoves) {
         Board copy(*this);
         copy.move(&legalMove);
